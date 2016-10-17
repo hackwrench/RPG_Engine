@@ -1,0 +1,11 @@
+DEFINT A-Z
+OPEN "DEFTABLE.TAB" FOR BINARY AS 1
+FOR i = 0 TO 255
+    Temp$ = CHR$(i)
+    PUT 1, , Temp$
+NEXT i
+
+SEEK 1, ASC("1") + 1
+
+CLOSE
+

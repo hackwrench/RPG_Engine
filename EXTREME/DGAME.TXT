@@ -1,0 +1,99 @@
+Original Documentation for DGAME by David Klempner
+
+  Okay, here are the instructions for (name here). I hope that you like it!
+*****REMEMBER!!!***** This game is freeware. My only request is, if the 
+version you have is less than 1 month old, please E-Mail me at 
+dmsv37c@prodigy.com with your comments or suggestions, or else I'll ask the 
+evil slimes to come at you at night, and well... umm... (I wish.) 
+Of course, remember: I am not asking for money or anything, I just want your 
+opinions! 
+
+  STORY: You are travelling down a mountain road when you found a hut in
+a forest on the side of the road. The hut has a sign saying, "YOU WIN! 
+YOU WIN! COME INSIDE! (no cash prize)." The wierdest thing about this sign is 
+that it is actually SAYING this! You go inside because of an overwhelming 
+curiousity. 
+
+   Going inside, your first thought is "WOW!!!" It has a lot of magical
+equipment, and a back door. You go out the back door, and find that you 
+are in the forest. You go around to the front of the hut, and find that
+it has no door! You try and go back around, and find a slime, that tries to 
+attack. You run, and run, and run, and find that you are lost. You eventually 
+come to an area with two buildings, an inn and a school. You go inside the
+inn, and find a few people. You hear, "Hmmm... I hear there is a wizard's hut
+over at the other side of the forest. It is said to be the only way out of it!
+The slimes are so easy to beat, but you have to fight so many of them on the 
+way!
+
+     You are determined to get back to your world, but it will take a lot of
+effort...
+
+HOW TO PLAY:
+
+     To start, you type "play" (this runs a batch file) and you wait a while.
+The game will load up about 10 seconds after the pictures stop. (on a 386/16)
+
+     You will find a little guy on the screen, with roads running in all four 
+directions. There is an inn in the center, and a square with the words
+
+                              BIG K'
+                               Exp.
+                             College
+
+This square, when you step on it, brings you to a blue screen with two 
+options. The first lets you pay money to get experience, which I will cover 
+later. The second tells you how much experience you need for the next level,
+unless you have enough experience to get a level, in which case, it gives
+you one.
+
+     The inn when you step on it's square, lets you recover your hit points
+for an amount equal to what level you are at.
+
+     By pressing 'S' at any time when you are not in a building, or in a
+battle, will show your status. Here are the things it will show:
+
+     Hit points: The amount of hit points, or HPs, you have. You lose them in
+battle, and when you run out, you lose.
+
+     Max Hit Points: The maximum amount of hit points you can have. Your hit
+points refill to their maximum when you stay at the inn.
+
+  Experience: You get a certain amount of experience from battle, and from
+spending money at the college. When you have enough experience you gain a
+
+  Level: As I said, you gain these as you get experience. When you gain
+one, your hit points go up.
+
+  Gold: You get gold from battles, and you spend it at the inn and college.
+
+  By pressing "Q" you can quit.     
+     
+  By pressing "S" and entering a filename, you can save a game.
+
+  By pressing "L" and entering a filename, you can load a game.
+
+  Every once in a while, you encounter an enemy. A picture of the enemy
+shows up in the middle of the screen, your hit points show up at the lower
+left, and the enemies' hit points show up at the lower right. Press 'A'
+and you attack. Both your hit points and your enemies go down. When its hit
+points go below zero, you win the battle, and gain gold and experience.
+If you press 'R', you run from the battle. In this version, pressing 'R' to 
+run from the battle always works. Weapons bought from the weapon shop have
+a positive effect on your attacks.
+
+ Eventually, you find the square which you step on to win. You will
+recognise it when you see it. HINT: it is near the lower right corner.
+
+     Tips:
+
+  Until you reach a high enough level, stay near the inn. You will gain
+experience safely.
+
+  You probably need to be at level 10 or more to win, unless you cheat and
+run from every battle (I still haven't inplemented chance there.)
+   I'd like suggestions for the game, and a game name!
+     
+     Have fun!
+
+
+Version integrated into RPGENGIN based on version released: October 16, 1996. (or so.)

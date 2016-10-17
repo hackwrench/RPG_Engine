@@ -1,0 +1,4 @@
+DEFINT A-Z
+'$DYNAMIC
+DIM SHARED MoneyCarriers(0 TO 0)
+

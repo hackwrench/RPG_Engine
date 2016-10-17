@@ -1,0 +1,50 @@
+DECLARE SUB voutput (x1%, y1%, x2%, y2%, Scratch%)
+OPEN "STUFFKON.GLF" FOR BINARY AS #1
+CALL voutput(1, 1, 25, 20, 81)
+CALL voutput(27, 1, 51, 20, 82)
+CALL voutput(53, 1, 77, 20, 83)
+CALL voutput(79, 1, 103, 20, 84)
+CALL voutput(105, 1, 129, 20, 85)
+CALL voutput(131, 1, 155, 20, 86)
+CALL voutput(157, 1, 181, 20, 87)
+CALL voutput(183, 1, 207, 20, 88)
+CALL voutput(209, 1, 233, 20, 89)
+CALL voutput(235, 1, 259, 20, 90)
+CALL voutput(261, 1, 285, 20, 91)
+CALL voutput(287, 1, 311, 20, 92)
+CALL voutput(1, 22, 25, 41, 93)
+CALL voutput(27, 22, 51, 41, 94)
+CALL voutput(53, 22, 77, 41, 95)
+CALL voutput(79, 22, 103, 41, 96)
+CALL voutput(105, 22, 129, 41, 97)
+CALL voutput(131, 22, 155, 41, 98)
+CALL voutput(157, 22, 181, 41, 99)
+CALL voutput(183, 22, 207, 41, 100)
+CALL voutput(209, 22, 233, 41, 101)
+CALL voutput(235, 22, 259, 41, 102)
+CALL voutput(261, 22, 285, 41, 103)
+CALL voutput(287, 22, 311, 41, 104)
+CALL voutput(1, 43, 25, 62, 105)
+CALL voutput(27, 43, 51, 62, 106)
+CALL voutput(53, 43, 77, 62, 107)
+CALL voutput(79, 43, 103, 62, 108)
+CALL voutput(105, 43, 129, 62, 109)
+CALL voutput(131, 43, 155, 62, 110)
+CALL voutput(157, 43, 181, 62, 111)
+CALL voutput(183, 43, 207, 62, 112)
+CALL voutput(209, 43, 233, 62, 113)
+CALL voutput(235, 43, 259, 62, 114)
+CALL voutput(261, 43, 285, 62, 115)
+CALL voutput(287, 43, 311, 62, 116)
+CALL voutput(1, 64, 25, 83, 117)
+CALL voutput(27, 64, 51, 83, 118)
+CALL voutput(53, 64, 77, 83, 119)
+CLOSE
+
+SUB voutput (x1%, y1%, x2%, y2%, Scratch%)
+    PUT #1, , x1%
+    PUT #1, , y1%
+    PUT #1, , x2%
+    PUT #1, , y2%
+END SUB
+

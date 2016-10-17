@@ -1,0 +1,7 @@
+
+Which units to support. specify logical size of battlefield
+for given units.
+Center
+Odd Sized Sprites, left of center or right of center.
+Battle cursor positions.
+Battle menu postions
