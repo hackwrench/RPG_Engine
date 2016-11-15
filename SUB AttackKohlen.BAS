@@ -8,17 +8,20 @@ SUB AttackKohlen (EnemyTargeted)
     IF EnemyTargeted = 2 THEN ex = 125: ey = 120: ly = 16: lx = 15
     IF EnemyTargeted = 3 THEN ex = 50: ey = 70: ly = 9: lx = 4
     IF EnemyTargeted = 4 THEN ex = 125: ey = 70: ly = 9: lx = 15
-   
+
     SCREEN 7, 0, 7, 0
     GET (280, 110)-(299, 129), coverup
     SCREEN 7, 0, 6, 0
-     PUT (280, 110), coverup, PSET
-     PUT (280, 110), Mode7Bitmap(0, 11), AND
-     PUT (280, 110), Mode7Bitmap(0, 10), OR
-     PCOPY 6, 3
-FOR xanth = 1 TO 20: PCOPY 3, 6
-PUT (ex - xanth, ey), Bangm, AND: PUT (ex - xanth, ey), Bang1, OR
-PCOPY 6, 0: delay .1: NEXT: PCOPY 3, 6: PCOPY 3, 0
+    PUT (280, 110), coverup, PSET
+    PUT (280, 110), Mode7Bitmap(0, 11), AND
+    PUT (280, 110), Mode7Bitmap(0, 10), OR
+    PCOPY 6, 3
+FOR xanth = 1 TO 20
+    PCOPY 3, 6
+    PUT (ex - xanth, ey), Bangm, AND: PUT (ex - xanth, ey), Bang1, OR
+    PCOPY 6, 0: delay .1:
+NEXT
+PCOPY 3, 6: PCOPY 3, 0
 PUT (280, 110), coverup, PSET
 PUT (280, 110), Mode7Bitmap(0, 9), AND: PUT (280, 110), Mode7Bitmap(0, 8), OR
 ERASE coverup: pdamage = INT(RND(1) * 50) + charstat(3, 3) - 50
