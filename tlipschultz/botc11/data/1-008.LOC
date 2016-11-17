@@ -1,0 +1,43 @@
+0101
+[?7h[1;1H[40m
+
+
+
+[0;33m[22C[32m≥[33m€≤±∞∞∞±±≤≤€€€€ﬂﬂ€€€€≤≤±±∞∞∞±≤€[32m≥[12C[1;37m8
+[22C[0;32m≥[33m€≤[30m€[33m∞∞∞±±≤≤€€€[30m€€€€[33m€€€≤≤±±∞∞∞±≤€[32m≥
+[22C≥[33m€[30m€€[33m∞ ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹ ∞±≤€[32m≥[8C[1;37m4   +
+[22C[0;32m≥[33m€[30m€€€[33m‹€€€€€€€€€€€€€€€€€€€€‹ ±≤€[32m≥
+[22C≥[33m€[30m€€€[33m∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[30m€ [33m≤€[32m≥
+[0m[255D
+/
+This small cave room is made even smaller by the gigantic pit on the south
+wall. It seems almost bottomless, but you can see a flickering blue glint
+being emitted from below, as of water. It should be safe to drop into the pit,
+but there would be NO WAY to get back up here, so be sure to explore this area
+THOROUGHLY before dropping down. In addition to the pit, there are exits to
+the north and west.
+/
++e
+Pit
+/
+Upon placing your ear to the ground, you can hear running water down below.
+You're fairly certain that dropping down into the pit would be safe. Be sure
+to explore Eagle thoroughly first, however, 'cause you won't be able to get
+back up here for quite a while!
+/
++8
+1-004
++2
+Press + to drop into the pit.
++4
+1-007
+++
+a
+FALLING.ANS
+1-039-1
++m12
+There is water below: you can fall even without the Float spell. Press +.
+/
++t
+|06Hello, I'm Mr. Pit!
+/

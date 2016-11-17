@@ -1,0 +1,35 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[33m∞±≤€€±≤€±∞≤€∞[1;37;43mÃÕÕπ[0;33m∞±≤€±≤€±∞€±≤€[32m≥
+[22C≥[33m±≤€±∞≤€∞±≤≤€±[1;37;43mÃÕÕπ[0;33m≤±€∞€±≤€∞±€±≤[32m≥
+[22C≥[33m≤±±∞±≤€±≤€±≤€[1;37;43mÃÕÕπ[0;33m€≤±∞€€±≤€∞±≤≤[32m≥[12C[1;37m-
+[22C[0;32m≥[33m€±≤€∞€±€∞€±∞≤[1;37;43mÃÕÕπ[0;33m∞±≤€∞±≤€∞€±±≤[32m≥
+[22C≥[33m€≤±€∞±≤∞±€∞≤€[1;37;43mÃÕÕπ[0;33m€≤€∞≤±€≤±€±≤€[32m≥
+[0m[255D
+/
+You are in the middle of the ladder. It feels very sturdy as you climb higher,
+but the rungs below you seem to be extremely fragile. It would be unwise to
+climb down from here. Go up instead.
+/
++e
+Ladder
+/
+The ladder is so long that it seems to be losing some of its integrity due
+to gravity alone. It would be unwise to climb down from here (not to mention
+impossible). Maybe a spell of some sort could assist you...
+/
++-
+1-002-1
+++
+The rungs are too unsturdy. You would probably crash to the ground.
++m12
+a
+LADDRDWN.ANS
+5-071
+/
++t
+|15Hello, I'm Mr. Ladder!
+/

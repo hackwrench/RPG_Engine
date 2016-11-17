@@ -1,0 +1,33 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1;30m[22C[0;32m≥[33m±€± ±€±€±€±€±€±€±€±€±€±€±€ €±€[32m≥
+[22C≥[33m± ± ±€±€±€±€±€±€±€±€±€±€±€ €±€[32m≥
+[22C≥[33m± ± [1;30m∞∞∞∞∞∞[34m≤±≤€±∞€€±€≤€±€∞± [0;33m€±€[32m≥[8C[1;37m4
+[22C[0;32m≥[33m±[1;30m∞∞∞∞∞∞∞∞[34m∞±≤€∞±≤€±∞≤€∞±≤€±≤ [0;33m±€[32m≥
+[22C≥[33m±[1;30m∞∞∞∞∞∞∞[34m±≤€∞±€≤∞±€±≤€±≤€±≤€± [0;33m€[32m≥
+[0m[255D
+/
+There's a pool of water here. While it's not a healing pool, it DOES seem to
+hold some sort of magical power, and is worth a closer look.
+/
++e
+Pool of Water
+/
+|09This is nothing more than pure water, refreshing as nature itself. It feels
+|09in some way magical, however...
+|09In a pinch, water can save a person's life...
+
++@09
+/
++4
+5-082
+++
+No drowning allowed!
+/
++t
+|07<You hear a voice booming from all sides>
+|15"Hello, I'm Mr. Tree!"
+/

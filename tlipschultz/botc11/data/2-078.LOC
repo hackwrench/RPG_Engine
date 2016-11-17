@@ -1,0 +1,33 @@
+0001
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m≤≤≤≤≤[32m∞±∞±∞±∞±∞[31m€ﬂ€[32m∞±∞±∞±∞[33m€∞±≤€∞[32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤≤≤≤≤[32m±∞±∞±∞±∞[31m≤±≤±≤[32m∞±∞±∞±∞[33m€∞±≤€[32m≥
+[22C≥±∞±∞±∞±∞±∞±∞±∞[31m≤±≤[32m∞±∞±∞±∞±∞[33m€∞±≤[32m≥[8C[1;37m4
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±[31m∞[32m±[31m∞[32m±∞±∞±∞±∞±∞[33m€∞±[32m≥
+[22C≥[33m€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞[32m≥
+[0m[255D
+/
+You've reached the southeast corner of Delidia City. A villager is standing
+here. There's a shop to the northwest, which means that the entrance is
+probably to the west. You can also go north.
+/
++e
+Villager
+/
+Yes, it's a villager! Try (T)alking!
+/
++8
+2-066
++4
+2-077
+/
++t
+|11VILLAGER
+|14"Oh, hello. Do you know how to use Incense? When you burn it, it casts the
+|14Life spell on you. If you die during that battle, you'll be revived with
+|14full health! It only works once, though, so if you die again you're dead
+|14for good. Unless you cast the Life spell a second time, anyway..."
+/

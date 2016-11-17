@@ -1,0 +1,35 @@
+0001
+[?7h[1;1H[40m
+
+
+
+[0;30m[22C[32m≥[37m€≤±∞∞∞∞∞∞∞∞∞±€ﬂﬂ€±∞∞∞[31m€ﬂ€[37m∞∞∞±≤€[32m≥[12C[1;37m8
+[22C[0;32m≥[37m€≤±∞∞∞∞∞∞∞∞∞±€[1;30m∞∞[0m€±∞∞[31m∞≤±≤∞[37m∞∞±≤€[32m≥
+[22C≥[37m€[30m€[37m±[30m€[37m‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹[31m±≤±[37m‹‹[30m€[37m±≤€[32m≥[8C[1;37m4
+[22C[0;32m≥[37m€[30m€€[37m‹€€€€€€€€€[1;47m∞∞∞∞[0m€€€€[31m∞[37m€[31m∞[37m€€‹[30m€[37m≤€[32m≥
+[22C≥[37m€[30m€[37m‹€€€€€€€€€€[1;47m±±±±[0m€€€€€€€€€€‹[30m€[37m€[32m≥[12C[1;37m2
+[0m[255D
+/
+You've entered the large building in the center of Delidia City. It's very
+poorly decorated, like so many other houses in the land. A villager --
+presumably a resident -- is in the corner here. There are doors to the west
+and north, and the building's exit is to the south.
+/
++e
+Villager
+/
+|14"Go away. Or (T)alk. Just don't examine me."
+/
++8
+2-039
++2
+2-064
++4
+2-053
+/
++t
+|11VILLAGER
+|14"Hello, traveler! This is the Vulterian Hotspot, where travelers from all
+|14over the land meet! It's a bit empty nowadays, but then again, so is
+|14Delidia, what with the giant slime in the castle and all..."
+/

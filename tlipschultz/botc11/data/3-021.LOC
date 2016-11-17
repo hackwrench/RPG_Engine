@@ -1,0 +1,33 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1;31m[22C[0;32m≥[1;37m±[0m≤[1m±[0;30m€[1;37m±≤±≤±≤±≤±≤±≤±≤±≤±[31m€ﬂ€[37m±≤[0;30m€[1;37m±[0m≤[1m±[0;32m≥
+[22C≥[37m≤[1m±[0m≤[30m€[1;37m≤±≤±≤±≤±≤±≤±≤±≤±[31m∞≤±≤∞[37m±[0;30m€[37m≤[1m±[0m≤[32m≥
+[22C≥[1;37m±[0;30m€[1;37m±[0;30m€[37m‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹[1;31m±≤±[0m‹‹[30m€[1;37m±[0m≤[1m±[0;32m≥[8C[1;37m4
+[22C[0;32m≥[37m≤[30m€€[37m‹€€€€€€€€€€€€€€€€€[1;31m∞[0m€[1;31m∞[0m€€‹[30m€[1;37m±[0m≤[32m≥
+[22C≥[1;37m±[0;30m€[37m‹€€€€€€€€€€€€€€€€€€€€€€€€‹[30m€[1;37m±[0;32m≥
+[0m[255D
+/
+Alone in this dead-end room sits a red-robed old man. He seems overjoyed
+to have a visitor. There is an exit to the west only.
+/
++e
+Old Man
+/
+He has an air of self-esteem and dignity to him... a very rare find nowadays.
+/
++4
+3-020
+/
++t
+|11MYSTERIOUS OLD MAN
+|14"Ah, what a beautiful sight! A visitor, for the first time in a very very
+|14long while! I have a weapon here that can outperform most any other blade.
+|14It's the very best there is: the Variant Blade. If you've got enough money
+|14to buy it from me, it's yours!"
+!I
+65
+30000
+/

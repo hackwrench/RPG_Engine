@@ -1,0 +1,38 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m€€≤≤±±∞∞∞∞[1m€ﬂ€[0m∞∞∞∞∞∞[1m«ƒ∂[0m∞∞±±≤≤€€[32m≥
+[22C≥[37m€€≤≤±±∞∞∞[1m∞≤±≤∞[0m∞∞∞∞∞[1m«ƒ∂[0m∞∞±±≤≤€€[32m≥
+[22C≥[37m€€≤≤±±[30m€[37m‹‹‹[1m±≤±[0m‹‹‹‹‹‹[1m«ƒ∂[0m‹[30m€[37m±±≤≤€€[32m≥[12C[1;37m-
+[22C[0;32m≥[37m€€≤≤[30m€[37m‹‹€€€[1m∞[0m€[1m∞[0m€€€€€€€€€€‹‹[30m€[37m≤≤€€[32m≥
+[22C≥[37m€€[30m€[37m‹‹€€€€€€€€€€€€€€€€€€€€‹‹[30m€[37m€€[32m≥
+[0m[255D
+/
+Well, look at that -- a hidden room! There's a white-robed man down here. He
+looks like a ghost or something, but he's holding a shiny gem in his hand.
+There's a ladder leading back up.
+/
++e
+Man with Gem
+/
+He quickly whisks his hand away as soon as you get near the gem. It must be
+rather valuable.
+/
++-
+2-045-1
+/
++t
+|11SPIRIT
+i37
+|14"Ah, you have the Prismatic Tear! I've wanted that Tear for a long time! In
+|14exchange for it, please take my Infinity Tear. Use it after you've learned
+|14all the spells there are to learn, and you will never forget any of them,
+|14even after waking up from this dream which belies our existence!"
+-g
+37
+38
+/
+|14"... I will only speak to the bearer of the Prismatic Tear."
+/

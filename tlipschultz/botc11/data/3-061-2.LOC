@@ -1,0 +1,50 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[1;37m±[0m≤[1m±[31mﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ[33;43mﬂ[31;40mﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ[37m≤±≤[0;32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤[1m±[0;30m€[37m‹€[1;30m€ﬂ€[0m€€€€€[33;41mﬂ[47m€[41mﬂ[37;40m€€€€€€[1;30m€ﬂ€[0m€‹[30m€[1;37m±[0m≤[32m≥
+[22C≥[1;37m±[0m≤[30m€[37m€[1;30m∞≤±≤∞[0m€€€€[1;31m≤≤≤[0m€€€€€[1;30m∞≤±≤∞[0m€[30m€[37m≤[30m€[32m≥[16C[1;37m6
+[22C[0;32m≥[37m≤[30m€[37m‹€€[1;30m±≤±[0m€€€€€[1;31m≤≤≤[0m€€€€€€[1;30m±≤±[0m€€‹[30m€€[32m≥
+[22C≥[1;37m±[0;30m€[37m€€€[1;30m∞[0m€[1;30m∞[0m€€€€€[1;31m≤≤≤[0m€€€€€€[1;30m∞[0m€[1;30m∞[0m€€€[30m€€[32m≥
+[0m[255D
+/
+It's King Bloodthorne's throne room! There are two guards stationed here,
+and far in the distant north sits King Bloodthorne himself -- at least, an
+imposter of the king. A red curtain seems to be draped over the wall beyond
+the king's throne.
+
+The guards are carefully watching you.
+/
++e
+Guards
+King
+Curtain
+/
+Yep, they're guards. And they don't seem to want to let you get past them.
+/
+The king sits far in the distance in his throne. Too bad it's not really King
+Bloodthorne...
+/
+There's something strange about that curtain, but you can't quite put your
+finger on it...
+/
++8
+i15
+3-061-3
+|14"What? Who are you? GUARDS! Remove this commoner from my throne!"
++6
+3-062
+/
++t
+|11THRONE GUARDS
+i15
+|14"Ah! You wear the Crown of Hope! Please, go north to King Bloodthorne's
+|14throne -- our land needs you!"
+/
+|14"You're a commoner, are you not? We've been given strict orders by this
+|14King you see before you. No one whose head is unadorned with the Crown of
+|14Hope may hold audience with him. If we don't comply with these orders,
+|14he will surely kill us..."
+/

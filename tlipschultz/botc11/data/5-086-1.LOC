@@ -1,0 +1,34 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32mГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ[12C[1;37m+
+[22C[0;32mГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ
+[0m[255D
+/
+WHOA! This room is pitch black! Unless you have some way to light the darkness,
+you might as well just go back down... there's NO WAY you can see where you're
+going without light.
+/
++e
+Darkness
+/
+You'll need the spell of Illuminate to continue here.
+/
+++
+5-080
++m13
+a
+LIGHTUP.ANS
+5-086-2
+/
++t
+|08Hello, I'm Mr. Darkness!
+/
++r
+It's MUCH too dark to read anything...
+/

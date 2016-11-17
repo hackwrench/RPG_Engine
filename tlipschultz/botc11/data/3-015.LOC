@@ -1,0 +1,36 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1;34m[22C[0;32m≥[37m€≤±[43m  [33;40m€€€[43m     [31;40m€ﬂ€[43m   [33;40m€€[37;43m‹[33;40m€€€€€[37m±≤€[32m≥
+[22C≥[37m€≤±[43m  [33;40m€€€[43m    [1;31;40m∞[0;31m≤±≤[1m∞[43m   [37;40m≤€≤[0;33m€€€[43m [37;40m±≤€[32m≥
+[22C≥[37m€≤±[33m≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥[12C[1;37m2
+[0m[255D
+/
+You've entered a small shop. The merchant is staring at you with a longing
+for your money. You assume that business here isn't too great -- especially
+with only one item for sale. You can (T)alk to the merchant to shop, or
+retreat by going south.
+/
++e
+Wares
+/
+Press T to shop.
+/
++8
+|14"HEY! Get away from me! Please... I'm very weak, and very scared."
++2
+3-028
+/
++t
+|11MERCHANT
+|14"A, a customer?! Please, come in! Care to buy a Powder Flash? It's pretty
+|14cheap, and it might save your life if you're ever surrounded by enemies
+|14you can't defeat. C'mon!"
+!I
+20
+100
+/

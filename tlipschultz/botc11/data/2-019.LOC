@@ -1,0 +1,37 @@
+0001
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[33m∞±≤€∞±≤€∞±≤€∞±[31m€ﬂ€[33m±≤€∞±≤€∞±≤€∞±[32m≥
+[22C≥∞±∞±∞±∞±∞±∞±∞[31m≤±≤±≤[32m∞±∞±∞±∞±∞±∞±≥
+[22C≥±∞±∞±∞±∞±∞±∞±∞[31m≤±≤[32m∞±∞±∞±∞±∞±∞±∞≥[8C[1;37m4[7C6
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±[31m∞[32m±[31m∞[32m±∞±∞±∞±∞±∞±∞±≥
+[22C≥[37m≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤[32m≥
+[0m[255D
+/
+You're caught between a rock and a hard place -- quite literally. There are
+mountains too steep to climb to the north, and there's a building wall to the
+south. But, as if placed here by fate so this spot isn't a TOTAL waste, a
+red-robed villager stands expectantly, waiting to be spoken with.
+/
++e
+Villager
+/
+|14"Forget it, pal -- you ain't seein' what's under my red robes!"
+/
++6
+2-020
++4
+2-018
+/
++t
+|11VILLAGER
+|14"Hi! Can I be your friend? I've had all my shots. I'm not terminally con-
+|14tageous anymore. There's now only a 2% chance of anyone being stricken with
+|14my unusual plague, and I like those odds! I just wish I could get into
+|14Cair Delidia -- I want to make good friends with King Bluerose! If he's even
+|14still alive, what with the curse on the gates and all. Nobody can get in
+|14the castle to check on him 'cause the key is in the guard's chamber, and
+|14the guard's chamber is cursed. Only the Amulet can break the curse."
+/

@@ -1,0 +1,41 @@
+0404
+[?7h[1;1H[40m
+
+
+
+[0;33m[22C[32m≥[33m€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€[1;34m±[0;32m≥
+[22C≥[33m≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤€≤[1;34m≤[0;32m≥
+[22C≥[1;34m∞±€≤±€±€≤[0;34m€±≤€∞≤€€∞€±≤€∞±≤€[1m€∞€±[0;32m≥[8C[1;37m4[7C6
+[22C[0;32m≥[1;34m≤≤∞±∞±≤€±≤€[0;34m€±≤∞±≤€∞±≤€∞[1m±€∞±≤∞€[0;32m≥
+[22C≥[1;34m∞∞±≤∞€±≤€±€±€∞±[0;34m±€∞±≤€[1m±€∞±≤€∞±≤[0;32m≥[12C[1;37m2
+[0m[255D
+/
+You swim out a short distance into the Delidian Sea. Though the north is
+blocked off by mountains, it looks like you're able to go in the other three
+directions with no problems.
+
+There's a patch of dark water here. It's no deeper than the other water...
+I wonder what its purpose is?
+/
++e
+Dark Water
+/
+|01No, it's not a healing pool.
+|01It's just a pool.
+|01But it can teach you to heal yourself...
+
++@09
+/
++2
+2-016
++6
+2-005
++4
+2-133
+++
+No, then you'd drown.
+/
++t
+...
+No response.
+/

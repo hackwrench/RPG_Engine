@@ -1,0 +1,48 @@
+0507
+[?7h[1;1H[40m
+
+
+
+[0;32m[22C≥∞∞∞∞[30m€[33m€€€€€[1;32m€∞€≤€[0;33m€€€€€€€€€€[30m€[33m≤€≤€[32m≥
+[22C≥∞∞∞∞[30m€[33mﬂﬂﬂﬂ[1;32m€±≤[30;47m˛[32;40m∞±≤[0;33mﬂﬂﬂﬂ[1;34;43m‹[40mﬂ€€ﬂ‹[0;33m≤€≤€[32m≥
+[22C≥∞[30m€[32m∞[30m€[32m‹≤±∞±≤[1m≤€∞±≤[0;32m∞±≤±∞±≤[1;34m≤≤[0;32m±‹[30m€[33m€≤€[32m≥[8C[1;37m4[7C6
+[22C[0;32m≥∞[30m€€[32m‹≤±∞±≤±∞[33m±≤±[32m∞±≤±∞±≤±[1;34m±±[0;32m≤±‹[30m€[33m≤€[32m≥
+[22C≥∞[30m€[32m‹≤±∞±≤±∞±[33m±≤±[32m±≤±∞±≤±∞±≤±∞±‹[30m€[33m€[32m≥
+[0m[255D
+/
+Wow, the grass here is VERY thick, and this room is like a nature preserve or
+something. Though all walls except the west wall are made of rock, it's rather
+obvious that this place is full of natural resources. There's a small tree
+growing in the center of this room, and it looks like somebody threw a metal
+box on top of it: it's stuck in the branches and is frustratingly out of
+reach. If only you had something magnetic to get it down with...
+
+There's an active geyser in the east. It looks strong enough to ride...
+/
++e
+Tree
+Geyser
+Metal Box
+/
+It's not too horribly large, but it's big enough that you can't get to the
+top, and covered in dew, so you can't climb it.
+/
+Seems pretty strong. You might even be able to stand on top of it!
+/
+It's too high to reach, and the tree is covered in dew and thus unclimbable.
+It's also stuck on a few branches, and thus cannot be shaken down. If only you
+had something magnetic to fish it down with...
+/
++6
+a
+GEYSER.ANS
+2-091-2
++4
+2-131
++-
+You may be able to ride the geyser back up to the surface... go east!
+/
++t
+There's a tree, a metal box, and a geyser here. For some reason, none of them
+seem to want to talk to you.
+/

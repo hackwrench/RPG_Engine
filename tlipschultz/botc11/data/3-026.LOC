@@ -1,0 +1,33 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1;34m[22C[0;32m≥[37m€≤±[43m  [33;40m€€€[43m     [37;40m€ﬂ€[43m   [33;40m€€€€€€€€[37m±≤€[32m≥
+[22C≥[37m€≤±[43m  [33;40m€€€€€€[43m [37;40m∞≤±≤∞[43m   [33;40m€€€€€€[43m [37;40m±≤€[32m≥
+[22C≥[37m€≤±[33m€€€€€€€[31m€€[1;37;41mÕ|ƒƒ[0;31m€€€[33m€€€€€€€€[37m±≤€[32m≥
+[22C≥[37m€≤±[33m∞∞∞∞∞∞∞[31m€≤±€[1;5;41m€[0;31m€±≤€[33m∞∞∞∞∞∞∞∞[37m±≤€[32m≥
+[22C≥[37m€≤±[33m∞∞∞∞∞∞∞[31m€≤±[1;5;41m€[0;1;31m€[5;41m€[0;31m±≤€[33m∞∞∞∞∞∞∞∞[37m±≤€[32m≥[12C[1;37m2
+[0m[255D
+/
+This must be the smithy, and that guy behind the furnace must be the
+blacksmith. (T)alk with him if you want your weapon altered in any way.
+The exit is to the south.
+/
++e
+Blacksmith
+/
+The blacksmith is wearing a nametag: "Hi, my name is Smithy, and that means
+I'm a damn good Smithy!"
+/
++2
+3-039
+/
++t
+|11SMITHY
+|14"All good blacksmiths are named Smithy, ya'know. And as far as blacksmiths
+|14go, I'm the finest (mostly because I'm the only one in Vulteria, but hey,
+|14I ain't complaining). So, what can I do ya' for?"
+!B
+150
+/

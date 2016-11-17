@@ -1,0 +1,57 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[34m€€€€[1;37;47m€ﬁ[0;34m€€€€€€[1;30m€ﬂ€[0;34m€€€€€€€€€[1;37;47m€ﬁ[0;34m€€[1;37;47m€ﬁ[0;32m≥
+[22C≥[34m€[37m∞∞∞[1;47m€ﬁ[0m∞∞[34m€€€[1;30m€∞±≤≤[0;34m€€€€€€€€[1;37;47m€ﬁ[0;34m€€[1;37;47m€ﬁ[0;32m≥
+[22C≥€∞≤€[1;37;47m€ﬁ[0;32m€∞±∞±[1;30m±€∞±±[0;32m∞±±∞€≤±±[1;37;47m€ﬁ[0;32m∞±[1;37;47m€ﬁ[0;32m≥[8C[1;37m4
+[22C[0;32m≥[37m€€€€€€≤€€€€€[1;30m±≤€[0m€€€≤€€€€€€€€€[1;47m€ﬁ[0;32m≥
+[22C≥[37m≤€€€€€€€€€€€[1;30m€[0m€[1;30m€[0m€€€€€€€€≤€€€€[1;47m€ﬁ[0;32m≥
+[0m[255D
+/
+You are in the Eagle Shrine, where brave explorers stop to rest after hours of
+spelunking. The Eagle Guru stands before you, ready to train you at a moment's
+notice. Speak with him often, for his help and services may mean the difference
+between life and death during future travels.
+
+The Shrine overlooks Shagwood Forest, and you have a clear view of a large gray
+building far in the distance. The only exit is to the west.
+/
++e
+Shrine
+Guru
+View
+/
+This shrine is one of the most famous there is. Feel proud to be here.
+/
+Speak often with the guru, for he can resurrect you when you die, and he can
+heal your wounds when you live. He can also bestow his power upon you...
+/
+You have an exceptional view of Shagwood, forest of sorcery, from here.
+The view is probably even better to the west, however.
+/
++8
+Although scenic, it's not possible to exit from here. Go west (4).
++2
+Mountainous crags block you in that direction. Press 4 to go west.
++6
+An endless fall, blocked by pillars. Press 4 to go west.
++4
+1-002-1
++-
+You're about as high up as you can get (until much later, anyway).
+++
+The Guru doesn't seem to want you to kiss his feet.
+/
++t
+|11EAGLE GURU
+|14"Welcome to the Eagle Shrine. Allow me to help you in your travels. I have
+|14now established a psychic connection with you, so if you are to die, I will
+|14be able to resurrect you here at the stroke of midnight. Speak to me again
+|14whenever you wish to renew this connection. Now, I shall heal you and teach
+|14you how to survive long falls unscathed. Use these powers to your advantage!"
++&
++@12
++*
+/

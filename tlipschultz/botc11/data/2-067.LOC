@@ -1,0 +1,39 @@
+0001
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[33m≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤[37m€≤≤±∞[32m≥
+[22C≥[33m€∞±≤€[32m±∞±∞±∞[36m€[32m∞[36m€[32m∞±∞[36m€[32m∞[36m€[32m∞±∞±∞±[37m€≤≤±[32m≥
+[22C≥[33m∞±≤€[32m±∞±∞[36m€[32m∞[36m€[32m∞[36m€[32m∞[36m€€€[32m∞[36m€[32m∞[36m€[32m∞[36m€[32m∞±∞±[37m€≤≤[32m≥
+[22C≥[33m±≤€[32m±∞±∞±∞[36m€€[32m±∞[36m€[32m∞±∞[36m€[32m∞±[36m€€[32m∞±∞±∞±[37m€≤[32m≥
+[22C≥[33m≤€[32m±∞±∞±∞±∞±∞±∞[36m€€€[32m∞±∞±∞±∞±∞±∞±[37m€[32m≥[12C[1;37m2
+[0m[255D
+/
+Whoa! There are some REALLY WEIRD markings on the ground here! They're made
+with a strange watery substance, but it's DEFINITELY not water. The wall of
+Cair Delidia is to the east, and there are tall impassable mountains to the
+north and west -- could this be the legendary 'Dark Mountain' area?
+
+The only direction you can go from here is south.
+/
++e
+Strange Markings
+/
+|03Is it chalk?
+|03  Is it powder?
+|03    Or perhaps it's... power?
+|03Who made these markings?
+|03  Who cares?
+|03    Their power is yours...
+
++@15
+/
++2
+2-068
+++
+You bend down to take a closer look. Why not (E)xamine these markings?
+/
++t
+|03Hello, We're the Super Markingo Bros.!
+/

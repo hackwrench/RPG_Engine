@@ -1,0 +1,51 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[1;37;47m€ﬁ[32;40m≤€[37;47m€ﬁ[32;40m∞±≤€∞±≤€[44m  [40m∞±≤€[30m€ﬂ€[32m€[37;47m€ﬁ[32;40m∞±[37;47m€ﬁ[0;32m≥[12C[1;37m8
+[22C[0;32m≥[1;37;47m€ﬁ[0;32m±∞[1;37;47m€ﬁ[0;32m±∞±∞±∞±∞±∞±∞[1;30m∞∞±€≤€±[37;47mﬁ[0;32m±∞[1;37;47m€ﬁ[0;32m≥
+[22C≥[1;37;47m€ﬁ[0;32m∞±[1;37;47m€ﬁ[0;32m∞±∞±∞±∞±∞±∞±[1;30m±±€∞€±∞[37;47mﬁ[0;32m∞±[1;37;47m€ﬁ[0;32m≥
+[22C≥[1;37;47m€ﬁ[0m€€≤€€€€€€€€€€€€€≤[1;30m∞±€∞±[0m€€€€[1;47m€ﬁ[0;32m≥
+[22C≥[1;37;47m€ﬁ[0m€€€€€€€€€€≤€€€€€€€[1;30m€[0m€[1;30m€[0m≤€€€€[1;47m€ﬁ[0;32m≥
+[0m[255D
+/
+You are standing in the Shagwood Shrine, meditation and training spot for all
+aspiring magicians. The only exit is to the north (8). The Shagwood Guru
+stands before you, ready to help you get stronger. (T)alk to him often,
+whenever you feel weak or tired!
+/
++e
+Shrine
+Guru
+/
+The shrine is perfectly situated amidst a grove of trees so that it is only
+visible from the north.
+/
+Speak with this guru often! He can heal your wounds, protect you from death,
+and teach you the magic of Fire!
+/
++8
+5-029
++2
+Too many trees are in the way. The only exit is to the north (8).
++6
+There are pillars and trees here. Press 8 (north) to leave the Shrine.
++4
+There are pillars and trees here. Press 8 (north) to leave the Shrine.
++-
+You flap your arms, but nothing happens!
+++
+Your head smacks the brick below. Ouch!
+/
++t
+|11SHAGWOOD GURU
+|14"Welcome to my Shrine, adventurer. I shall now heal your wounds and teach
+|14you the battle spell of Fire. Use it wisely, and remember that it only does
+|14significant damage against beings of ice! I shall also now form a link with
+|14you -- if you are to perish in these lands, I will know, and I will revive
+|14you here when the clock strikes midnight!"
++&
++@01
++*
+/

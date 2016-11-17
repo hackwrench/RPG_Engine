@@ -1,0 +1,32 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32mГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ[12C[1;37m-
+[22C[0;32mГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ
+[0m[255D
+/
+You step into the tunnels, but find that you can't see your hand in front of
+your face! You need some means of lighting up the general area before you can
+continue. If you have none, then there's no choice but to go back up.
+/
++e
+Darkness
+/
+It's no use -- you can't find your way around in this. You gotta go back,
+unless you can light the place up somehow...
+/
++-
+3-010
++m13
+a
+LIGHTUP.ANS
+3-081-2
+/
++t
+|08Konnichi wa, Daakunesu to moushimasu. Hajimemashite.
+/

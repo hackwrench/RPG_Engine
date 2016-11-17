@@ -1,0 +1,33 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m€≤±∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[34m€ﬂ€[37m∞∞∞∞±≤€[32m≥
+[22C≥[37m€≤±∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[34m∞≤±≤∞[37m∞∞∞±≤€[32m≥
+[22C≥[37m€≤±[30m€[37m‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹[34m±≤±[37m‹‹‹[30m€[37m±≤€[32m≥
+[22C≥[37m€≤[30m€[37m‹€€€€€€€€€€€€€€€€[34m∞[37m€[34m∞[37m€€€‹[30m€[37m≤€[32m≥
+[22C≥[37m€[30m€[37m‹€€€€€€€€€€[1;30;47m‹‹‹‹[0m€€€€€€€€€€‹[30m€[37m€[32m≥[12C[1;37m2
+[0m[255D
+/
+You've entered a local house. The villager who lives here stands before you.
+You can leave through the door in the south or (T)alk with this person.
+/
++e
+Villager
+/
+The villager wears a bright blue cloak, but has a compassionate face.
+Maybe you should (T)alk!
+/
++2
+3-064
+/
++t
+|11VILLAGER
+|14"Hmm... I don't recognize you. You must be new here. Your weapon seems to
+|14be a bit ratty... or maybe it's just my eyesight. Nonetheless, Phorax is a
+|14dangerous place, so I'm gonna be generous and give you a weapon. It's not
+|14the greatest weapon in the world, but it's something. No need to thank me."
+!g
+51
+/

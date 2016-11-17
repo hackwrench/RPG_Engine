@@ -1,0 +1,34 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;32m[22C≥[37m€≤±[43m  [33;40m€[1;43m∞[0;33m€[43m     [31;40m€ﬂ€[43m   [33;40m€€€€€€€€[37m±≤€[32m≥
+[22C≥[37m€≤±[43m  [33;40m€[1;35;43m∫[0;33m€[43m    [1;31;40m∞[0;31m≤±≤[1m∞[43m   [0;33m€€€€€€[43m [37;40m±≤€[32m≥
+[22C≥[37m€≤±[33m≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥[12C[1;37m2
+[0m[255D
+/
+You've entered a small shop. The shopkeeper and his lone ware sit behind a
+counter in the north. (T)alk if you wish to shop here today.
+/
++e
+Wares
+/
+Press T to shop.
+/
++8
+|14"Stay IN FRONT OF the counter, please."
++2
+3-025
+/
++t
+|11MERCHANT
+|14"Good day, warrior! May I interest you in buying a Boulder Wand, one of
+|14the sturdiest earth-elemental weapons in existence? You'll be pleased
+|14with its effect on your fighting skills, I'm certain of it!"
+!I
+64
+17500
+/

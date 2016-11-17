@@ -1,0 +1,42 @@
+0103
+[?7h[1;1H[40m
+
+
+
+[0m[22C[32m³[33m²Û°±²Û°±²Û°±²Û°±²Û°±²Û°±²Û°±²Û[32m³
+[22C³°±°±°±°±°±°±°±°±°±°±°±°±°±°±°±³
+[22C³±°±°±°±°±°±°±[41m [1;35mÄ [0;32m±°±°±°±°±°±°±°³[8C[1;37m4[7C6
+[22C[0;32m³°±°±°±°±°±°±°±[1;37;42mº[0;32m±°±°±°±°±°±°±°±³
+[22C³[33m²Û[32m±°±°±°±°±°±°±°±°±°±°±°±°±°[37m²²[32m³[12C[1;37m2
+[0m[255D
+/
+The hustle and bustle of Phorax City is all around you. But it is NOT a
+peaceful sound -- Phorax is a very violent place with very dangerous enemies
+and very deadly secrets. Be wary in this battlefield.
+
+There's a sign in front of you (read it with R). You can go west, south,
+or east.
+/
++e
+Sign
+/
+Wow, a sign! (R)ead it!
+/
++8
+...but you CAN'T GO NORTH, dufus!
++2
+3-011
++6
+3-005
++4
+3-003
+/
++t
+READ IT. Don't talk to it! What are you, some kind of looney?!
+/
++r
+|14Welcome to Phorax City.
+
+|13If you value your life, you might wish to leave.
+|13If you're a hero, be sure to get all the local gossip.
+/

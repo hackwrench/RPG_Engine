@@ -1,0 +1,39 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m€≤±[43m   [33;40m€€€€€[43m  [31;40m€ﬂ€[43m           [37;40m±≤€[32m≥
+[22C≥[37m€≤±[43m [1;30;40m€±[0;33m€[1;30m€[37;47m˛[30;40m€[0;33m€[43m [1;31;40m∞[0;31m≤±≤[1m∞[43m   [0;35m±∞≤[43m    [37;40m±≤€[32m≥
+[22C≥[37m€≤±[33m≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥[12C[1;37m2
+[0m[255D
+/
+You've stepped into a merchant's shop. He looks REALLY REALLY LONELY. His
+wares are proudly displayed behind the counter. Maybe you should (T)alk to
+him...
+/
++e
+Wares
+/
+Press T to shop.
+/
++8
+|14"Don't step behind the counter, please."
++2
+2-002
+/
++t
+|11MERCHANT
+|14"Hey! You interested in messing with somebody else's plans? Maybe you have
+|14it in for someone, or you've got your eye on somebody's hot bod? Well,
+|14you've come to the right place... REVENGE HEADQUARTERS!"
+!I
+08
+50
+09
+400
+10
+2500
+/

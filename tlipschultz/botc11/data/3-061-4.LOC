@@ -1,0 +1,40 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;31m[22C[32m≥[1;37m±[0m≤[1m±[31mﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ[0;30m€[31m‹[30m€[1;31mﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ[37m≤±≤[0;32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤[1m±[0;30m€[37m‹€[1;30m€ﬂ€[0m€€€€€[31m€‹€[37m€€€€€€[1;30m€ﬂ€[0m€‹[30m€[1;37m±[0m≤[32m≥
+[22C≥[1;37m±[0m≤[30m€[37m€[1;30m∞≤±≤∞[0m€€€€[1;31m≤≤≤[0m€€€€€[1;30m∞≤±≤∞[0m€[30m€[37m≤[30m€[32m≥[16C[1;37m6
+[22C[0;32m≥[37m≤[30m€[37m‹€€[1;30m±≤±[0m€€€€€[1;31m≤≤≤[0m€€€€€€[1;30m±≤±[0m€€‹[30m€€[32m≥
+[22C≥[1;37m±[0;30m€[37m€€€[1;30m∞[0m€[1;30m∞[0m€€€€€[1;31m≤≤≤[0m€€€€€€[1;30m∞[0m€[1;30m∞[0m€€€[30m€€[32m≥
+[0m[255D
+/
+The False King is gone. The throne is empty. Your quest for the Ruby Tear is
+finally complete. Speak with the guards once more -- perhaps they have a
+reward for you!
+/
++e
+Guards
+/
+You needn't examine them. There's no change from before.
+/
++8
+3-000
++6
+3-062
+/
++t
+|11THRONE GUARDS
+i15
+|14"You've saved the land of Phorax, brave adventurer! We ask only that you
+|14return to us the crown of the true king -- in exchange, we will give you
+|14the False King's Crown of Despair, to be used as a weapon against evil.
+|14In your pure hands, though, it may only be used once, so use it well."
+-g
+15
+16
+/
+|14"There is nothing more we can do for you. Please, live for the sake of us
+|14all, and we wish you luck in defeating The Chameleon."
+/

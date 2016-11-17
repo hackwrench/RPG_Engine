@@ -1,0 +1,44 @@
+0505
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m€≤€≤ﬁ≤€≤€≤€≤€[32m≤€≤[37m€≤€≤€≤€≤€›€≤€≤[32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤ﬂ €ﬁ€≤€≤€≤€≤∞∞∞≤€≤€≤€≤€≤›≤ ﬂ€[32m≥
+[22C≥[37m€  ≤∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞€  ≤[32m≥[8C[1;37m4[7C6
+[22C[0;32m≥[37m≤∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞±[1;31;47mRIP[0m±∞∞∞∞∞€[32m≥
+[22C≥[37m€∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[47m [1;31m--- [0m∞∞∞∞∞≤[32m≥
+[0m[255D
+/
+This small room is almost completely empty except for a large gray tombstone
+thrust upon the ground with a soil grave underneath it, hiding the remains of
+some celebrated hero of ages past. There are openings to other rooms on the
+east and west walls, and an exit to the outside world on the north wall.
+/
++e
+Tombstone
+/
+|03The hero, killed by a supernatural power, survived through strength and
+|03speed alone. His speed was not natural, however...
+|03It had a magical nature to it...
+
++@06
+/
++8
+5-003
++6
+5-009
++4
+5-007
+/
++t
+|12You want to talk to a dead stranger? What the heck would you SAY?!
+/
++r
+|14R.I.P. Verdang Nolas
+|12--------------------
+|10This brave warrior will always be remembered for his blinding speed. He
+|10fought bravely all his life, killing most of the Neglifians, leaving only
+|10one ship behind. They say it still keeps watch over his grave, but cannot
+|10catch his speedy spirit.
+/

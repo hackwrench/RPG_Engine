@@ -1,0 +1,42 @@
+0101
+[?7h[1;1H[40m
+
+
+
+[0;32m[22C≥[1m∞±≤€∞[0;32m∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±[1m±≤€∞±[0;32m≥[12C[1;37m8
+[22C[0;32m≥[1m≤€∞€[36m∞±∞€±≤€≤±€±≤€∞±±≤€≤±€≤[32m€±≤€[0;32m≥
+[22C≥[1m€∞€[36m∞±≤€±≤±€±≤€±∞€±≤€±[46m@[40m≤€±±∞[32m€±≤[0;32m≥[12C[1;37m+
+[22C[0;32m≥[1m±€[36m∞±≤€±€∞±≤€±≤€±€∞±≤€±€∞±≤€∞[32m€∞[0;32m≥
+[22C≥[1m€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤±€[0;32m≥
+[0m[255D
+/
+Hmmm... this must be a healing pool! Drink from it to regain your health and
+magic! How fortunate that it's here. If you're making a map, be sure to mark
+this location!
+
+But wait! There, in the middle of the healing pool, is... a whirlpool?!
+Whatever it is, you can see bottom, so it's probably safe to dive in. Or, you
+could go north, back into the forest.
+/
++e
+Healing Pool
+Whirlpool
+/
+|11You stick your face in the pool and take a sip...
+
++&
+/
+It's not spinning very fast.
+/
++8
+5-049
++2
+You swim farther out and whap into a tree. You decide to swim back.
++-
+Down is [+], not [-]. That's UP.
+++
+5-096-1
+/
++t
+|01Hello, I'm Mr. Whirlpool!
+/

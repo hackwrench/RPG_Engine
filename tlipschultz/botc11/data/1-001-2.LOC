@@ -1,0 +1,47 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[33m∞∞∞∞∞∞∞∞∞∞∞∞∞≤≤≤≤∞∞∞∞∞∞∞∞∞∞∞∞∞[32m≥[12C[1;37m8
+[22C[0;32m≥[33m∞∞∞∞∞∞∞∞∞∞∞∞≤[1;30mﬂﬂﬂﬂ[0;33m≤∞∞∞∞∞∞∞∞∞∞∞∞[32m≥
+[22C≥[33m∞∞∞∞∞∞∞∞∞∞∞≤≤≤≤≤≤≤≤∞∞∞∞∞∞∞∞∞∞∞[32m≥[8C[1;37m4   -   6
+[22C[0;32m≥[33m∞∞∞[1;30mﬂﬂﬂﬂ[0;33m∞∞∞≤≤≤≤≤≤≤≤≤≤∞∞∞[1;30mﬂﬂﬂﬂ[0;33m∞∞∞[32m≥
+[22C≥[33m∞∞∞∞∞∞∞∞∞≤≤≤≤≤≤≤≤≤≤≤≤∞∞∞∞∞∞∞∞∞[32m≥
+[0m[255D
+/
+You have just emerged from a hole on the north side of this room. There are
+two other holes to the east and west. The room is lit by a blinding light
+being emitted from the south. You can stand up and examine the room more
+closely by pressing the - key.
+/
++e
+North Hole
+West Hole
+East Hole
+Light Source
+/
+This is the passage leading to the main tunnel system of Eagle.
+/
+The peaceful village of Delidia lies to the west of the Eagle Mountains.
+Perhaps this hole will take you there.
+/
+The savage land of Phorax lies to the east of Eagle. This hole may be a
+passage to that area.
+/
+What is this bright light streaming in from the south? Perhaps you should
+stand up and examine it further...
+/
++8
+1-025
++2
+Stand up to examine the light to the south. Press the - key.
++6
+1-041
++4
+1-045
++-
+1-019
+++
+Choose one of the three holes to go down: north, west, or east.
+/

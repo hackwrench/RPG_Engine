@@ -1,0 +1,52 @@
+0103
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m≤≤≤≤≤≤≤≤≤≤≤≤≤∞∞∞∞≤≤≤≤≤≤≤≤≤≤≤≤≤[32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤≤≤≤≤≤≤≤≤≤≤≤≤∞∞∞∞≤≤≤≤[31m€ﬂ€[37m≤≤≤≤≤≤[32m≥
+[22C≥[1;34m∞€∞±€[0;32m∞±∞±∞±∞±∞±∞±∞±∞[31m∞≤±≤∞[32m∞±∞±∞≥[16C[1;37m6
+[22C[0;32m≥[1;34m≤±€≤[0;32m∞±∞±∞±∞±∞±∞±∞±∞±∞[31m±≤±[32m∞±∞±∞±≥
+[22C≥[37m≤≤[1;34m±[0;32m∞±∞±∞±∞±∞±∞±∞±∞±∞±[31m∞[32m±[31m∞[32m±∞±∞±∞≥[12C[1;37m2
+[0m[255D
+/
+You're standing outside an open building (presumably a shop). In front of
+the shop you see a loitering civilian. To the west is a shallow man-made
+lake which, upon closer inspection, turns out to be a HEALING POOL! There's
+also more city to the south and east.
+/
++e
+Healing... Lake?
+Loiterer
+/
+Hmmm... seems to extend pretty far to the west, and it looks like there's
+something glinting in the sun in the middle of it...
+
+At any rate, knowing its healing properties, you take a drink.
+
++&
+/
+I'll tell ya', these people have NO RESPECT for the law anymore!
+/
++8
+3-015
++2
+3-041
++6
+3-029
++4
+3-027
++-
+No.
+++
+Try (E)xamining the healing pool...
+/
++t
+|11VILLAGER
+|14"Wooo! I really enjoy my new Powder Flash, and you will too, if you
+|14purchase it here, at Bob's Powder Flash Emporium! In a land as savage as
+|14Phorax, nothing's as big a life-saver as a Powder Flash! (And here's a
+|14word to the wise, bub: there's something IN THE LAKE you might be
+|14interested in too, if you get my drift... the water's shallow, you know...
+|14wink wink, nudge nudge...)"
+/

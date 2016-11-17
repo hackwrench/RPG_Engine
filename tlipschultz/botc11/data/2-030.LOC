@@ -1,0 +1,40 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m€≤±[43m  [1;31m⁄ [37m⁄     [0;31m€ﬂ€[43m    [1;37mﬁ‹› [31mﬁ‹›[0m±≤€[32m≥
+[22C≥[37m€≤±[43m  [1;31m≥ [37m≥    [31;40m∞[0;31m≤±≤[1m∞[43m    [37mﬂ   [31mﬂ [0m±≤€[32m≥
+[22C≥[37m€≤±[33m≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤≤[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥
+[22C≥[37m€≤±[33m±±±±±±±±±±±±±±±±±±±±±±±±[37m±≤€[32m≥[12C[1;37m2
+[0m[255D
+/
+Ah, an old-fashioned weapon and armor shoppe! The shopkeeper is looking at you
+expectantly. When you're finished, go south to leave.
+/
++e
+Wares
+/
+Press T to shop.
+/
++8
+|14"IN FRONT of the counter, please. Don't make me get medieval on you."
++2
+2-040
+/
++t
+|11MERCHANT
+|14"Care for some top-of-the-line scepters or breast plates? Delidia may not be
+|14quite as dangerous as the rest of the world, but it's still better to
+|14prepare yourself for the trials to come, don't you think?"
+!I
+62
+20000
+63
+20000
+75
+8000
+76
+8000
+/

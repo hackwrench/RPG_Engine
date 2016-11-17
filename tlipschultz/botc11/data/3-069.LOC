@@ -1,0 +1,30 @@
+0101
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m≤€≤€≤€≤€≤€≤[33m≈≈≈[37m≤€≤€≤€≤€≤€≤€[33m∞±≤€[32m≥[12C[1;37m8
+[22C[0;32m≥[37m€≤€≤€≤€≤€≤€[33m≈≈≈[37m€≤€≤€≤€≤€≤€≤[33m€∞±≤[32m≥
+[22C≥±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±[33m€∞±[32m≥[8C[1;37m4
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±[33m€∞[32m≥
+[22C≥[33m≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€[32m≥
+[0m[255D
+/
+You've located the entrance to Phorax Castle. Unfortunately, there's a bronze
+gate blocking it, and it's locked. You need a key to get inside. You can go
+west to get back to Phorax City.
+
+Hmmm... wonder why there are no guards at the gate?
+/
++e
+Castle Gate
+/
+There's a small keyhole in the gate, presumably for the Bronze Key.
+/
++8
+i27
+3-056
+You need a key to open the gate.
++4
+3-068
+/

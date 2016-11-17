@@ -1,0 +1,45 @@
+0001
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m€≤±∞∞∞[1;31;41m€ﬂ€[0m∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞±≤€[32m≥
+[22C≥[37m€≤±∞∞[1;31;41m∞±≤±∞[0m∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞±≤€[32m≥
+[22C≥[37m€[30m€[37m±[30m€[37m‹‹[1;31;41m≤±≤[0m‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹[30m€[37m±≤€[32m≥[8C[1;37m4
+[22C[0;32m≥[37m€[30m€€[37m‹€€[1;31;41m∞[0m€[1;31;41m∞[0m€€€€€€€€€€€€€€€€€‹[30m€[37m≤€[32m≥
+[22C≥[37m€[30m€[37m‹€€€€€€€€€€[1;30;47m‹‹‹‹[0m€€€€€€€€€€‹[30m€[37m€[32m≥[12C[1;37m2
+[0m[255D
+/
+There's a man here with a bright red-orange cloak. He's wearing a... nametag?
+He seems to want to talk to you. There are doors to the west and south.
+/
++e
+Man with Nametag
+/
+His nametag says "hi i'm doug :)"...
+/
++2
+2-054
++4
+2-038
+/
++t
+|11DOUG THE CLOCKFIXER
+i31
+|14"Ohhhhh you found my broken clock! I'll give you 5,000 gold for it -- please
+|14say yes, 'cause it's a precious heirloom!"
+-g
+31
+5000
+/
+|14"Ohhhhh hello! Can you do me a favor and find my favorite broken clock for
+|14me? It fell out of my boat while I was exploring the Delidian Sea. I was
+|14looking for land, and I hit something or another while going in a circle
+|14counterclockwise. That's when it fell out of my hands, and I haven't seen
+|14it since! If you find it, I can offer you a significant reward..."
+/
++r
+The nametag says:
+
+|13hi i'm doug :)
+/

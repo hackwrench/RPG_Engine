@@ -1,0 +1,42 @@
+0507
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[33m€≤±∞∞ €€€€€€€€€€€€€€€€€€ ∞∞±≤€[32m≥
+[22C≥[33m€≤±∞∞ ∞±∞±∞±∞±∞±∞±∞±∞±∞± ∞∞±[1;31;43m [D[0;33m€[32m≥
+[22C≥[33m€≤±∞ ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹ ∞±[37m∞[33m€[32m≥
+[22C≥[33m€≤± ‹€€€€€€€€€€€€€€€€€€€€‹ ±≤€[32m≥
+[22C≥[33m€≤ ‹€€€€€€€€[1;30;43m‹‹‹‹‹‹[0;33m€€€€€€€€‹ ≤€[32m≥[12C[1;37m2
+[0m[255D
+/
+Well, here's something a bit different. There's a small cliff to the north
+leading up to a whole new cavern, but the cliff is a little too smooth and
+high to climb. There's also a torch on the east wall, burning with such
+radiant beauty that it seems to be the source of light for this entire cave
+system. It must have magical origins. The only other exit is to the south.
+/
++e
+Cliff
+Torch
+/
+Looks like a lot of open space up there. What a shame that you can't get to
+it from here!
+/
+|09You stare into the radiant flame of the torch, implanting its flickering
+|09rhythm into your retina. Suddenly, you realize that you too have the power
+|09to shed such brilliant light.
+|09The mind is a very powerful thing...
+
++@13
+/
++8
+The cliff is too smooth and slightly too high to climb.
++2
+1-023
++6
+Ouch! You burnt yourself on the torch!
+/
++t
+|12Hello, I'm Mr. Torch!
+/

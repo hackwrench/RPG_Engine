@@ -1,0 +1,33 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1;32m[22C[0;32mГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ[12C[1;37m-
+[22C[0;32mГ[30mлллллллллллллллллллллллллллллл[32mГ
+[22CГ[30mлллллллллллллллллллллллллллллл[32mГ
+[0m[255D
+/
+Uh-oh. You kinda suspected that this might happen, but you were hoping it
+wouldn't. The Ruins have become pitch black. You need to find some way of
+lighting them up before you can continue. If you have no means of illumi-
+nation, you can only go back up from here.
+/
++e
+Darkness
+/
+It's no use -- you can't see a thing! You need to illuminate the darkness
+before you can continue.
+/
++-
+2-124
++m13
+a
+LIGHTUP.ANS
+2-126-2
+/
++t
+|08I can't hear you, it's too dark...
+/

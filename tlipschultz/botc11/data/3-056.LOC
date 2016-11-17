@@ -1,0 +1,35 @@
+0507
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[1;37m±[0m≤[1m±[0;30m€[1;37m±≤±≤±≤±≤±≤[0mﬂﬂ[1m±≤±≤±≤±≤±≤[0;30m€[1;37m±[0m≤[1m±[0;32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤[1m±[0m≤[30m€[1;37m≤±≤±≤±≤±≤±[0;30m€€[1;37m≤±≤±≤±≤±≤±[0;30m€[37m≤[1m±[0m≤[32m≥
+[22C≥[1;37m±[0m≤[1m±[0;30m€[37m‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹[30m€[1;37m±[0;30m€[1;37m±[0;32m≥[16C[1;37m6
+[22C[0;32m≥[37m≤[1m±[0;30m€[37m‹€€€€€€€€€[1;47m∞∞∞∞[0m€€€€€€€€€‹[30m€€[37m≤[32m≥
+[22C≥[1;37m±[0;30m€[37m‹€€€€€€€€€€[1;47m±±±±[0m€€€€€€€€€€‹[30m€[1;37m±[0;32m≥[12C[1;37m2
+[0m[255D
+/
+You've entered Phorax Castle.
+
+Much to your surprise, you're greeted by a completely empty room with no
+guards! And, to top it off, there are two doorways here -- one to the north
+and another to the east -- which have been left open and unattended. This may
+be easier than you thought!
+
+You can leave the castle through the south.
+/
++e
+Castle
+/
+Seems sturdy enough, but why is it so empty?
+/
++8
+3-043
++2
+3-069
++6
+3-057
+/
++t
+|07Hello, I'm Mr. Completely Unattended Empty Room!

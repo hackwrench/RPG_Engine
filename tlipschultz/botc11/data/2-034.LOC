@@ -1,0 +1,42 @@
+0408
+[?7h[1;1H[40m
+
+
+
+[0;34m[22C[32mГ[1;30mллл[45mп[0;35mлллллллллллллллллллллл[1;30;45mп[40mллл[0;32mГ
+[22CГ[1;30mлл[0;35mллллл[1;45mмм[40mллллллл[37mлпл[35mлл[45mмм[0;35mллллл[1;30mлл[0;32mГ
+[22CГ[1;30mл[35mллллллллллллл[37mАВБВА[35mллллл[0;35mллллл[1;30mл[0;32mГ[8C[1;37m4
+[22C[0;32mГ[1;30mлл[0;35mллллл[1;45mпп[40mлллллл[37mА[35mл[37mА[35mллл[45mпп[0;35mллллл[1;30mлл[0;32mГ
+[22CГ[1;30mллл[45mм[0;35mлллллллллл[1mлл[0;35mлллллллллл[1;30;45mм[40mллл[0;32mГ[12C[1;37m2
+[0m[255D
+/
+GOOD GOD! One of the castle guards is here, crumpled up and contorted into a
+very unnatural position, obviously not much longer for this Earth (if he's
+still alive to begin with!). The rest of the guards must've already decomposed
+and become part of this oozy, horrid slime. It's amazing that this poor guard
+survived even THIS long, considering that there's no oxygen in here -- only
+random air bubbles every once in a while. He couldn't have been here more
+than a very short while. Perhaps he was trying to be a hero? Perhaps he was
+caught while escaping? Maybe we'll never know...
+/
++e
+Dying Guard
+/
+Is he alive? Try (T)alking to him!
+/
++2
+2-049
++4
+2-033
+/
++t
+i34
+He's dead...
+Rest in peace, brave guard...
+/
+|11DYING GUARD
+|14"... ...even if... we win... ... ...
+|14... ...Cair Deli... dia... ... ... will never... return...
+|14         ...back... ... ... to norm... al... ...
+|14    ...it's ... ... the end... of... ... an era... ..."
+/

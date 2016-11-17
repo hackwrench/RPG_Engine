@@ -1,0 +1,34 @@
+0003
+[?7h[1;1H[40m
+
+
+
+[0;30m[22C[32m≥[37m€≤±∞∞∞∞[1;31m€ﬂ€[0m∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞±≤€[32m≥
+[22C≥[37m€≤±∞∞∞[1;31m∞≤±≤∞[0m∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞±≤€[32m≥
+[22C≥[37m€[30m€[37m±[30m€[37m‹‹‹[1;31m±≤±[0m‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹[30m€[37m±≤€[32m≥[8C[1;37m4
+[22C[0;32m≥[37m€[30m€€[37m‹€€€[1;31m∞[0m€[1;31m∞[0m€€€€€€€€€€€€€€€€‹[30m€[37m≤€[32m≥
+[22C≥[37m€[30m€[37m‹€€€€€€€€€€[1;30;47m‹‹‹‹[0m€€€€€€€€€€‹[30m€[37m€[32m≥[12C[1;37m2
+[0m[255D
+/
+There's a red-cloaked villager standing before you. You can go west or south.
+/
++e
+Villager
+/
+Seems that red is the fashionable color in these parts...
+/
++2
+2-045-1
++4
+2-042
+/
++t
+|11TRAVELLING MERCHANT
+|14"Ah, would you be interested in buying a Prism Lance from me? It's a very
+|14powerful weapon, though admittedly it fares a bit poorly against magical
+|14armor. Nonetheless, few blades can match its strength, and my price of a
+|14mere 5,000 gold is tough to match! What say you, adventurer?"
+!I
+59
+5000
+/

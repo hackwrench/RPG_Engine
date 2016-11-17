@@ -1,0 +1,52 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m≤≤≤≤≤[1;47m€ﬁ[0;32m∞[1;37;47m€ﬁ[0;32m±∞±∞±∞±∞±∞[1;37;47m€ﬁ[0;32m±[1;37;47m€ﬁ[0m≤≤≤≤≤[32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤≤≤≤∞[1;47m€ﬁ[0m∞[1;47m€ﬁ[0m∞∞∞∞[33m€ﬂ€[37m∞∞∞[1;47m€ﬁ[0m∞[1;47m€ﬁ[0m∞≤≤≤≤[32m≥
+[22C≥[37m≤≤≤∞∞[1;47m€ﬁ[0m∞[1;47m€ﬁ[0m∞∞∞[33m∞≤±≤∞[37m∞∞[1;47m€ﬁ[0m∞[1;47m€ﬁ[0m∞∞≤≤≤[32m≥
+[22C≥[37m≤≤∞∞∞[1;47m€ﬁ[0m∞∞∞∞∞∞∞[33m±≤±[37m∞∞∞∞∞∞[1;47m€ﬁ[0m∞∞∞≤≤[32m≥
+[22C≥[37m≤∞∞∞∞[1;47m€ﬁ[0m∞∞∞∞∞∞∞[33m∞[37m∞[33m∞[37m∞∞∞∞∞∞[1;47m€ﬁ[0m∞∞∞∞≤[32m≥
+[0m[255D
+/
+You're inside the peaceful Delidian Shrine, renowned for its powers of healing.
+The Delidia Guru stands here, meditating. Speak with him often, for he can
+heal your wounds, teach you magic to heal your OWN wounds, and provide you
+with resurrection services should you die in battle. But, none of that can
+happen unless you (T)alk to him!
+
+The Shrine's only exit is to the north (8).
+/
++e
+Shrine
+Guru
+/
+The Shrine is situated in a small building with an open wall in the north (8).
+/
+(T)alk to the Guru often -- he can be of MUCH HELP to you!
+/
++8
+2-086
++2
+You can only go north (8) from here.
++6
+There is nothing to the east but the Shrine wall. Go north (8).
++4
+There is nothing to the west but the Shrine wall. Go north (8).
++-
+There is nothing up from here but the sky. Go north (8).
+++
+Down? There is only solid ground below you. Go north (8).
+/
++t
+|11DELIDIA GURU
+|14"Rise, my pupil! I will heal your wounds and make you well again! I also can
+|14teach you the most powerful healing spell in existence, though perhaps you
+|14are not yet strong enough to cast it -- most people aren't. Nonetheless, you
+|14will know it, and it may save your life one day. In addition, I will form a
+|14psychic bond with you now. If you die, I will revive you within 24 hours."
++&
++@11
++*
+/

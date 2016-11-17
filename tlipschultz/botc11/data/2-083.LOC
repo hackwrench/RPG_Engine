@@ -1,0 +1,33 @@
+0001
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[37m≤€≤€≤€≤€≤€≤€≤[1;33m≈≈≈≈[0m€≤€≤€≤€≤€≤€≤€[32m≥[12C[1;37m8
+[22C[0;32m≥[37m€≤€≤€≤€≤€≤€≤€[1;33m≈≈≈≈[0m≤€≤€≤€≤€≤€≤€≤[32m≥
+[22C≥±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞≥[8C[1;37m4[7C6
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±≥
+[22C≥[33m≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€∞±≤€[32m≥
+[0m[255D
+/
+Here it is: the locked gate which leads into the depths of Cair Delidia, the
+home of King Bluerose. You can go east or west from here, or, if you possess
+the key to this gate, you can go north to enter the castle.
+/
++e
+Castle Gate
+/
+There's a small keyhole in this copper gate, presumably for the Copper Key...
+/
++8
+i28
+2-072
+You need the Copper Key to unlock this gate!
++6
+2-084
++4
+2-082
+/
++t
+|14Uh, hi, I'm a gate.
+/

@@ -1,0 +1,43 @@
+0111
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m≥[1;30m€[37m«ƒ∂[30m€€€€€€€€€€€€€€€€€€€€€€€€€€[0;32m≥[12C[1;37m8
+[22C[0;32m≥[37m€[1m«ƒ∂[0m€€[1m€[0m€€[1m€[0m€[1m€[0m€[1m€[0m€[1m€[0m€[1m€[0m€[1m€[0m€[1m€[0m€€[1m€[0m€€[1m€€[0m€[32m≥
+[22C≥[1;37m€«ƒ∂€€[0m€€[1m€[0m€€[1m€[0m€[1m€[0m€[1m€[0m€[1m€[0m€[1m€[0m€€[1m€[0m€€[1m€€[0m€€[1m€[0;32m≥[8C[1;37m4   -   6
+[22C[0;32m≥[37m€€€[1m€[0m€€€[1m€[0m€€[1m€[0m€€[1m€[0m€[1m€[0m€[1m€[0m€€[1m€[0m€€[1m€[0m€€€[1m€[0m€€[32m≥
+[22C≥[37m€[1m€€[0m€€€[1m€[0m€€€[1m€[0m€[1m€[0m€€[1m€[0m€€[1m€[0m€[1m€[0m€€€[1m€[0m€€€[1m€€[0;32m≥[12C[1;37m2
+[0m[255D
+/
+This is the Battle Arena. Here, you will be able to walk around in any of the
+four directions without ever actually changing your location -- it's like a
+very small underground planet. The enemies here range from level one weaklings
+to bosses (including The Chameleon himself!) to enemies never before seen.
+
+Be brave, and above all, try not to die.
+/
++e
+Battle Arena
+/
+This place is creepy -- it's like a whole planet, with its own gravity, albeit
+very small. No matter which way you go, you'll end up roughly at the same
+spot.
+/
++8
+3-109
++2
+3-109
++6
+3-109
++4
+3-109
++-
+3-105
+++
+No.
+/
++t
+|12MONSTERS
+|13"WE WILL KILL YOU, PUNY ONE! Dare you face us?"
+/

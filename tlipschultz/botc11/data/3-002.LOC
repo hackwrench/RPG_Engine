@@ -1,0 +1,37 @@
+0103
+[?7h[1;1H[40m
+
+
+
+[0;1m[22C[0;32m³[33m±²Û°±²Û°±²Û°±²Û°±²Û°±²Û°±[30mÛ[33mÛ°±Û[32m³
+[22C³°±°±°±°±°±°±°[37m±±±±±[32m°±°±°[33m±²[30mÛÛ[33mÛ°±[32m³
+[22C³±°±°±°²[1;37;42mØØØØØØØ[0m²²²[1;42mØØØØØØØ[30;40m±°[0;30mÛ[33m²Û°[32m³[8C[1;37m4[7C6
+[22C[0;32m³°±°±°±°²[1;37;42mØØØØØØ[33mO[37mØ[33mO[37mØØØØØØØØ[30;40m±°[0;33m±²Û[32m³
+[22C³[33m±²Û°±²Û°±²Û°±²Û°±²Û°±²Û°±²Û°±²[32m³
+[0m[255D
+/
+You see an abandoned mine car here in front of a rather large gaping cave
+entrance. Unfortunately, the track is electrified, and the minecar lock is
+electronic and has been scrambled. You'll need to ride the minecar to enter
+the mine, but you'll need a descrambler for the lock first.
+/
++e
+Minecar
+/
+Seems to be a pretty typical minecar, except for the wheel lock keeping it in
+place... not to mention the electrified track it's on. You can't fake it: you
+need to descramble that minecar lock in order to get into these caves.
+/
++6
+i30
+a
+MINECAR.ANS
+3-096
+The minecar lock is scrambled. You need to find a descrambler for it!
++4
+3-001
+/
++t
+|07Hello, I'm Mr. Scrambled Lock!
+|08(Bet you thought it'd be Mr. Minecar, huh... but you were WRONG!)
+/

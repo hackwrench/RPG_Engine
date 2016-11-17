@@ -1,0 +1,49 @@
+0101
+[?7h[1;1H[40m
+
+
+
+[0;32m[22C≥±∞±∞±∞±∞±∞±∞±∞±[1;30m€ﬂ€[0;32m±∞±∞±∞±∞±∞±∞≥[12C[1;37m8
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±[1;30m∞≤€∞≤[0;32m±∞±∞±∞±∞±∞±≥
+[22C≥±∞±∞±∞±∞±∞±∞±∞[1;30m≤∞±€±[0;32m∞±∞±∞±∞±∞±∞≥[8C[1;37m4[7C6
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±∞[1;30m≤∞±[0;32m∞±∞±∞±∞±∞±∞±≥
+[22C≥[37m∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[1;30m€[0m∞[1;30m€[0m∞∞∞∞∞∞∞∞∞∞∞∞[32m≥[12C[1;37m2
+[0m[255D
+/
+You are standing in a forest clearing. The Shagwood Shrine is to the south and
+there are forest paths stretching out to the north, east, and west. A lone
+wizard stands before you, eyeing you carefully. Is he friend or foe?
+/
++e
+Lone Wizard
+Shrine
+/
+He is staring at you. The only part of his body visible is his face. The rest
+is cloaked in gray robes.
+/
+The lost shrine of Shagwood, a treasure trove for weary adventurers, is to the
+south. Visit its guru often!
+/
++8
+5-021
++2
+5-037-1
++6
+5-030
++4
+5-028
++-
+Fly away, little bird! You're free now! WHEEEEEEEHehEhHEhEHHEh...
+++
+Grass. How lovely.
+/
++t
+|11LONE WIZARD
+|14"Greetings, traveler! My name is Isbot. I, like you, am on a quest. But I
+|14have been injured in my travels, and the Shagwood Guru is helping me heal.
+|14Do not make the same mistake I did. I got lost in the forest, away from all
+|14civilization. Make a map of your travels through Shagwood. Believe me, it
+|14will help you immensely. Shagwood is a big place. If you're not careful, it
+|14may be your final resting place, like that poor warrior whose tomb rests far
+|14in the north, behind the gray building..."
+/

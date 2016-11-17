@@ -1,0 +1,48 @@
+0203
+[?7h[1;1H[40m
+
+
+
+[0;33m[22C[32m≥[33m€≤€≤€≤ ∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[37m€≤€≤€≤[32m≥[12C[1;37m8
+[22C[0;32m≥[33m€≤[30m€[33m≤€ ∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[37m≤€≤€≤€[32m≥
+[22C≥[33m€[30m€€[33m≤ ∞∞∞∞∞∞∞∞∞∞∞[1;31;41m---[0;33m∞∞∞∞∞∞∞∞∞∞∞[32m≥[8C[1;37m4[7C6
+[22C[0;32m≥[33m€[30m€€ [33m∞∞∞∞∞∞∞∞∞∞∞∞∞[1;30m›[0;33m∞∞∞∞∞∞∞∞∞∞∞∞[32m≥
+[22C≥[33m€[30m€ [33m∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞[37m€≤[32m≥[12C[1;37m2
+[0m[255D
+/
+Whoa! This place is HUGE!! You are standing at the entrance to a giant cavern
+housing a modest-sized underground city. There's a sign in front of you (which
+you can read with R). There are small gray buildings on either side of the
+passage to the east. In addition, you can go north or south from here, or
+leave the city through the exit to the west.
+/
++e
+City
+Sign
+/
+The city seems to be fairly small-- but it's still impressive when you consider
+where you are! There appear to be two small houses and a columned building that
+looks like a temple of some sort. There are also a few rocky cliffs in the
+distance that seem to lead up to other areas. You see a villager to the north.
+/
+Try reading it. Duh.
+/
++8
+1-059
++2
+1-071
++6
+1-066
++4
+1-031
+/
++t
+|04Hello, I'm Mr. Sign!
+/
++r
+|11Welcome to the Eagle Village!
+|15Population: 13
+|14Seek out the townsfolk for news. The news they offer may help you find some
+|14very valuable items! Check what they say for any words composed of N, S, E,
+|14and W only, and you might just find something...
+/

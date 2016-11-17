@@ -1,0 +1,54 @@
+0000
+[?7h[1;1H[40m
+
+
+
+[0m[22C[32m≥[33m€∞±≤€[1;37;47m€ﬁ[0;32m∞[1;37;47m€ﬁ[0;32m±∞±∞±∞±∞±∞[1;37;47m€ﬁ[0;32m±[1;37;47m€ﬁ[0;33m€≤±∞€[32m≥[12C[1;37m8
+[22C[0;32m≥[33m∞±≤€[1;30m€[37;47m€ﬁ[30;40m€[37;47m€ﬁ[30;40m€€€€[0;36m€ﬂ€[1;30m€€€[37;47m€ﬁ[30;40m€[37;47m€ﬁ[30;40m€[0;33m€≤±∞[32m≥
+[22C≥[33m±≤€[1;30m€€[37;47m€ﬁ[30;40m€[37;47m€ﬁ[30;40m€€€[36m∞[0;36m≤±≤[1m∞[30m€€[37;47m€ﬁ[30;40m€[37;47m€ﬁ[30;40m€€[0;33m€≤±[32m≥
+[22C≥[33m≤€[1;30m€€€[37;47m€ﬁ[30;40m€€€€€€€[0;36m±≤±[1;30m€€€€€€[37;47m€ﬁ[30;40m€€€[0;33m€≤[32m≥
+[22C≥[33m€[1;30m€€€€[37;47m€ﬁ[30;40m€€€€€€€[36m∞[30m€[36m∞[30m€€€€€€[37;47m€ﬁ[30;40m€€€€[0;33m€[32m≥
+[0m[255D
+/
+You've arrived at the Phorax Shrine, the only truly safe point in the entire
+land. Speak often with the Phorax Guru (press T to talk), for he can heal you
+when your health is low, teach you magic that will aid you in battle, and
+cast a spell upon you that will return your body here as soon as death falls
+upon you -- for yes, he can revive the dead, and he will aid you if you die.
+Search the land for the 3 other gurus, as they offer the same service.
+
+When you've finished here, you can leave the Shrine by going north (press 8).
+/
++e
+Shrine
+Guru
+/
+The shrine is situated in a hollowed-out alcove cut directly into the
+mountains. As a result, you can only leave it by going north (8).
+/
+The Guru stands here, waiting to speak with you. Press T to talk!
+/
++8
+3-064
++2
+You cannot go south -- press 8 to go north to leave the Shrine.
++6
+There are only pillars and mountainous rocks in the east. Press 8 to go.
++4
+Theer are only pillars and mountainous rocks in the west. Press 8 to go.
++-
+You cannot go up here, for there is naught but sky above you.
+++
+Down? What's down, other than the ground?
+/
++t
+|11PHORAX GURU
+|14"Ah, another adventurer has arrived at my shrine! Please, let me help you!
+|14First, I will heal your wounds for you. Then, I will teach you the magic
+|14of Earthquake, which may be of assistance to you in battle, but also
+|14carries numerous dangers with it. And, I shall make a psychic connection
+|14with you -- if you die, I will revive you here under the midnight moon."
++&
++@14
++*
+/

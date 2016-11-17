@@ -1,0 +1,141 @@
+|13- Blood of the Chameleon -
+|05  Portrait of a BBS Door
+
+|10Written on New Year's Day, 2011. This is the tale of a now-obsolete
+underground fad amongst nerds in the United States of America a little
+over a decade ago, and the game that I produced because of it.
+
+Blood of the Chameleon was a pet project of mine back in the late 1990s.
+Although it's hard to imagine now, the internet was still but a fledgling
+at that point in time, only just beginning to come into its own after
+existing as little more than a novelty for many years. Throughout most of
+the 1990s, people didn't use regular ISPs, but rather online services like
+AOL, Prodigy, NVN and Delphi. Some of these (most notably AOL) offered
+world-wide web services (or at least newsgroup services -- remember
+newsgroups?), but most were comprised entirely of their own internal
+networks, including message boards, file servers and games.
+
+|02Life was so much simpler back then, wasn't it? ;)
+
+|10Meanwhile, computer nerds were creating their own miniature versions of
+these online services known as "bulletin board systems," or BBSes. A BBS
+was typically a collection of message boards, file servers and games, just
+like its bigger siblings -- except there was usually just some local schmoe
+running the thing out of his/her own house, using BBS software like Renegade
+or Iniquity. Local BBSes were generally accessible only via dial-up, and
+were invariably 100% text-based affairs (making them universal to pretty
+much all makes and models of computer, and requiring only that the user had
+a TTY "talk-to-you" program like Telnet installed on his/her system to
+access them).
+
+Despite being text-only (or perhaps BECAUSE of this restriction), local
+BBSes became their own little subculture of nerdism for a period of about
+five years. If you were a TRUE computer nerd in the early 90s, you ran one,
+and you filled it with all manner of "text art" menus using high ASCII
+("American Standard Code for Information Interchange") text such as boxes
+and lines to draw cool pictures, animated and colored via simple ANSI
+("American National Standards Institute") codes known as "escape codes."
+
+|15Example of high ASCII text colored and animated via ANSI escape codes:
+**ANSIDEMO
+
+|10Unsurprisingly, these local BBSes also featured multiplayer online games
+(again, purely text-based) known as "doors"... though why they were called
+doors, I really can't say!
+
+Door games were an interesting beast. Basically, the BBS user would select
+a door from a games menu that the SysOp ("system operator" -- the person
+running the BBS) had previously set up. This would then create what's known
+as a "dropfile" (usually called DOOR.SYS) containing all of that user's
+pertinent information (real name, BBS nickname, password, address, etc.),
+and transfer control of the BBS over to a game executable. The game would
+then run in place of the BBS software, with access to all of the information
+in the dropfile (generally used to determine which character was logged in),
+and when playtime was over, it would delete the dropfile and transfer
+control back over to the BBS.
+
+
+By far, the two most popular BBS door games were Legend of the Red Dragon
+(also simply known as "LORD") and Trade Wars. Pretty much every BBS had
+these two games (or at least LORD), and pretty much every BBSer played them.
+As a result, other door games started copying the predominant features of
+these titles, and the tropes of the "traditional BBS door game" were born.
+
+|11These tropes included:
+
+|03* A limited number of actions available to the user per day, preventing
+|03  players from getting too powerful too quickly.
+
+|03* A score listing, usually output to a .ANS file that could automatically be
+|03  copied and displayed to all BBS users on login, encouraging competition.
+
+|03* Daily news, generally advising players who killed whom, who was killed by
+|03  whom, who was seduced by whom and/or any notable accomplishments that
+|03  occurred as part of the game's story, or as part of an IGM ("in-game
+|03  module" -- basically the 90s equivalent of an expansion pack).
+
+|03* The ability to attack other players (either in real-time if the SysOp had
+|03  multiple phone lines, or "while they slept").
+
+|03* The ability to marry or seduce other players.
+
+|03* Dead players staying dead (and thus unable to play) until the next day,
+|03  real time (which generally meant midnight -- so if you played late,
+|03  you wouldn't have very long to wait!)
+
+
+|10Eventually, BBSes fell out of favor with nerds as MUDs (multi-user dungeons)
+and, ultimately, the internet became the new "game space." And it was around
+this time -- sadly -- that I learned how to make my own BBS door game.
+
+So, as 1999 drew to a close (and BBSes were already virtually obsolete), my
+first and only BBS door game, "Blood of the Chameleon," was born.
+
+...aaaaaand it wouldn't compile. So if anyone wanted to actually run the
+thing, they'd have to have QuickBASIC 4.5 installed.
+And on top of THAT, it also crashed a lot due to optimization errors with
+the QuickBASIC libraries I was using! So even if there still existed a SysOp
+with QuickBASIC 4.5 installed who was willing to test-market the game on
+his/her BBS, the program itself would pretty much ACTIVELY DISCOURAGE this,
+locking up the whole system until someone happened to notice.
+
+Basically, the game was doomed from the start, and the number of people who
+actually played it when it was new is probably only around a dozen or less.
+Which is rather unfortunate, as I really think I made a pretty amazing game
+that easily topped any other BBS door I'd ever experienced, and could even
+stand on its own as a single-player title.
+|14                 ...And that's exactly how it's being presented to you now!
+
+Thanks to a wonderful program called QB64 (basically a 64-bit emulator for
+QuickBASIC 4.5 that's native to Windows), Blood of the Chameleon -- the
+little engine that COULDN'T for over a decade -- finally CAN. Granted, ANSI
+escape codes no longer being supported by Windows put a bit of a damper
+on things... but that was nothing a little programming sleight-of-hand
+couldn't fix!
+And so, the game that lies before you now is, in its entirety, an original,
+pristine BBS door game completed on August 25, 1999, known as "Blood of the
+Chameleon." It's not QUITE the same as it was back then, of course (what with
+the lack of a multiplayer online component)... but I've attempted to emulate
+that as best as I could by allowing multiple people to play the game from the
+same computer. And if you happen to live all alone, I've also populated the
+world with strategically-placed computer-controlled "players" who may be
+attacked or seduced as you see fit -- and will even respond to your assaults
+or advances using rudimentary AI conditionals!
+
+Oh, and I've also done a bit of touch-up work, correcting some misspellings
+and finally implementing the super-secret hidden item known as the "Vulteria
+Godbook." This was always supposed to be an over-powered relic of unfathom-
+able rarity, virtually impossible to find... but in the original game, if
+you DID manage to find it (and to my knowledge, only one person ever did!)
+and you tried to use it, you'd just receive a message telling you that the
+thing wasn't quite working yet -- to check back again in the next version.
+
+|02That would've been pretty aggravating, no? ;)
+|10Anyway, it's not perfect, but it's probably the most complex programming feat
+I've ever accomplished, and I'm extremely proud of my work on it. I hope you
+have a blast playing it, and I'd love to hear from you if you do!
+
+|14Enjoy!
+
+|13-Tom Lipschultz
+|05 a.k.a. Wyrdwad

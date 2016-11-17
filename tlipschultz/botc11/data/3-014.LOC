@@ -1,0 +1,40 @@
+0103
+[?7h[1;1H[40m
+
+
+
+[0m[22C[32m≥±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±[37m≤≤≤≤≤[32m≥[12C[1;37m8
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±[37m≤≤≤≤[32m≥
+[22C≥±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±[37m≤≤≤[32m≥[8C[1;37m4
+[22C[0;32m≥∞[1;34m±≤€∞≤€±∞±€±≤€∞±≤€±≤±≤€∞±≤€±[0m≤≤[32m≥
+[22C≥[37m≤≤[1;34m€±≤€∞±€±≤€±∞±€±≤€±≤∞±≤€∞±≤€[0m≤[32m≥
+[0m[255D
+/
+Hmm... this area seems mildly flooded. It seems as if a sort of makeshift
+lake has been formed here. Upon closer inspection, you discover that it's
+actually a HEALING POOL! One sip, and you'll be dancin' on the tables like
+mad with energy! It seems to extend to the south for quite a distance, and
+is apparently rather shallow. You can also go west or north from here.
+/
++e
+Healing... Lake?
+/
+Seems to extend pretty far south, and it looks like there's something pretty
+much in the middle of it, glinting in the sunlight.
+
+Ah well... time to take a drink!
+
++&
+/
++8
+3-007
++2
+3-027
++4
+3-013
+++
+Glug, glug! (To drink from the healing pool, (E)xamine it!)
+/
++t
+(E)xamine it, doofus.
+/

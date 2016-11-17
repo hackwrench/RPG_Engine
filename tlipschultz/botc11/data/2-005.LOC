@@ -1,0 +1,48 @@
+0404
+[?7h[1;1H[40m
+
+
+
+[0;32m[22C≥[1;34m±∞[0;33m€∞∞∞∞∞€[1;34m∞∞±€∞∞±≤∞±€[30m€ﬂ€[34m€±∞€∞±≤[0;32m≥
+[22C≥[1;34m≤±[0;33m€∞∞∞∞∞€[1;34m±∞±≤€∞±€≤[30m∞∞≤±≤∞∞[34m€±≤€≤[0;32m≥
+[22C≥[1;34m±≤[0;33;44mﬂ[40m€∞∞∞€[44mﬂ[1;34;40m∞€∞±≤€±[33m∞±[30m∞±±≤±±∞[33m±∞±∞±[0;32m≥[16C[1;37m6
+[22C[0;32m≥[1;34m±∞€[0;33;44mﬂ€[40m∞[44m€ﬂ[1;34;40m∞€∞[33m∞±∞±∞±∞±[30m∞≤±≤∞[33m±[0;32m±[1;33m±[0;32m±[1;33m±∞[0;32m≥
+[22C≥[1;34m€≤∞±[0;33;44mﬂ€ﬂ[1;40m±∞±∞±∞±∞±∞±∞[30m∞∞[0;32m±[1;30m∞∞[33m∞[0;32m∞[1;33m∞[0;32m∞[1;33m∞[0;32m∞≥[12C[1;37m2
+[0m[255D
+/
+You're at the southeast shallows of the Delidian Sea. A burly sailor in a
+gray cloak stands before you, with his boat docked nearby. The shallows seem
+to continue out to the west, but the water seems to be very deep in the north.
+You can go south or east from here.
+/
++e
+Burly Sailor
+Boat
+Delidian Sea
+/
+Hey, he's a ferryman! (T)alk to him if you want a ride across the sea!
+/
+The ferryman's boat. Don't touch unless you're a paying customer.
+/
+Seems pretty dang shallow to the west, like you could walk right through...
+/
++8
+|14"Wish ye to drown? Arrrr... talk to me, and I'll ferry ye."
++2
+2-017
++6
+2-006
++4
+2-136
+++
+|14"Drownin' yerself won't solve anythin', matey."
+/
++t
+|11FERRYMAN
+|14"Arrrr, I be the reformed pirate SilverCloak, as of late turned ferryman. Be
+|14ye interested in crossing these here seas? I'll ferry ye for nary more than
+|14100 gold -- a bargain, ta' be sure! What say ye?"
+-$
+100
+2-004-1
+/

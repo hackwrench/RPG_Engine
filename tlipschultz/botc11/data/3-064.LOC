@@ -1,0 +1,47 @@
+0101
+[?7h[1;1H[40m
+
+
+
+[0;1;36m[22C[0;32m≥[37m≤≤≤≤≤≤≤≤≤≤≤≤≤∞∞∞∞≤≤≤≤≤[1;30m€ﬂ€[0m≤≤≤≤≤[32m≥[12C[1;37m8
+[22C[0;32m≥[37m≤≤≤≤≤≤≤≤≤≤≤≤≤∞∞∞∞≤≤≤≤[1;30m∞≤±≤∞[0m≤≤≤≤[32m≥
+[22C≥±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞[1;30m±≤±[0;32m∞±∞±∞≥[8C[1;37m4[7C6
+[22C[0;32m≥∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±∞±[1;30m∞[0;32m±[1;30m∞[0;32m±∞±∞±≥
+[22C≥[33m≤€[1;30m€€€€€€€€€€€€€€€€€€€€€€€€€€[0;33m€≤[32m≥[12C[1;37m2
+[0m[255D
+/
+A local villager stands before you -- maybe you should (T)alk. The Phorax
+Shrine is to the south, and a building entrance to the north. The city street
+stretches east and west from here. What will you do?
+/
++e
+Villager
+Shrine
+/
+(T)alk to the villager -- examining people generally is of no help to you!
+/
+The shrine is to the south (2). Go there often -- trust me!
+/
++8
+3-051
++2
+3-070
++6
+3-065
++4
+3-063
++-
+Can't go up. Sorry.
+++
+Can't go down. Sorry.
+/
++t
+|11VILLAGER
+|14"You new here? If so, you'll have a tough time surviving in these harsh
+|14lands. My advice? First, go north into this generous man's house. He'll
+|14give you a Short Sword. There's also a Longsword laying around this
+|14village somewhere... might be worthwhile to look around for it. My second
+|14piece of advice? The weakest enemies in Phorax are here: in the area near
+|14the Phorax Shrine. Hang around here for a while -- at least until you've
+|14gained a few levels. If you're hurt, talk to the Guru in the Shrine."
+/
