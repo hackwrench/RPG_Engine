@@ -1,3 +1,5 @@
+$IF SUBESTABLISHTARGET = 0 THEN
+$LET SUBESTABLISHTARGET = 1
 SUB EstablishTarget (enemyat%(), EnemyTargeted%)
 FOR yowsa = 1 TO 4
     IF enemyat(EnemyTargeted) = 0 THEN
@@ -11,3 +13,4 @@ FOR yowsa = 1 TO 4
     END IF
 NEXT
 END SUB
+$ENDIF

@@ -1,36 +1,48 @@
 SUB AttackKyta (EnemyTargeted)
-    DIM coverup(140)
-    CALL EstablishTarget(enemyat%(), EnemyTargeted%)
-   
-    IF EnemyTargeted = 1 THEN ex = 55: ey = 120: ly = 16: lx = 4
-    IF EnemyTargeted = 2 THEN ex = 130: ey = 120: ly = 16: lx = 15
-    IF EnemyTargeted = 3 THEN ex = 55: ey = 70: ly = 9: lx = 4
-    IF EnemyTargeted = 4 THEN ex = 130: ey = 70: ly = 9: lx = 15
-    
-   
-    SCREEN 7, 0, 7, 0
-    GET (280, 60)-(299, 79), coverup
-    SCREEN 7, 0, 6, 0
-    PUT (280, 60), coverup, PSET
-   
-   
-    PUT (280, 60), Mode7Bitmap(0, 3), AND
-    PUT (280, 60), Mode7Bitmap(0, 2), OR
-    PCOPY 6, 3
-    FOR xanth = 1 TO 20
-      PCOPY 3, 6
-      LINE (ex, ey)-(ex - xanth, ey), 12
-      LINE (ex, ey - 1)-(ex - xanth, ey - 1), 4
-      LINE (ex, ey + 1)-(ex - xanth, ey + 1), 4
-      PCOPY 6, 0
-      delay .05
-    NEXT
-      ex = ex - 20
-FOR xanth = 19 TO 1 STEP -1: PCOPY 3, 6
-LINE (ex, ey)-(ex + xanth, ey), 12
-LINE (ex, ey - 1)-(ex + xanth, ey - 1), 4
-LINE (ex, ey + 1)-(ex + xanth, ey + 1), 4
-PCOPY 6, 0: delay .05: NEXT: PCOPY 3, 0
+  DIM coverup(140) AS INTEGER
+  CALL EstablishTarget(enemyat%(), EnemyTargeted%)
+
+  IF EnemyTargeted = 1 THEN
+    ex = 55: ey = 120
+    lx = 4: ly = 16
+  END IF
+  IF EnemyTargeted = 2 THEN
+    ex = 130: ey = 120
+    lx = 15: ly = 16
+  END IF
+  IF EnemyTargeted = 3 THEN
+    ex = 55: ey = 70
+    lx = 4: ly = 9
+  END IF
+  IF EnemyTargeted = 4 THEN ex = 130: ey = 70: ly = 9: lx = 15
+
+  SCREEN 7, 0, 7, 0
+  GET (280, 60)-(299, 79), coverup
+  SCREEN 7, 0, 6, 0
+  PUT (280, 60), coverup, PSET
+
+
+  PUT (280, 60), Mode7Bitmap(0, 3), AND
+  PUT (280, 60), Mode7Bitmap(0, 2), OR
+  PCOPY 6, 3
+  FOR xanth = 1 TO 20
+    PCOPY 3, 6
+    LINE (ex, ey)-(ex - xanth, ey), 12
+    LINE (ex, ey - 1)-(ex - xanth, ey - 1), 4
+    LINE (ex, ey + 1)-(ex - xanth, ey + 1), 4
+    PCOPY 6, 0
+    delay .05
+  NEXT
+  ex = ex - 20
+  FOR xanth = 19 TO 1 STEP -1
+    PCOPY 3, 6
+    LINE (ex, ey)-(ex + xanth, ey), 12
+    LINE (ex, ey - 1)-(ex + xanth, ey - 1), 4
+    LINE (ex, ey + 1)-(ex + xanth, ey + 1), 4
+    PCOPY 6, 0
+    delay .05
+  NEXT
+PCOPY 3, 0
 PCOPY 3, 6: PUT (280, 60), coverup, PSET
 PUT (280, 60), Mode7Bitmap(0, 1), AND: PUT (280, 60), Mode7Bitmap(0, 0), OR: ERASE coverup
 pdamage = INT(RND(1) * 50) + charstat(1, 3) - 50

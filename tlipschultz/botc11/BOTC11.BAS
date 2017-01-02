@@ -1,4 +1,7 @@
 '$DYNAMIC
+
+'Original code by Thomas Lipshultz
+'Modified by Robert Claypool
 DEFINT A-Z
 
 DECLARE SUB AnsiDraw (ansfilename$)
@@ -37,7 +40,7 @@ DECLARE SUB CenterShow (atthisy%, showthis$, inthiscolor%)
 DECLARE SUB GetItemInfo (itemno, fightb, ifnm$)
 DECLARE FUNCTION EncryptText$ (convertme$)
 DECLARE FUNCTION DecryptText$ (convertme$)
-DECLARE FUNCTION _FILEEXISTS (filename$)
+
 DECLARE FUNCTION AddPadding$ (padamt%, st2pd$)
 DECLARE FUNCTION GetFileLine$ (zfn$, lineno)
 DECLARE FUNCTION NumericPrompt% (they%, thex%, whattosay$, firstval%, lastval%)
@@ -105,7 +108,7 @@ FOR loadfour% = 1 TO 3
  LoadUserData
  IF ustring$ <> DATE$ THEN
   showda% = 0
-  IF _FILEEXISTS("MAIL" + LTRIM$(STR$(loadfour%)) + ".ML") = 0 THEN filexists% = 1 ELSE filexists% = 0
+  IF _FILEEXISTS("data\MAIL" + LTRIM$(STR$(loadfour%)) + ".ML") = 0 THEN filexists% = 1 ELSE filexists% = 0
   IF filexists% = 1 THEN
     OPEN "data\MAIL" + LTRIM$(STR$(loadfour%)) + ".ML" FOR INPUT AS #38
     DO WHILE NOT EOF(38)
