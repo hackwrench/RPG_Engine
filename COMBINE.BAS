@@ -90,7 +90,6 @@ DECLARE SUB DrawCharacter ()
 DECLARE FUNCTION SizeOfTable% (Table%, Tables() AS INTEGER, Index() AS INTEGER)
 DECLARE SUB SetBattleBackground (NewBattleBackground%)
 
-DECLARE FUNCTION ItemName$ (item%)
 DECLARE FUNCTION NumberOfChunks% (fc%, ChunkType$)
 DECLARE FUNCTION ReverseLong& (longInt&)
 
@@ -199,6 +198,7 @@ DECLARE SUB DebugKeys (Key$)
 
 DECLARE SUB MapRetrieve (Integ%, Lines%)
 DECLARE SUB MapFileListInit ()
+DECLARE SUB MapFileListLoad (FileName$)
 
 DECLARE FUNCTION Surrounding% (ttlf$)
 DECLARE SUB Epilogue ()
@@ -271,6 +271,8 @@ DECLARE SUB delay (DelTime#)
 CONST False = 0
 CONST TRUE = NOT False
 
+DIM Byte AS STRING * 1
+
 DIM SHARED DebugNoEnemies%, DebugRun%, DebugPos%, DebugEnemiesAnyway%
 DIM SHARED NoEnemies%
 
@@ -280,10 +282,14 @@ DIM SHARED BlockList(0 TO 255) AS STRING * 1
 DIM SHARED DoActions%
 
 DIM SHARED MapFileList(0 TO 0) AS STRING
+'From BATTLE1.BAS
+'          4 times to level up
+DIM SHARED levelup(1 TO 4) AS LONG
 
 DIM SHARED Mode7Bitmap(121, 0 TO 23)
 DIM SHARED mn$(12)
-DIM SHARED mpused(12), levelup(4), curexp(3), curlev(3), ItemName$(18)
+DIM SHARED mpused(12)
+DIM SHARED curexp(3), curlev(3), ItemName$(18)
 
 
 
@@ -315,7 +321,7 @@ DIM SHARED CharacterDraw%
 
 CharacterDraw% = -1
 
-ON ERROR GOTO ErrorHandle
+'ON ERROR GOTO ErrorHandle
 
 SelGame:
     OPEN "RPGLIST.LIS" FOR INPUT AS 1
@@ -384,7 +390,7 @@ SelGame:
    
     SCREEN 0
     WIDTH 80
-    CALL DebugTools
+    DebugTools
   ELSEIF a% = 6 THEN
   ELSE
    GOTO SelGame
@@ -445,42 +451,48 @@ FOR gab = 1 TO 5
     PRINT "GP"; power(itmno(gab), 2): NEXT
 PCOPY 2, 1
 mychc = 1
-: DO
-: PCOPY 1, 2
-: COLOR 15
-LOCATE mychc + 9, 10
-: PRINT CHR$(26)
-: PCOPY 2, 0
-ii$ = INKEY$:
-SELECT CASE ii$
-CASE CHR$(0) + CHR$(72), CHR$(0) + CHR$(75):
-mychc = mychc - 1
-: IF mychc = 0 THEN mychc = 5
-CASE CHR$(0) + CHR$(77), CHR$(0) + CHR$(80):
-mychc = mychc + 1
-: IF mychc = 6 THEN mychc = 1
-CASE CHR$(27):
+  DO
+    PCOPY 1, 2
+    COLOR 15
+    LOCATE mychc + 9, 10
+    PRINT CHR$(26)
+    PCOPY 2, 0
+    ii$ = INKEY$
+    SELECT CASE ii$
+    CASE CHR$(0) + CHR$(72), CHR$(0) + CHR$(75):
+      mychc = mychc - 1
+      IF mychc = 0 THEN mychc = 5
+    CASE CHR$(0) + CHR$(77), CHR$(0) + CHR$(80):
+      mychc = mychc + 1
+      IF mychc = 6 THEN mychc = 1
+  CASE CHR$(27):
  ii$ = CHR$(13)
-: mychc = 6
-END SELECT
-LOOP UNTIL ii$ = CHR$(13)
+      mychc = 6
+    END SELECT
+  LOOP UNTIL ii$ = CHR$(13)
 IF mychc = 6 THEN ERASE itmno
 : EXIT SUB
 
 IF curgold < power(itmno(mychc), 2) THEN
-cannotrun = 1: COLOR , totalback: CheapSkate: EXIT SUB
+  cannotrun = 1
+  COLOR , totalback
+  CheapSkate
+  EXIT SUB
 END IF
-LOCATE 2, 3: PRINT "You sure you want it? (Y/N)"
+
+LOCATE 2, 3
+PRINT "You sure you want it? (Y/N)"
 PCOPY 2, 0
-DO
-ii$ = INKEY$
-LOOP UNTIL ii$ <> ""
+
+ii$ = GetKeyPress
 IF UCASE$(ii$) = "Y" THEN
 curgold = curgold - power(itmno(mychc), 2)
 inven(itmno(mychc)) = inven(itmno(mychc)) + 1
-IF inven(itmno(mychc)) = 100 THEN inven(itmno(mychc)) = 99
-LOCATE 2, 3: PRINT "Sold!                         "
-PCOPY 2, 0: delay 1
+  IF inven(itmno(mychc)) = 100 THEN inven(itmno(mychc)) = 99
+LOCATE 2, 3
+PRINT "Sold!                         "
+PCOPY 2, 0
+delay 1
 ELSE
 GOTO StartofBuyingSub
 END IF
@@ -501,17 +513,29 @@ SUB CampGround STATIC
   PRINT "You've stumbled upon a campground."
   IF inven(18) = 0 THEN
 PRINT "Unfortunately, you don't"
-PRINT "have a tent.": LOCATE 3, 40
-PRINT CHR$(254): PCOPY 2, 0: SLEEP: dmbo$ = INKEY$
+PRINT "have a tent."
+ LOCATE 3, 40
+PRINT CHR$(254)
+PCOPY 2, 0
+SLEEP
+dmbo$ = INKEY$
 ELSE
 PRINT "Would you like to stay for"
-PRINT "the night?           (Y/N)": LOCATE 3, 40
-PRINT CHR$(26): PCOPY 2, 0: SLEEP: dmb$ = INKEY$
+PRINT "the night?           (Y/N)"
+LOCATE 3, 40
+PRINT CHR$(26)
+ PCOPY 2, 0
+ SLEEP
+ dmb$ = INKEY$
 IF UCASE$(dmb$) = "Y" THEN
-curgold = curgold + 50
-inven(18) = inven(18) - 1: StayTheNight
+  curgold = curgold + 50
+  inven(18) = inven(18) - 1
+  StayTheNight
 END IF
-PCOPY 5, 2: LOCATE py, px: COLOR 14: PRINT CHR$(1);
+PCOPY 5, 2
+LOCATE py, px
+COLOR 14
+PRINT CHR$(1);
 COLOR , totalback
 END IF
 END SUB
@@ -730,38 +754,6 @@ SUB DoBox
 
 END SUB
 
-SUB DrawBattleCave
-SCREEN 7, 0, 7, 0
-LINE (0, 0)-(319, 50), 6, BF
-LINE (0, 51)-(319, 199), 6, BF
-cntr = 1
-FOR lookreal = 50 TO 199
-    cntr = cntr + 1
-    LINE (0, lookreal + 1)-(319, lookreal + cntr), 14, BF
-lookreal = lookreal + cntr
-NEXT
-END SUB
-
-SUB DrawBattleField
-SCREEN 7, 0, 7, 0
-LINE (0, 0)-(319, 50), 11, BF
-LINE (0, 51)-(319, 199), 2, BF
-    cntr = 1
-    FOR lookreal = 50 TO 199
-      cntr = cntr + 1
-      LINE (0, lookreal + 1)-(319, lookreal + cntr), 10, BF
-      lookreal = lookreal + cntr
-    NEXT
-    CIRCLE (160, 50), 25, 14, , 3.15
-    LINE (135, 50)-(185, 50), 14
-    PAINT (160, 48), 14: cntr = 0
-    COLOR 14
-    FOR lookreal = 51 TO 76
-      cntr = cntr + 1
-      LINE (135 + cntr * 4, lookreal + cntr)-(185 - cntr * 4, lookreal + cntr)
-      lookreal = lookreal + cntr
-    NEXT
-END SUB
 
 SUB DrawGraphic (endcor%)
     
@@ -806,7 +798,6 @@ Key$ = INKEY$
 
 END SUB
 
-REM $STATIC
 FUNCTION EnemiesRemaining (enemyat())
     FOR slot = 1 TO 4
       count = count + enemyat(slot)
@@ -814,7 +805,6 @@ FUNCTION EnemiesRemaining (enemyat())
     EnemiesRemaining = count
 END FUNCTION
 
-REM $DYNAMIC
 SUB EnemyAttack (enum)
 DIM ey(3)
 ey(1) = 65
@@ -875,19 +865,23 @@ DO
 PCOPY 6, 4
 FOR sabro = 1 TO 3: CharMenu sabro
    IF ErrorLevel = 1 THEN sabro = sabro - 1: ErrorLevel = 0
-NEXT: FOR xab = 300 TO 0 STEP -1: FOR sabro = 1 TO 3
-IF charstat(sabro, 3) = xab THEN CharAttack sabro: IsPartyDead
 NEXT
+  FOR xab = 300 TO 0 STEP -1
+    FOR sabro = 1 TO 3
+      IF charstat(sabro, 3) = xab THEN CharAttack sabro: IsPartyDead
+    NEXT
     FOR sabro = 1 TO 4
-    IF enemyat(sabro) > 0 THEN
-      ghaj = enemyat(sabro)
-      IF etype(ghaj, 2) = xab THEN EnemyGo sabro: IsPartyDead
-   END IF
-NEXT: NEXT
+      IF enemyat(sabro) > 0 THEN
+        ghaj = enemyat(sabro)
+        IF etype(ghaj, 2) = xab THEN EnemyGo sabro: IsPartyDead
+      END IF
+    NEXT
+  NEXT
 
 IF EnemiesRemaining(enemyat()) = 0 THEN GOTO endbattle
 
-PCOPY 6, 0: LOOP
+PCOPY 6, 0
+LOOP
 endbattle:
 PCOPY 6, 0: WinBattle
 COLOR , totalback: SCREEN 7, 0, 2, 0: cannotrun = 0
@@ -895,13 +889,13 @@ FOR abab = 1 TO 4: enemyat(abab) = 0: NEXT
 FOR abab = 1 TO 3: walled(abab) = 0: NEXT
 END SUB
 
-REM $STATIC
+
 FUNCTION EnumeratedList$ (Text$, Number&)
 EnumeratedList$ = LTRIM$(STR$(Number&)) + ". " + Text$
 END FUNCTION
 
-REM $DYNAMIC
-SUB Epilogue STATIC
+
+SUB Epilogue
 COLOR 14, 0: LOCATE 15, 20: PRINT CHR$(2)
 LOCATE 20, 15: PRINT CHR$(1); "    "; CHR$(1); "    "; CHR$(1)
 COLOR 15: LOCATE 1, 1: PRINT "KING: Thank you for saving my body"
@@ -919,232 +913,8 @@ CLS : PRINT "And so ends the RPG engine demo game..."
 delay 3: PRINT "But YOU can continue the story...": delay 5
 END SUB
 
-SUB EquipItems
-CLS : LINE (0, 0)-(319, 199), 1, BF
-LINE (0, 0)-(319, 199), 12, B
-LOCATE 2, 3: COLOR 15: PRINT "Equip who?"
-COLOR 14: LOCATE 15, 17: PRINT "Kyta"
-LOCATE 16, 17: PRINT "Glenlin"
-LOCATE 17, 17: PRINT "Kohlen"
-LOCATE 18, 17: PRINT "EXIT"
-PCOPY 2, 1: mychc = 1
-DO
-    PCOPY 1, 2
-    COLOR 15
-    LOCATE mychc + 14, 15
-    PRINT CHR$(26)
-    PCOPY 2, 0
-ii$ = INKEY$
-    SELECT CASE ii$
-CASE CHR$(0) + CHR$(72), CHR$(0) + CHR$(75):
-mychc = mychc - 1: IF mychc = 0 THEN mychc = 4
-CASE CHR$(0) + CHR$(77), CHR$(0) + CHR$(80):
-mychc = mychc + 1: IF mychc = 5 THEN mychc = 1
-CASE CHR$(27): ii$ = CHR$(13): mychc = 4
-END SELECT
-LOOP UNTIL ii$ = CHR$(13)
-IF mychc = 4 THEN EXIT SUB
-mypers = mychc
-OnceAgain:
-mychc = mypers
-CLS : LINE (0, 0)-(319, 199), 1, BF
-LINE (0, 0)-(319, 41), 12, B
-COLOR 15: LOCATE 2, 3
-PRINT "HAND - ": LOCATE 3, 3: PRINT "BODY - "
-LOCATE 7, 3: PRINT "Please choose a weapon:"
-inven(equip(mychc, 1)) = inven(equip(mychc, 1)) + 1
-inven(equip(mychc, 2)) = inven(equip(mychc, 2)) + 1
-equip(mychc, 1) = 0: equip(mychc, 2) = 0
-COLOR 14
-    FOR ha = 1 TO 2
-      LOCATE ha + 15, 10
-      IF inven(canequip(mychc, ha)) > 0 THEN
-        PRINT ItemName$(canequip(mychc, ha))
-        LOCATE ha + 15, 28
-        goby$ = LTRIM$(STR$(power(canequip(mychc, ha), 1)))
-        IF LEN(goby$) = 2 THEN goby$ = "0" + goby$
-        PRINT goby$
-      ELSE
-        PRINT "<Nothing>"
-     END IF
-NEXT: LOCATE 18, 10: PRINT "<Nothing>"
-mypers = mychc
-PCOPY 2, 1: mychc = 1: DO: PCOPY 1, 2: COLOR 15
-LOCATE mychc + 15, 8: PRINT CHR$(26): PCOPY 2, 0
-ii$ = INKEY$: SELECT CASE ii$
-CASE CHR$(0) + CHR$(72), CHR$(0) + CHR$(75):
-mychc = mychc - 1: IF mychc = 0 THEN mychc = 3
-CASE CHR$(0) + CHR$(77), CHR$(0) + CHR$(80):
-mychc = mychc + 1: IF mychc = 4 THEN mychc = 1
-END SELECT
-LOOP UNTIL ii$ = CHR$(13): LOCATE 2, 8: COLOR 14
-IF mychc < 3 AND inven(canequip(mypers, mychc)) > 0 THEN
-mc = mychc
-inven(canequip(mypers, mc)) = inven(canequip(mypers, mc)) - 1
-equip(mypers, 1) = canequip(mypers, mychc)
-charstat(mypers, 3) = power(canequip(mypers, mychc), 1)
-PRINT ItemName$(canequip(mypers, mychc))
-ELSE
-equip(mypers, 1) = 0: charstat(mypers, 3) = 0
-PRINT "<Nothing>"
-END IF
-LINE (0, 42)-(319, 199), 1, BF: COLOR 15
-LOCATE 7, 3: PRINT "Please choose an armor:"
-COLOR 14: FOR ha = 3 TO 4: LOCATE ha + 13, 10
-IF inven(canequip(mypers, ha)) > 0 THEN
-PRINT ItemName$(canequip(mypers, ha))
-LOCATE ha + 13, 28
-goby$ = LTRIM$(STR$(power(canequip(mypers, ha), 1)))
-IF LEN(goby$) = 2 THEN goby$ = "0" + goby$
-PRINT goby$
-ELSE
-PRINT "<Nothing>"
-END IF
-NEXT: LOCATE 18, 10: PRINT "<Nothing>"
-PCOPY 2, 1: mychc = 1: DO: PCOPY 1, 2: COLOR 15
-LOCATE mychc + 15, 8: PRINT CHR$(26): PCOPY 2, 0
-ii$ = INKEY$: SELECT CASE ii$
-CASE CHR$(0) + CHR$(72), CHR$(0) + CHR$(75):
-mychc = mychc - 1: IF mychc = 0 THEN mychc = 3
-CASE CHR$(0) + CHR$(77), CHR$(0) + CHR$(80):
-mychc = mychc + 1: IF mychc = 4 THEN mychc = 1
-END SELECT
-LOOP UNTIL ii$ = CHR$(13): LOCATE 3, 8: COLOR 14
-IF mychc < 3 THEN
-IF inven(canequip(mypers, mychc + 2)) > 0 THEN
-mc = mychc + 2
-inven(canequip(mypers, mc)) = inven(canequip(mypers, mc)) - 1
-equip(mypers, 2) = canequip(mypers, mc)
-charstat(mypers, 4) = power(canequip(mypers, mc), 1)
-PRINT ItemName$(canequip(mypers, mc))
-ELSE
-equip(mypers, 2) = 0: charstat(mypers, 4) = 0
-PRINT "<Nothing>"
-END IF
-ELSE
-equip(mypers, 2) = 0: charstat(mypers, 4) = 0
-PRINT "<Nothing>"
-END IF
-LINE (0, 42)-(319, 199), 1, BF
-LOCATE 16, 3: PRINT "Is this OK? (Y/N)": PCOPY 2, 0
-DO: ii$ = INKEY$: LOOP UNTIL ii$ <> ""
-IF UCASE$(ii$) = "Y" THEN EXIT SUB ELSE GOTO OnceAgain
-END SUB
 
-SUB FileToScreen (FileName$)
-DEF SEG = &HA000 'Load land for some graphics
-BLOAD FileName$, 0
-END SUB
 
-SUB ImportMenus (FileName$, MenuIndex%(), MenuTable%())
-DIM Header AS ChunkHeader
-fc% = FileOPEN(FileName$, "B")
-CurrMenu% = 1
-ImportMenusTop:
-Temp% = NumberOfChunks%(fc%, "MENU")
-IF Temp% = 0 THEN EXIT SUB
-REDIM MenuTable(1 TO Temp%)
-PreserveSeek& = SEEK(fc%)
-GlonkOfIndex% = 0
-FOR i% = 1 TO Temp%
-    GetAnother:
-    GET fc%, , Header
-    Header.Chunksize = ReverseLong&(Header.Chunksize)
-    SEEK fc%, SEEK(fc%) + Header.Chunksize
-    IF Header.ChunkType = "MENU" THEN
-        'A 'Glonk' is a value that is both the size and the next element
-        MenuTable%(i%) = GlonkOfIndex%
-        GlonkOfIndex% = GlonkOfIndex% + Header.Chunksize / 2
-    ELSE
-        GOTO GetAnother
-    END IF
-NEXT
-REDIM MenuIndex%(0 TO GlonkOfIndex - 1)
-
-SEEK fc%, PreserveSeek&
-'This is the last time through
-GetHeader = TRUE
-FOR i% = 0 TO GlonkOfIndex - 1
-    GetAnother2:
-    IF GetHeader = TRUE THEN
-        GET fc%, , Header
-        Header.Chunksize = ReverseLong&(Header.Chunksize)
-        IF Header.ChunkType = "MENU" THEN
-            GetHeader = False
-        ELSE
-            SEEK fc%, SEEK(fc%) + Header.Chunksize
-            GOTO GetAnother2
-        END IF
-    END IF
-    GET fc%, , MenuIndex(i%)
-    Header.Chunksize = Header.Chunksize - 2
-    IF Header.Chunksize = 0 THEN GetHeader = TRUE
-NEXT
-CLOSE fc%
-END SUB
-
-SUB InnkeeperTalk
-COLOR 15: LINE (0, 0)-(319, 31), totalback, BF
-LINE (0, 31)-(319, 31), 12: LOCATE 1, 1
-PRINT "Care to stay the night? It's"
-PRINT "only 50 GP."
-PRINT "                       (Y/N)"
-LOCATE 3, 40: PRINT CHR$(26): PCOPY 2, 0: SLEEP: dmb$ = INKEY$
-IF UCASE$(dmb$) = "Y" THEN StayTheNight
-PCOPY 5, 2: LOCATE py, px: COLOR 14: PRINT CHR$(1);
-COLOR , totalback
-END SUB
-
-SUB IsPartyDead STATIC
-   FOR ga = 1 TO 3
-     IF curhp(ga) > 0 THEN EXIT SUB
-   NEXT
-   COLOR 15
-   LINE (0, 0)-(319, 31), 0, BF
-   LINE (0, 31)-(319, 31), 12
-   LOCATE 1, 1
-   PRINT "NOTICE: you are dead. The enemies"
-   PRINT "devour your body. Have a"
-   PRINT "nice day!"
-  LOCATE 3, 40
-  PRINT CHR$(254)
-  PCOPY 6, 0: SLEEP
-  dmb$ = INKEY$
-  SYSTEM
-END SUB
-
-SUB JumpAttack (EnemyTargeted)
-   
-    DIM ex(4), ey(4)
-
-    CALL AttackPattern1(ex(), ey())
-
-CALL DisplayAttackName("Jump")
-
-CALL EstablishTarget(enemyat%(), EnemyTargeted%)
-
- DIM coverup(140): SCREEN 7, 0, 7, 0
-GET (280, 110)-(299, 129), coverup: SCREEN 7, 0, 6, 0
-PUT (280, 110), coverup, PSET: PCOPY 6, 3
-FOR bja = 110 TO 0 STEP -5
-: PCOPY 3, 6
-: PUT (280, bja), Mode7Bitmap(0, 11), AND
-: PUT (280, bja), Mode7Bitmap(0, 10), OR
-: PCOPY 6, 0
-: delay .05
-NEXT
-: PCOPY 3, 0: delay 1
-FOR bja = 0 TO ey(EnemyTargeted) STEP 5: PCOPY 3, 6
-PUT (ex(EnemyTargeted), bja), Mode7Bitmap(0, 9), AND: PUT (ex(EnemyTargeted), bja), Mode7Bitmap(0, 8), OR
-PCOPY 6, 0: delay .05: NEXT: FOR bja = ex(EnemyTargeted) TO 300 STEP 5
-PCOPY 3, 6: PUT (bja, ey(EnemyTargeted)), Mode7Bitmap(0, 11), AND
-PUT (bja, ey(EnemyTargeted)), Mode7Bitmap(0, 10), OR: PCOPY 6, 0: delay .05: NEXT
-PCOPY 3, 0: delay 1: FOR bja = 0 TO 110 STEP 5: PCOPY 3, 6
-PUT (280, bja), Mode7Bitmap(0, 9), AND: PUT (280, bja), Mode7Bitmap(0, 8), OR
-PCOPY 6, 0: delay .05: NEXT: PCOPY 6, 3: DamageEnemy 0, 275, EnemyTargeted
-SCREEN 7, 0, 6, 0: PCOPY 7, 6: delay 1: PlaceEnemies
-ERASE ex, ey, coverup
-END SUB
 
 SUB KillChar (EnemyTargeted)
 IF EnemyTargeted = 2 THEN
@@ -1161,30 +931,36 @@ ey(1) = 60
 ey(2) = 85
 ey(3) = 110
 FOR xha = 10 TO 1 STEP -1
-FOR ew = ey(EnemyTargeted) TO ey(EnemyTargeted) + 20 STEP xha
+  FOR ew = ey(EnemyTargeted) TO ey(EnemyTargeted) + 20 STEP xha
     SCREEN 7, 0, 7, 0
     GET (270, ew)-(310, ew), lner
     SCREEN 7, 0, 6, 0
     PUT (270, ew), lner, PSET
     PCOPY 6, 0: delay .00001
-    NEXT: NEXT
+  NEXT
+NEXT
     ERASE ey, lner
 END SUB
 
 SUB KillEnemy (EnemyTargeted) STATIC
-    delay 1
-    ehit(EnemyTargeted) = 0
-    enemyat(EnemyTargeted) = 0
+  delay 1
+  ehit(EnemyTargeted) = 0
+  enemyat(EnemyTargeted) = 0
    
-    DIM ex(4), ey(4), lner(20)
+  DIM ex(4), ey(4), lner(20)
    
-    CALL AttackPattern1(ex(), ey())
+  AttackPattern1 ex(), ey()
 
-    FOR xha = 10 TO 1 STEP -1
-      FOR ew = ey(EnemyTargeted) - 10 TO ey(EnemyTargeted) + 30 STEP xha
-SCREEN 7, 0, 7, 0: GET (ex(EnemyTargeted) - 10, ew)-(ex(EnemyTargeted) + 30, ew), lner
-SCREEN 7, 0, 6, 0: PUT (ex(EnemyTargeted) - 10, ew), lner, PSET
-PCOPY 6, 0: delay .00001: NEXT: NEXT:
+  FOR xha = 10 TO 1 STEP -1
+    FOR ew = ey(EnemyTargeted) - 10 TO ey(EnemyTargeted) + 30 STEP xha
+      SCREEN 7, 0, 7, 0
+      GET (ex(EnemyTargeted) - 10, ew)-(ex(EnemyTargeted) + 30, ew), lner
+      SCREEN 7, 0, 6, 0
+      PUT (ex(EnemyTargeted) - 10, ew), lner, PSET
+      PCOPY 6, 0
+      delay .00001
+    NEXT
+  NEXT
 ERASE ex, ey, lner
 END SUB
 
@@ -1204,7 +980,7 @@ LOCATE 3, 40
 PRINT CHR$(254)
 PCOPY 6, 0
 SLEEP
-dmbo$ = INKEY$
+dmbo$ = GetKeyPress
 PCOPY 3, 6
 PCOPY 3, 0
 END SUB
@@ -1406,75 +1182,9 @@ CLS : PALETTE
 
 SpaceClear = 0
 
-CALL ModPal
+  ModPal
 END SUB
 
-SUB Land13Show
-CLS
-PUT (1, 1), Mode13Graphic(0, 4), PSET: PUT (27, 1), Mode13Graphic(0, 5), PSET
-PUT (53, 1), Mode13Graphic(0, 6), PSET: PUT (287, 1), Mode13Graphic(0, 13), PSET
-PUT (287, 22), Mode13Graphic(0, 23), PSET: PUT (287, 43), Mode13Graphic(0, 35), PSET
-
-PUT (79, 1), Mode13Graphic(0, 7), PSET
-PUT (105, 1), Mode13Graphic(0, 8), PSET: PUT (131, 1), Mode13Graphic(0, 9), PSET
-
-PUT (157, 1), Mode13Graphic(0, 1), PSET: PUT (183, 1), Mode13Graphic(0, 2), PSET
-
-PUT (209, 1), Mode13Graphic(0, 10), PSET: PUT (235, 1), Mode13Graphic(0, 11), PSET
-PUT (261, 1), Mode13Graphic(0, 12), PSET: PUT (261, 22), Mode13Graphic(0, 3), PSET
-PUT (209, 22), Mode13Graphic(0, 21), PSET: PUT (235, 22), Mode13Graphic(0, 22), PSET
-PUT (261, 43), Mode13Graphic(0, 34), PSET
-PUT (1, 85), Mode13Graphic(0, 48), PSET: PUT (27, 85), Mode13Graphic(0, 49), PSET
-PUT (53, 85), Mode13Graphic(0, 50), PSET: PUT (79, 85), Mode13Graphic(0, 51), PSET
-PUT (235, 43), Mode13Graphic(0, 33), PSET
-
-PUT (1, 22), Mode13Graphic(0, 0): PUT (27, 22), Mode13Graphic(0, 14), PSET
-PUT (53, 22), Mode13Graphic(0, 15), PSET
-
-PUT (79, 22), Mode13Graphic(0, 16), PSET
-
-PUT (105, 22), Mode13Graphic(0, 17), PSET
-
-PUT (131, 22), Mode13Graphic(0, 18), PSET: PUT (157, 22), Mode13Graphic(0, 19), PSET
-
-PUT (183, 22), Mode13Graphic(0, 20), PSET
- 
-PUT (1, 43), Mode13Graphic(0, 24): PUT (27, 43), Mode13Graphic(0, 25), PSET
-
-
-PUT (79, 43), Mode13Graphic(0, 27): PUT (105, 43), Mode13Graphic(0, 28), PSET
-
-PUT (131, 43), Mode13Graphic(0, 29): PUT (157, 43), Mode13Graphic(0, 30), PSET
-PUT (183, 43), Mode13Graphic(0, 31), PSET
-
-PUT (209, 43), Mode13Graphic(0, 32), PSET
-
-PUT (1, 64), Mode13Graphic(0, 36): PUT (27, 64), Mode13Graphic(0, 37), PSET
-
-PUT (53, 43), Mode13Graphic(0, 26), PSET: PUT (53, 64), Mode13Graphic(0, 38), PSET
-PUT (79, 64), Mode13Graphic(0, 39): PUT (105, 64), Mode13Graphic(0, 40), PSET
-
-PUT (131, 64), Mode13Graphic(0, 41)
-PUT (157, 64), Mode13Graphic(0, 42): PUT (183, 64), Mode13Graphic(0, 43)
-PUT (209, 64), Mode13Graphic(0, 44): PUT (235, 64), Mode13Graphic(0, 45)
-PUT (261, 64), Mode13Graphic(0, 46): PUT (287, 64), Mode13Graphic(0, 47)
-
-PUT (105, 85), Mode13Graphic(0, 52): PUT (131, 85), Mode13Graphic(0, 53)
-
-PUT (157, 85), Mode13Graphic(0, 54), PSET: PUT (183, 85), Mode13Graphic(0, 55), PSET
-PUT (209, 85), Mode13Graphic(0, 56), PSET: PUT (235, 85), Mode13Graphic(0, 57), PSET
-
-PUT (261, 85), Mode13Graphic(0, 58), PSET: PUT (287, 85), Mode13Graphic(0, 59), PSET
-
-
-
-LOCATE 25, 1
-PRINT "Press Space to continue";
-DO: LOOP UNTIL INKEY$ = " "
-CLS
-
-
-END SUB
 
 SUB SellItem
 StartofSellingSub:
@@ -2215,54 +1925,8 @@ SUB SpellDrownGraphic (ex%, ey%)
 
 END SUB
 
-SUB SpellEnemy (spnum) STATIC
-    DIM ey(4)
-    ey(1) = 60
-    ey(2) = 85
-    ey(3) = 110
-    DO
-      EnemyTargeted = INT(RND(1) * 3) + 1
-      IF EnemyTargeted = 4 THEN EnemyTargeted = 3
-    LOOP UNTIL curhp(EnemyTargeted) > 0
-    PCOPY 6, 3
-    LINE (5, 5)-(95, 25), 0, BF
-    LINE (5, 5)-(95, 25), 12, B
-    LOCATE 2, 2
-    COLOR 15
-    SELECT CASE spnum
-    CASE 4
-        PRINT "Fire":
-        Mode7ShowAndRestore 1
-        PCOPY 3, 0
-        SpellFire 280, ey(EnemyTargeted), EnemyTargeted
-    CASE 5:
-        PRINT "Ice"
-        Mode7ShowAndRestore 1
-        PCOPY 3, 0
-SpellIce 280, ey(EnemyTargeted), EnemyTargeted
-    CASE 6
-      PRINT "Lightning":
-      Mode7ShowAndRestore 1
-      PCOPY 3, 0
-      IF walled(EnemyTargeted) THEN
-        SpellReflect 5, EnemyTargeted
-      ELSE
-        SpellLightning 280, ey(EnemyTargeted), EnemyTargeted, -1
-      END IF
-    CASE 7
-    disflag = 0
-    FOR gah = 1 TO 3
-      IF walled(gah) THEN disflag = 1: EnemyTargeted = gah
-    NEXT
-    IF disflag = 0 THEN
-      PRINT "Rage": EnemyAttack 4
-    ELSE
-      PRINT "Penetrate"
-      PCOPY 6, 0
-      delay 1
-      PCOPY 3, 0
-SUB Actions (Temp$)
-    SELECT CASE Temp$
+'$INCLUDE:"SUB SpellEnemy.BAS"
+
 SUB SpellCast (spnum, EnemyTargeted)
     
     DIM ex(4), ey(4), lx(4), ly(4)
@@ -2619,69 +2283,95 @@ IF ex = 280 THEN DamageChar 600, EnemyTargeted ELSE DamageEnemy 6, 175, EnemyTar
 END SUB
 
 SUB StatusScreen
-DO: CLS : LINE (0, 0)-(319, 199), 1, BF
-LINE (0, 0)-(319, 199), 12, B: PCOPY 2, 0
-MCOLOR 15, 1: FOR abdf = 1 TO 3: LOCATE 19 + abdf, 2
-SELECT CASE abdf
-CASE 1: PRINT "Kyta    HP ";
-CASE 2: PRINT "Glenlin HP ";
-CASE 3: PRINT "Kohlen  HP ";
-END SELECT
-jnum$ = ZeroDelimitedInt$(curhp(abdf), 4)
-knum$ = ZeroDelimitedInt$(charstat(abdf, 1), 4)
+DO
+  CLS
+  LINE (0, 0)-(319, 199), 1, BF
+  LINE (0, 0)-(319, 199), 12, B
+  PCOPY 2, 0
+  MCOLOR 15, 1
+  FOR CurrPC = 1 TO 3
+    LOCATE 19 + CurrPC, 2
+    SELECT CASE CurrPC
+    CASE 1: PRINT "Kyta    HP ";
+    CASE 2: PRINT "Glenlin HP ";
+    CASE 3: PRINT "Kohlen  HP ";
+    END SELECT
+    jnum$ = ZeroDelimitedInt$(curhp(CurrPC), 4)
+    knum$ = ZeroDelimitedInt$(charstat(CurrPC, 1), 4)
 
-PRINT jnum$; "/"; knum$; " MP ";
-IF abdf = 1 OR abdf = 3 THEN
-PRINT "000/000"; " LV"; curlev(abdf)
-ELSE
-njh$ = LTRIM$(STR$(curmp)): FOR baha = 1 TO 3
-IF LEN(njh$) < 3 THEN njh$ = "0" + njh$
-NEXT
-PRINT njh$; "/"; LTRIM$(STR$(charstat(2, 2)));
-PRINT " LV"; curlev(abdf)
+    PRINT jnum$; "/"; knum$; " MP ";
+    IF CurrPC = 1 OR CurrPC = 3 THEN
+      CurMPT$ = "000"
+    ELSE
+      CurMPT$ = ZeroDelimitedInt$ (curmp, 3)
+
+PRINT CurMPT$; "/"; LTRIM$(STR$(charstat(2, 2)));
+PRINT " LV"; curlev(CurrPC)
 END IF
-NEXT: LOCATE 18, 18: PRINT "GP"; curgold
-COLOR 14: LOCATE 5, 15: PRINT "INVENTORY"
+NEXT
+LOCATE 18, 18
+PRINT "GP"; curgold
+COLOR 14
+LOCATE 5, 15: PRINT "INVENTORY"
 LOCATE 6, 15: PRINT "EQUIP"
 LOCATE 7, 15: PRINT "EXIT"
-PCOPY 2, 1: mychc = 1: DO: PCOPY 1, 2: COLOR 15
-LOCATE mychc + 4, 13: PRINT CHR$(26): PCOPY 2, 0
-ii$ = INKEY$: SELECT CASE ii$
-CASE CHR$(0) + CHR$(72), CHR$(0) + CHR$(75):
-mychc = mychc - 1: IF mychc = 0 THEN mychc = 3
-CASE CHR$(0) + CHR$(77), CHR$(0) + CHR$(80):
-mychc = mychc + 1: IF mychc = 4 THEN mychc = 1
-CASE CHR$(27): ii$ = CHR$(13): mychc = 3
-END SELECT
+PCOPY 2, 1: mychc = 1
+DO
+  PCOPY 1, 2
+  COLOR 15
+  LOCATE mychc + 4, 13
+  PRINT CHR$(26)
+  PCOPY 2, 0
+  ii$ = INKEY$
+  SELECT CASE ii$
+  CASE CHR$(0) + CHR$(72), CHR$(0) + CHR$(75):
+    mychc = mychc - 1
+    IF mychc = 0 THEN mychc = 3
+  CASE CHR$(0) + CHR$(77), CHR$(0) + CHR$(80):
+    mychc = mychc + 1
+    IF mychc = 4 THEN mychc = 1
+  CASE CHR$(27):
+    ii$ = CHR$(13)
+    mychc = 3
+  END SELECT
 LOOP UNTIL ii$ = CHR$(13)
-IF mychc = 3 THEN
-PCOPY 5, 2: LOCATE py, px
-COLOR 14, totalback: PRINT CHR$(1): EXIT SUB
-END IF
-IF mychc = 2 THEN EquipItems
-IF mychc = 1 THEN
-CLS : LINE (0, 0)-(319, 199), 1, BF
-LINE (0, 0)-(319, 199), 12, B
-COLOR 15: LOCATE 2, 3: PRINT "Press any key to exit."
-COLOR 14: cloc = 5: FOR bala = 1 TO 18: LOCATE cloc, 10
-IF inven(bala) > 0 THEN
-PRINT ItemName$(bala): LOCATE cloc, 29
-hag$ = LTRIM$(STR$(inven(bala)))
-IF LEN(hag$) = 1 THEN hag$ = "0" + hag$
-PRINT hag$: cloc = cloc + 1
-END IF
-NEXT
-PCOPY 2, 0: SLEEP: dmbo$ = INKEY$
-END IF
+SELECT CASE mychc
+CASE 3:
+  PCOPY 5, 2
+  LOCATE py, px
+  COLOR 14, totalback
+  PRINT CHR$(1)
+  EXIT SUB
+CASE 2:
+  EquipItems
+CASE 1:
+  CLS
+  LINE (0, 0)-(319, 199), 1, BF
+  LINE (0, 0)-(319, 199), 12, B
+  COLOR 15
+  LOCATE 2, 3
+  PRINT "Press any key to exit."
+  COLOR 14
+  cloc = 5
+  FOR bala = 1 TO 18
+    LOCATE cloc, 10
+    IF inven(bala) > 0 THEN
+      PRINT ItemName$(bala)
+      LOCATE cloc, 29
+      hag$ = LTRIM$(STR$(inven(bala)))
+      IF LEN(hag$) = 1 THEN hag$ = "0" + hag$
+      PRINT hag$
+      cloc = cloc + 1
+    END IF
+  NEXT
+  PCOPY 2, 0
+  SLEEP
+  dmbo$ = GetKeyPress
+END SELECT
 LOOP
 END SUB
 
-SUB delay (DelTime#) 'SYSTEM.BAS
-dtx# = TIMER(.001)
-WHILE TIMER(.001) < dtx# + DelTime#
-    IF dtx# > TIMER(.001) THEN dtx# = dtx# - 86400
-WEND
-END SUB
+'$INCLUDE:"SUB delay.BAS"
 
 FUNCTION FileOPEN% (FileName$, Mode$)
 STATIC CurrFileHandle%
@@ -3692,6 +3382,8 @@ FOR abab = 1 TO 4: enemyat(abab) = 0: NEXT
 FOR abab = 1 TO 3: walled(abab) = 0: NEXT
 END SUB
 
+'$INCLUDE:"SUB EquipItems.BAS"
+
 SUB EquipItems
 CLS: LINE (0, 0)-(319, 199), 1, BF
 LINE (0, 0)-(319, 199), 12, B
@@ -3837,9 +3529,15 @@ FOR bja = 110 TO 0 STEP -5: PCOPY 3, 6
 PCOPY 6, 0: delay .05: NEXT: PCOPY 3, 0: delay 1
 FOR bja = 0 TO ey(EnemyTargeted) STEP 5: PCOPY 3, 6
     PUT (ex(EnemyTargeted), bja), Mode7Bitmap(0, 9), AND: PUT (ex(EnemyTargeted), bja), Mode7Bitmap(0, 8), OR
-    PCOPY 6, 0: delay .05: NEXT: FOR bja = ex(EnemyTargeted) TO 300 STEP 5
-    PCOPY 3, 6: PUT (bja, ey(EnemyTargeted)), Mode7Bitmap(0, 11), AND
-PUT (bja, ey(EnemyTargeted)), Mode7Bitmap(0, 10), OR: PCOPY 6, 0: delay .05: NEXT
+    PCOPY 6, 0: delay .05
+    NEXT
+    FOR bja = ex(EnemyTargeted) TO 300 STEP 5
+      PCOPY 3, 6
+      PUT (bja, ey(EnemyTargeted)), Mode7Bitmap(0, 11), AND
+      PUT (bja, ey(EnemyTargeted)), Mode7Bitmap(0, 10), OR
+      PCOPY 6, 0
+      delay .05
+    NEXT
 PCOPY 3, 0: delay 1: FOR bja = 0 TO 110 STEP 5: PCOPY 3, 6
     PUT (280, bja), Mode7Bitmap(0, 9), AND: PUT (280, bja), Mode7Bitmap(0, 8), OR
 PCOPY 6, 0: delay .05: NEXT: PCOPY 6, 3: DamageEnemy 0, 275, EnemyTargeted
@@ -4643,19 +4341,38 @@ SUB AttackKohlen (EnemyTargeted) STATIC
      PUT (280, 110), Mode7Bitmap(0, 11), AND
      PUT (280, 110), Mode7Bitmap(0, 10), OR
      PCOPY 6, 3
-FOR xanth = 1 TO 20: PCOPY 3, 6
-PUT (ex - xanth, ey), Bangm, AND: PUT (ex - xanth, ey), Bang1, OR
-PCOPY 6, 0: delay .1: NEXT: PCOPY 3, 6: PCOPY 3, 0
-PUT (280, 110), coverup, PSET
-PUT (280, 110), Mode7Bitmap(0, 9), AND: PUT (280, 110), Mode7Bitmap(0, 8), OR
-ERASE coverup: pdamage = INT(RND(1) * 50) + charstat(3, 3) - 50
-pdamage = pdamage - INT(.75 * etype(enemyat(EnemyTargeted), 3))
-pmiss = INT(RND(1) * 100): IF pmiss < 3 THEN pdamage = 0
-SCREEN 7, 0, 0, 0: COLOR 12: LOCATE ly, lx
-IF pdamage < 1 THEN PRINT "Miss!": pdamage = 0 ELSE PRINT pdamage
-SCREEN 7, 0, 6, 0: ehit(EnemyTargeted) = ehit(EnemyTargeted) - pdamage
-IF ehit(EnemyTargeted) < 1 THEN KillEnemy EnemyTargeted
-PCOPY 7, 6: delay 1: PlaceEnemies
+  FOR xanth = 1 TO 20
+    PCOPY 3, 6
+    PUT (ex - xanth, ey), Bangm, AND
+    PUT (ex - xanth, ey), Bang1, OR
+    PCOPY 6, 0
+    delay .1
+  NEXT
+  PCOPY 3, 6
+  PCOPY 3, 0
+  PUT (280, 110), coverup, PSET
+  PUT (280, 110), Mode7Bitmap(0, 9), AND
+  PUT (280, 110), Mode7Bitmap(0, 8), OR
+  ERASE coverup
+  pdamage = INT(RND(1) * 50) + charstat(3, 3) - 50
+  pdamage = pdamage - INT(.75 * etype(enemyat(EnemyTargeted), 3))
+  pmiss = INT(RND(1) * 100)
+  IF pmiss < 3 THEN pdamage = 0
+  SCREEN 7, 0, 0, 0
+  COLOR 12
+  LOCATE ly, lx
+  IF pdamage < 1 THEN
+    PRINT "Miss!"
+    pdamage = 0
+  ELSE
+    PRINT pdamage
+  END IF
+  SCREEN 7, 0, 6, 0
+  ehit(EnemyTargeted) = ehit(EnemyTargeted) - pdamage
+  IF ehit(EnemyTargeted) < 1 THEN KillEnemy EnemyTargeted
+  PCOPY 7, 6
+  delay 1
+  PlaceEnemies
 END SUB
 
 SUB AttackKyta (EnemyTargeted) STATIC
@@ -4666,14 +4383,14 @@ SUB AttackKyta (EnemyTargeted) STATIC
     IF EnemyTargeted = 2 THEN ex = 130: ey = 120: ly = 16: lx = 15
     IF EnemyTargeted = 3 THEN ex = 55: ey = 70: ly = 9: lx = 4
     IF EnemyTargeted = 4 THEN ex = 130: ey = 70: ly = 9: lx = 15
-    
-   
+
+
     SCREEN 7, 0, 7, 0
     GET (280, 60)-(299, 79), coverup
     SCREEN 7, 0, 6, 0
     PUT (280, 60), coverup, PSET
-   
-   
+
+
     PUT (280, 60), Mode7Bitmap(0, 3), AND
     PUT (280, 60), Mode7Bitmap(0, 2), OR
     PCOPY 6, 3

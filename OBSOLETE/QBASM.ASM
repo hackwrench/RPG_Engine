@@ -28,6 +28,19 @@ READBIT PROC FAR
     RETF 4
 READBIT ENDP
 
+PUBLIC TABLE256
+TABLE256 PROC FAR
+    PUSH    BP
+    MOV     BP, SP
+    PUSH DS
+    LDS     BX, [BP + 8]
+    MOV     AX, [BP + 6]
+    XLAT
+    POP     DS
+    POP     BP
+    RET 6
+TABLE256 ENDP
+
 MEM16W PROC FAR
     PUSH BP
     PUSH DS

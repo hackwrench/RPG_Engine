@@ -1,0 +1,90 @@
+'FROM:    KARINA MISTER(WPBS12B)
+'How would you all like to see a Final Fantasy-style RPG game
+'engine? The overworld maps would be in SCREEN 7 text, but
+'the battle scenes would use REAL graphics (SCREEN 7, again,
+'but hey, I'm posting this on $P$rodigy!). You would control
+'3 characters: Kyta, Glenlin, and Kohlen. One is a fighter,
+'one a mage, and the other a ninja. Think of treasure chests
+'(some of them containing monsters!), weapon/armor shops,
+'inns, 12 magic spells, and a rather short and abrupt
+'storyline. Think of battles against foes, changing
+'background graphics, and, best of all, the ability to edit
+'it to make ANYTHING YOU WANT out of it RPG-wise.
+'                                                 [>]
+'Think of a few days, 2 weeks at most. I've already started,
+'and I'm about 60% done (in two days!). Here's what's left:
+'* Weapon/armor shop
+'* Inn
+'* Interactive battle scenes
+'* Talking to the king
+'That's it!
+'It's already pretty large, and I'm not sure how much larger
+'it will get. However, I will either post it here, send it
+'out via email, or BOTH. It's completely self-contained, but
+'only because I'm posting it on $P$rodigy (or thinking about
+'it, anyway). It can be converted to data files without any >
+'problem. Anyway, though, reply here and tell me what you
+'think. Here's a taste of what it'll be like: the SPELLS!
+'CURE         Recover HP in one party member
+'HEAL " in all party members                         "
+'FIRE         Fire attack
+'ICE          Ice attack
+'LIGHTNING    Lightning attack
+'TREMOR       Earth attack
+'DROWN        Water attack
+'WALL         Block spells
+'LIFE         Bring back to life
+'[>]
+'QUAKE        Major earth attack against all enemies
+'PHASE        Major attack against all enemies
+'TIDAL WAVE   Major water attack against all enemies
+'
+'~-ThOmAs
+'OK, I'm ALMOST done. Here's what remains:
+'* Enemies still need to be able to cast HEAL, PENETRATE, and
+'  TREMOR.
+'* You still need to be able to get experience and gold from
+'  defeating enemies (piece of cake to program).
+'* You still need to be able to run from battles (no prob).
+'* You still need to be able to camp (no prob).
+'* The weapon/armor shop and inventory screen still need to
+'  be created.
+'* The game over screen (NOTICE: you are dead) still needs
+'  to be created.
+'That's IT! It may sound like a lot, but trust me:    [>]
+'compared to what I've already done, that's dust on the
+'floor!
+
+'Also, I may or may not be sending copies via Internet email.
+'It may be easier to just send via $P$rodigy email.
+
+
+                                 '~-ThOmAs
+
+'Finally, it's done! :) The following 30 subjects contain the
+'source code to one of the most complex RPG's ever posted on
+'this bb. The battle scenes are similar to those in Final
+'Fantasy II, with 3 characters battling 1 to 4 enemies, the
+'strongest characters moving first. There are many different
+'types of attacks, as well: 3 different weapon attacks, 3
+'different beam attacks, 2 different star attacks, a jumping
+'attack, and 12 magic spells. Each spell uses an elemental to
+'inflict damage, and if the enemy is weak against that
+'elemental, it will receive up to 3x as much damage. However,
+'if the enemy is STRONG against that elemental, it will GAIN
+'life instead of losing it.       [>]
+'There's also the ever-popular WALL spell, which will NOT
+'ONLY *block* the enemies' spells, but also BOUNCE THEM BACK
+'at the enemy! And new spells are learned as you gain levels!
+'Of course, this game also has the usual RPG elements:
+'weapon/armor shops, status screens, HP, MP, GP, inns,
+'campgrounds, a storyline, and a shocking final battle.
+'
+'Best of all... this game runs from an RPG game engine, which
+'can be easily EDITED to make... you guessed it... your OWN
+'RPG!!!
+'
+'Please reply with any and all comments, and HAVE FUN!   ~T~
+
+'Note 1 of 30
+
