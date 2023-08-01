@@ -1,0 +1,2667 @@
+'   Konrad the Warrior by Steve Nunnally
+'$DYNAMIC
+'dlc
+DECLARE SUB SetupGame ()
+DECLARE SUB SetupNewGame ()
+DECLARE SUB ColorTitle ()
+DECLARE SUB ScreenLoad (a$, filename$)
+DECLARE SUB Credits (clength%, cclr%, cover%, cdelay!, cstart%)
+DECLARE SUB Font (fontdelay!, words$)
+DECLARE SUB Continue ()
+DECLARE SUB Intro ()
+DECLARE SUB Menu ()
+DECLARE SUB SideGraphics ()
+DECLARE SUB ShowInventory ()
+DECLARE SUB ShowItem (xshow%, yshow%, kindofput%, itemtoshow%)
+DECLARE SUB ShowStuff (xshow%, yshow%, kindofput%, itemtoshow%)
+DECLARE SUB ShowGuy (xshow%, yshow%, kindofput%, itemtoshow%)
+DECLARE SUB WriteStats ()
+DECLARE SUB ChangeLevels (newstage%)
+DECLARE SUB QuitGame ()
+DECLARE SUB SaveGame ()
+DECLARE SUB RotateColors ()
+DECLARE SUB DrawLevel ()
+DECLARE SUB Blockade ()
+DECLARE SUB UseBoat (Boat.type$)
+DECLARE SUB BoatBlock (boat.type$)
+DECLARE SUB FightKnight ()
+DECLARE SUB FightWizard ()
+DECLARE SUB FightNoel ()
+DECLARE SUB FightSetup ()
+DECLARE SUB Fight (enemy.name$, eland$)
+DECLARE SUB YouDied ()
+DECLARE SUB GetJForItems (stringtolookin$, lookover%)
+DECLARE SUB GetObject ()
+DECLARE SUB DropObject ()
+DECLARE SUB UseObject ()
+DECLARE SUB UseLeaf ()
+DECLARE SUB UseKey ()
+DECLARE SUB Equip ()
+DECLARE SUB SwitchItems ()
+DECLARE SUB GameHelp ()
+DECLARE SUB UseSomething ()
+DECLARE SUB Talk ()
+DECLARE SUB UseStairway (kindof%)
+DECLARE SUB CheckChest ()
+DECLARE SUB CheckSign ()
+DECLARE SUB CheckDresser (katana)
+DECLARE SUB SleepNow ()h%byref k j lmn opqest
+ik
+uk
+unknown'f '
+iukusecase yes
+DECLARE SUB Switches ()
+DIM SHARED level(1 TO 100) AS STRING, item.lvl(1 TO 100) AS STRING
+DIM SHARED up AS INTEGER, over AS INTEGER, dir AS INTEGER
+DIM SHARED hp AS INTEGER, hpmax AS INTEGER, stage AS INTEGER
+DIM SHARED money AS INTEGER, exper AS INTEGER, skipmenu AS INTEGER
+DIM SHARED inv(1 TO 15) AS STRING, lefttonext AS INTEGER, lvl AS INTEGER
+DIM SHARED attack AS INTEGER, defense AS INTEGER
+DIM SHARED body.items AS STRING, item.down AS INTEGER
+DIM SHARED spaceclear AS INTEGER, scrolltxt(1 TO 75) AS STRING
+DIM SHARED enemy.life AS INTEGER, enemy.name AS STRING
+DIM SHARED currentpal AS INTEGER, p AS INTEGER
+DIM SHARED somethingup AS INTEGER, somethingover AS INTEGER
+DIM SHARED t AS INTEGER, l AS INTEGER, w AS INTEGER
+DIM SHARED posx AS INTEGER, posy AS INTEGER
+DIM SHARED boatcheck AS INTEGER, confile AS STRING
+DIM SHARED getenemy(1 TO 270), enemy.1(125), enemy.2(125), j AS STRING
+DIM SHARED grass(125), water.d(125), water(125), beach.1(125)
+DIM SHARED beach.2(125), beach.3(125), beach.6(125), beach.5(125)
+DIM SHARED beach.4(125), beach.7(125), beach.8(125), beach.9(125)
+DIM SHARED beach.10(125), beach.11(125), beach.12(125), tree(125)
+DIM SHARED grass.2(125), grass.1(125), path.5(125), robin(125)
+DIM SHARED boulder(125), mount.g(125), mount.s(125), hill(125)
+DIM SHARED mount.1(125), mount.2(125), mount.3(125), swamp(125)
+DIM SHARED mount.4(125), desert(125), bridge.12(125), bridge.13(125)
+DIM SHARED bridge.11(125), bridge.21(125), bridge.22(125), bridge.23(125)
+DIM SHARED island.l(125), island.m(125), island.r(125), cave(125)
+DIM SHARED fence.u(125), fence.s(125), crop.2(125), crop.3(125)
+DIM SHARED crop(125), crop.1(125), desert.s(125), desert.c(125)
+DIM SHARED stairs.d(125), stairs.u(125), cave.w(125), secret.do(125)
+DIM SHARED secret.dc(125), wall(125), door.c(125), door.o(125)
+DIM SHARED table(125), chair(125), king(125), dresser(125)
+DIM SHARED clerk(125), bed(125), prison.o(125), fill.side(125)
+DIM SHARED steel.dl(125), floor(125), prison(125), prison.dc(125)
+DIM SHARED cave.f(125), dirt.w(125), lava(125), water.oo(125)
+DIM SHARED fountain(125), prison.dl(125), cave.f1(125), water.o(125)
+DIM SHARED cave.f2(125), floor.w(125), stag(125), steel.du(125)
+DIM SHARED steel.do(125), floor.c(125), sign(125), door.cl(125)
+DIM SHARED items(1 TO 56, 1 TO 25, 1 TO 20) AS INTEGER
+DIM SHARED stuffs(0 TO 23, 1 TO 25, 1 TO 20) AS INTEGER
+DIM SHARED guy(1 TO 9, 1 TO 25, 1 TO 20) AS INTEGER
+SCREEN 13
+RANDOMIZE TIMER
+KEY 15, CHR$(4 + 128 + 32 + 64) + CHR$(70)
+ON KEY(15) GOSUB NoBreak: KEY(15) ON
+KEY 16, CHR$(4 + 128) + CHR$(70): ON KEY(16) GOSUB NoBreak: KEY(16) ON
+KEY 17, CHR$(4 + 128 + 32) + CHR$(70): ON KEY(17) GOSUB NoBreak
+KEY(17) ON: KEY 18, CHR$(4 + 128 + 64) + CHR$(70): ON KEY(18) GOSUB NoBreak
+KEY(18) ON: KEY 19, CHR$(4) + CHR$(70): ON KEY(21) GOSUB NoBreak
+KEY(21) ON: KEY 22, CHR$(4 + 64) + CHR$(70)
+ON KEY(22) GOSUB NoBreak: KEY(22) ON: KEY 23, CHR$(4 + 32) + CHR$(46)
+ON KEY(23) GOSUB NoBreak: KEY(23) ON: KEY 24, CHR$(4 + 64) + CHR$(46)
+ON KEY(24) GOSUB NoBreak: KEY(24) ON
+KEY 25, CHR$(4 + 32 + 64) + CHR$(46)
+ON KEY(25) GOSUB NoBreak: KEY(25) ON
+  SetupGame:   ColorTitle
+  ScreenLoad("title.pal", "title.kon")
+SLEEP: CLS
+PassFileError:
+  ScreenLoad("menu.pal", "menu.kon"):   Menu
+DEF SEG = &HA000: BLOAD "side.kon", 0
+  SideGraphics:   ShowInventory
+  WriteStats:   DrawLevel
+PALETTE 247, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 246, 65536 * INT(51) + 256 * INT(0) + INT(0)
+PALETTE 245, 65536 * INT(61) + 256 * INT(0) + INT(0): PALETTE 244, 65536 * INT(31) + 256 * INT(0) + INT(0)
+PALETTE 243, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 242, 65536 * INT(51) + 256 * INT(0) + INT(0)
+PALETTE 241, 65536 * INT(0) + 256 * INT(0) + INT(31): PALETTE 240, 65536 * INT(0) + 256 * INT(0) + INT(41)
+PALETTE 239, 65536 * INT(0) + 256 * INT(0) + INT(51): PalTimer! = TIMER
+DO
+ IF TIMER > (PalTimer! + 1) THEN   RotateColors: PalTimer! = TIMER
+ keyboard$ = INKEY$
+ SELECT CASE keyboard$
+	CASE CHR$(0) + "H"
+	 IF dir <> 3 AND dir <> 4 THEN dir = 4
+	   Blockade
+	 IF spaceclear = 0 THEN
+		up = up - 1: dir = dir + 1: IF dir = 5 THEN dir = 3
+		shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel
+	CASE CHR$(0) + "P"
+	 IF dir <> 1 AND dir <> 2 THEN dir = 2
+	   Blockade
+	 IF spaceclear = 0 THEN
+		up = up + 1: dir = dir + 1: IF dir = 3 THEN dir = 1
+		shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel
+	CASE CHR$(0) + "M"
+	 IF dir <> 7 AND dir <> 8 THEN dir = 8
+	   Blockade
+	 IF spaceclear = 0 THEN
+		over = over + 1: dir = dir + 1: IF dir = 9 THEN dir = 7
+		shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel
+	CASE CHR$(0) + "K"
+	 IF dir <> 5 AND dir <> 6 THEN dir = 6
+	   Blockade
+	 IF spaceclear = 0 THEN
+		over = over - 1: dir = dir + 1: IF dir = 7 THEN dir = 5
+		shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel
+	CASE "]"
+	 item.down = item.down + 1
+	 IF item.down > 15 THEN
+		item.down = 15
+	 ELSE
+		  ShowInventory
+	 END IF
+	CASE "["
+	 item.down = item.down - 1
+	 IF item.down < 1 THEN
+		item.down = 1
+	 ELSE
+		  ShowInventory
+	 END IF
+	CASE "h":   GameHelp
+	CASE "s":   SaveGame
+	CASE "q":   QuitGame
+	CASE "g":   GetObject
+	CASE "d":   DropObject
+	CASE "u":   UseObject
+	CASE "e":   Equip
+	CASE " ":   UseSomething
+ END SELECT
+ spaceclear = 0
+LOOP
+NoBreak: RETURN
+BadFileName:
+ CLS : PALETTE: COLOR 15
+ LOCATE 13: PRINT "Bad file mode or name, cannot restore..."
+ WHILE INKEY$ = "": WEND: RESUME PassFileError
+NoSavedGames:
+ CLS : PALETTE: COLOR 15
+ LOCATE 10, 2: PRINT "There are no saved games, sorry!! =)"
+ LOCATE 12, 14: PRINT "Press Enter!"
+ WHILE INKEY$ = "": WEND: RESUME PassFileError
+CreditData:
+DATA "****************************************"
+DATA "***********************************"
+DATA "****************************************"
+DATA "*****                              *****"
+DATA "*****     Konrad the Warrior       *****"
+DATA "*****            in                *****"
+DATA "*****the Search for the Magic Stone*****"
+DATA "*****                              *****"
+DATA "*****        was made by           *****"
+DATA "*****                              *****"
+DATA "*****       STEVE NUNNALLY         *****"
+DATA "*****                              *****"
+DATA "****************************************"
+DATA "*****                              *****"
+DATA "*****       Copyright(C) 1997      *****"
+DATA "*****                              *****"
+DATA "*****              an              *****"
+DATA "*****                              *****"
+DATA "*****      Acid Works Software     *****"
+DATA "*****          Production          *****"
+DATA "*****                              *****"
+DATA "****************************************"
+DATA "*********************************"
+DATA "****************************************"
+
+REM $STATIC
+SUB Blockade
+ IF dir = 1 OR dir = 2 THEN somethingup = 1: somethingover = 0
+ IF dir = 3 OR dir = 4 THEN somethingup = -1: somethingover = 0
+ IF dir = 5 OR dir = 6 THEN somethingup = 0: somethingover = -1
+ IF dir = 7 OR dir = 8 THEN somethingup = 0: somethingover = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "H" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "ø" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "T" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "O" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "A" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "M" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "5" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "6" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "7" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "8" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "f" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "F" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "g" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "≤" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ò" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "€" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "˜" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "ˆ" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "ı" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ç" AND MID$(body.items$, 10) <> "Î" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "(" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Å" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "{" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "|" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "*" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = " " THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ã" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "œ" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "—" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "“" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "”" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ï" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "#" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "≠" THEN spaceclear = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "s" AND MID$(body.items$, 10) <> "û" THEN spaceclear = 1
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Ã" THEN spaceclear = 1
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "”" THEN spaceclear = 1
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "„" THEN spaceclear = 1
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "‰" THEN spaceclear = 1
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Â" THEN spaceclear = 1
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Ê" THEN spaceclear = 1
+ IF up + somethingup = 89 AND stage = 2 AND over + somethingover = 13 THEN
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "." THEN   FightKnight
+ END IF
+ IF up + somethingup = 8 AND stage = 4 AND over + somethingover = 137 THEN
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = ":" THEN   FightWizard
+ END IF
+ IF up + somethingup = 96 AND stage = 4 AND over + somethingover = 29 THEN   FightNoel
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "·" THEN
+	MID$(item.lvl$(up + somethingup), over + somethingover, 1) = " "
+	up = up + somethingup: over = over + somethingover:   UseBoat("raft"): GOSUB EndBoat
+ END IF
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "‡" THEN
+	MID$(item.lvl$(up + somethingup), over + somethingover, 1) = " "
+	up = up + somethingup: over = over + somethingover:   UseBoat("ship"): GOSUB EndBoat
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "#" THEN
+ IF MID$(body.items$, 1, 1) = "Ë" AND MID$(body.items$, 3, 1) = "" THEN
+ IF MID$(body.items$, 8, 1) = "È" AND MID$(body.items$, 10, 1) = "Á" THEN
+	up = up + somethingup: over = over + somethingover:   UseBoat("mask"): GOSUB EndBoat
+ END IF
+ END IF
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "H" THEN
+ IF MID$(body.items$, 1, 1) = "Ë" AND MID$(body.items$, 3, 1) = "" THEN
+ IF MID$(body.items$, 8, 1) = "È" AND MID$(body.items$, 10, 1) = "Á" THEN
+	up = up + somethingup: over = over + somethingover:   UseBoat("mask"): GOSUB EndBoat
+ END IF
+ END IF
+ END IF
+EndBoat:
+END SUB
+
+SUB BoatBlock (boat.type$)
+ IF dir = 1 OR dir = 2 THEN somethingup = 1: somethingover = 0
+ IF dir = 3 OR dir = 4 THEN somethingup = -1: somethingover = 0
+ IF dir = 5 OR dir = 6 THEN somethingup = 0: somethingover = -1
+ IF dir = 7 OR dir = 8 THEN somethingup = 0: somethingover = 1
+ IF boat.type$ = "raft" THEN
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "‡" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "g" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "M" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "T" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ä" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "#" THEN skipmenu = 0
+	IF skipmenu = 1 AND MID$(level$(up + somethingup), over + somethingover, 1) <> "H" THEN
+	 MID$(item.lvl$(up), over, 1) = "·": skipmenu = 0: boatcheck% = 0
+	 spaceclear = 0: up = up + somethingup: over = over + somethingover
+	END IF
+ END IF
+ IF boat.type$ = "ship" THEN
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "·" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "g" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "M" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "T" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ä" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN skipmenu = 0
+	IF skipmenu = 1 AND MID$(level$(up + somethingup), over + somethingover, 1) <> "H" THEN
+	 IF MID$(level$(up + somethingup), over + somethingover, 1) <> "#" THEN
+		MID$(item.lvl$(up), over, 1) = "‡": skipmenu = 0: boatcheck% = 0
+		spaceclear = 0: up = up + somethingup: over = over + somethingover
+	 END IF
+	END IF
+ END IF
+ IF boat.type$ = "mask" THEN
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "g" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "M" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "T" THEN skipmenu = 0
+	IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN skipmenu = 0
+	IF skipmenu = 1 AND MID$(level$(up + somethingup), over + somethingover, 1) <> "H" THEN
+	 IF MID$(level$(up + somethingup), over + somethingover, 1) <> "#" THEN
+		IF MID$(level$(up + somethingup), over + somethingover, 1) <> "Ä" THEN
+		 skipmenu = 0: boatcheck% = 0: spaceclear = 0
+		 up = up + somethingup: over = over + somethingover
+		 END IF
+		END IF
+	 END IF
+	END IF
+END SUB
+
+SUB ChangeLevels (newstage%)
+OPEN "temp2.s" FOR OUTPUT AS #3
+ IF newstage% = 1 THEN
+	FOR i = 1 TO 25: WRITE #3, item.lvl(i): NEXT i: FOR i = 1 TO 25: WRITE #3, level(i): NEXT i
+ ELSE
+	FOR i = 1 TO 100: WRITE #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #3, level(i): NEXT i
+ END IF
+CLOSE #3
+OPEN confile$ FOR INPUT AS #1
+OPEN "temp.s" FOR OUTPUT AS #2
+ INPUT #1, a, a, a, a, a: INPUT #1, a, a, a: INPUT #1, a, a, a, a
+ INPUT #1, j$, a: FOR i = 1 TO 15: INPUT #1, j$: NEXT i
+ FOR i = 1 TO 25: INPUT #1, item.lvl(i): NEXT i
+ FOR i = 1 TO 25: INPUT #1, level(i): NEXT i
+ WRITE #2, lvl, hp, hpmax, attack, defense: WRITE #2, money, exper, lefttonext
+ WRITE #2, up, over, dir, stage: WRITE #2, body.items, item.down
+ FOR i = 1 TO 15: WRITE #2, inv(i): NEXT i
+ IF newstage% = 1 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 25: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 25: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 25: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 25: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF newstage% = 2 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 100: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF newstage% = 3 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 100: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF newstage% = 4 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 100: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+CLOSE #2
+CLOSE #1
+KILL "temp2.s"
+KILL confile$
+OPEN "temp.s" FOR INPUT AS #1
+OPEN confile$ FOR OUTPUT AS #2
+ INPUT #1, a, a, a, a, a: INPUT #1, a, a, a: INPUT #1, a, a, a, a
+ INPUT #1, j$, a: FOR i = 1 TO 15: INPUT #1, j$: NEXT i
+ FOR i = 1 TO 25: INPUT #1, item.lvl(i): NEXT i
+ FOR i = 1 TO 25: INPUT #1, level(i): NEXT i
+ WRITE #2, lvl, hp, hpmax, attack, defense: WRITE #2, money, exper, lefttonext
+ WRITE #2, up, over, dir, stage: WRITE #2, body.items, item.down
+ FOR i = 1 TO 15: WRITE #2, inv(i): NEXT i: FOR i = 1 TO 25: WRITE #2, item.lvl(i): NEXT i
+ FOR i = 1 TO 25: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+CLOSE #2
+CLOSE #1
+KILL "temp.s"
+OPEN confile$ FOR INPUT AS #1
+ INPUT #1, a, a, a, a, a: INPUT #1, a, a, a: INPUT #1, a, a, a, a: INPUT #1, j$, a
+ FOR i = 1 TO 15: INPUT #1, j$: NEXT i
+ FOR i = 1 TO 25: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 25: INPUT #1, level(i): NEXT i
+ IF stage% = 1 THEN GOSUB DoneChangingLevels
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF stage% = 2 THEN GOSUB DoneChangingLevels
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF stage% = 3 THEN GOSUB DoneChangingLevels
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+DoneChangingLevels:
+CLOSE #1
+END SUB
+
+SUB CheckChest
+LINE (4, 147)-(214, 195), 0, BF
+
+FOR i% = 1 TO 15: FOR s% = 1 TO 3
+ IF MID$(inv$(i%), s%, 1) = " " THEN GOSUB FoundASpot3
+NEXT s%: NEXT i%
+DRAW "BM 6,148 C4 S4":   Font(0, "you can't carry any more!")
+GOSUB EndCheckChest
+FoundASpot3:
+ IF up + somethingup = 7 AND stage = 2 AND over + somethingover = 57 THEN MID$(inv$(i%), s%, 1) = "ô"
+ IF up + somethingup = 40 AND stage = 2 AND over + somethingover = 100 THEN MID$(inv$(i%), s%, 1) = "˝"
+ IF up + somethingup = 74 AND stage = 2 AND over + somethingover = 48 THEN MID$(inv$(i%), s%, 1) = "§"
+ IF up + somethingup = 78 AND stage = 2 AND over + somethingover = 137 THEN MID$(inv$(i%), s%, 1) = "π"
+ IF up + somethingup = 81 AND stage = 2 AND over + somethingover = 132 THEN MID$(inv$(i%), s%, 1) = "ë"
+ IF up + somethingup = 8 AND stage = 3 AND over + somethingover = 51 THEN MID$(inv$(i%), s%, 1) = "û"
+ IF up + somethingup = 21 AND stage = 3 AND over + somethingover = 5 THEN MID$(inv$(i%), s%, 1) = "¢"
+ IF up + somethingup = 21 AND stage = 3 AND over + somethingover = 17 THEN MID$(inv$(i%), s%, 1) = "È"
+ IF up + somethingup = 36 AND stage = 3 AND over + somethingover = 133 THEN MID$(inv$(i%), s%, 1) = "∆"
+ IF up + somethingup = 57 AND stage = 3 AND over + somethingover = 17 THEN MID$(inv$(i%), s%, 1) = "ö"
+ IF up + somethingup = 76 AND stage = 3 AND over + somethingover = 79 THEN MID$(inv$(i%), s%, 1) = "ç"
+ IF up + somethingup = 84 AND stage = 3 AND over + somethingover = 46 THEN MID$(inv$(i%), s%, 1) = "î"
+ IF up + somethingup = 18 AND stage = 4 AND over + somethingover = 119 THEN MID$(inv$(i%), s%, 1) = "ú"
+ IF up + somethingup = 29 AND stage = 4 AND over + somethingover = 18 THEN MID$(inv$(i%), s%, 1) = "÷"
+ IF up + somethingup = 67 AND stage = 4 AND over + somethingover = 67 THEN MID$(inv$(i%), s%, 1) = "Î"
+ IF up + somethingup = 74 AND stage = 4 AND over + somethingover = 114 THEN MID$(inv$(i%), s%, 1) = ""
+   GetJForItems(inv$(i%), s%)
+ DRAW "BM 6,148 C4 S4":   Font(0, "you found a " + j$ + ".")
+ IF MID$(inv$(i%), s%, 1) = " " THEN GOSUB FoundGold
+ GOSUB EndCheckChest
+FoundGold:
+ DRAW "BM 6,148 C4 S4":   Font(0, "you got 20 gold pieces."): money = money + 20
+EndCheckChest:
+   WriteStats:   ShowInventory
+END SUB
+
+SUB CheckDresser
+LINE (4, 147)-(214, 195), 0, BF
+FOR i% = 1 TO 15: FOR s% = 1 TO 3
+ IF MID$(inv$(i%), s%, 1) = " " THEN GOSUB FoundASpot2
+NEXT s%: NEXT i%
+DRAW "BM 6,148 C4 S4":   Font(0, "you can't carry any more!")
+GOSUB EndCheckDresser
+FoundASpot2:
+ IF up + somethingup = 13 AND stage = 2 AND over + somethingover = 20 THEN MID$(inv$(i%), s%, 1) = "≈"
+ IF up + somethingup = 13 AND stage = 2 AND over + somethingover = 21 THEN MID$(inv$(i%), s%, 1) = "˚"
+ IF up + somethingup = 13 AND stage = 2 AND over + somethingover = 22 THEN MID$(inv$(i%), s%, 1) = "ó"
+ IF up + somethingup = 18 AND stage = 2 AND over + somethingover = 12 THEN MID$(inv$(i%), s%, 1) = "˘"
+ IF up + somethingup = 18 AND stage = 2 AND over + somethingover = 13 THEN MID$(inv$(i%), s%, 1) = "¥"
+ IF up + somethingup = 18 AND stage = 2 AND over + somethingover = 20 THEN MID$(inv$(i%), s%, 1) = "ß"
+   GetJForItems(inv$(i%), s%)
+ DRAW "BM 6,148 C4 S4":   Font(0, "you found a " + j$ + ".")
+EndCheckDresser:
+   ShowInventory
+END SUB
+
+SUB CheckSign
+ LINE (4, 147)-(214, 195), 0, BF
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "„" THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: weapon store")
+ END IF
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Â" THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: item shop")
+ END IF
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "‰" THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: armor store")
+ END IF
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Ê" THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: inn")
+ END IF
+ IF up + somethingup = 17 AND stage = 1 AND over + somethingover = 14 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: the castles treasury")
+ END IF
+ IF up + somethingup = 15 AND stage = 2 AND over + somethingover = 15 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: staircase")
+ END IF
+ IF up + somethingup = 16 AND stage = 2 AND over + somethingover = 19 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: king's room")
+ END IF
+ IF up + somethingup = 18 AND stage = 2 AND over + somethingover = 15 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: servant's room")
+ END IF
+ IF up + somethingup = 18 AND stage = 2 AND over + somethingover = 19 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: konrad's room")
+ END IF
+ IF up + somethingup = 41 AND stage = 2 AND over + somethingover = 15 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: dining room")
+ END IF
+ IF up + somethingup = 41 AND stage = 2 AND over + somethingover = 19 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "sign reads: dining room")
+ END IF
+END SUB
+
+SUB ColorTitle
+FOR i = 1 TO 202: PALETTE i, 65536 * 17 + 256 * 17 + 17: NEXT i
+DEF SEG = &HA000: BLOAD "begin.kon", 0
+FOR i = 1 TO 202
+ PALETTE i, 65536 * 50 + 256 * 50 + 50
+ CurrentTimer! = TIMER: WHILE TIMER < (CurrentTimer! + 1D-17): WEND
+ PALETTE i, 65536 * 17 + 256 * 17 + 17
+NEXT i
+PALETTE: PALETTE 250, 65536 * 50 + 256 * 50 + 50
+COLOR 250: LOCATE 18, 15: PRINT "PRESENTS...": SLEEP: CLS
+END SUB
+
+SUB Continue
+   ScreenLoad("contin.pal", "contin.kon")
+ PALETTE 0, 0
+ ON ERROR GOTO NoSavedGames
+ PALETTE 240, 0: COLOR 240: LOCATE 6: FILES "*.sav"
+ FOR y = 6 TO CSRLIN - 1: FOR x = 9 TO 40 STEP 18
+	LOCATE y, x: PRINT SPACE$(4): LOCATE y, x: PRINT SPACE$(4)
+ NEXT: NEXT
+ LOCATE CSRLIN - 1: PRINT SPACE$(40): LOCATE 6: PRINT SPACE$(40)
+ PALETTE 240, 65536 * INT(61) + 256 * INT(61) + INT(61)
+ ON ERROR GOTO BadFileName
+ COLOR 240: LOCATE 22, 1: INPUT "Name of game to continue-> ", confile$
+ confile$ = LEFT$(confile$, 8): confile$ = RTRIM$(confile$)
+ confile$ = LCASE$(confile$): confile$ = confile$ + ".sav"
+ OPEN confile$ FOR INPUT AS #1
+ INPUT #1, lvl, hp, hpmax, attack, defense: INPUT #1, money, exper, lefttonext
+ INPUT #1, up, over, dir, stage: INPUT #1, body.items, item.down
+ FOR i = 1 TO 15: INPUT #1, inv(i): NEXT i: FOR i = 1 TO 25: INPUT #1, item.lvl$(i): NEXT i
+ FOR i = 1 TO 25: INPUT #1, level$(i): NEXT i
+ IF stage = 1 THEN GOSUB DoneChangingLvls
+ FOR i = 1 TO 100: INPUT #1, item.lvl$(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level$(i): NEXT i
+ IF stage = 2 THEN GOSUB DoneChangingLvls
+ FOR i = 1 TO 100: INPUT #1, item.lvl$(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level$(i): NEXT i
+ IF stage = 3 THEN GOSUB DoneChangingLvls
+ FOR i = 1 TO 100: INPUT #1, item.lvl$(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level$(i): NEXT i
+DoneChangingLvls:
+ CLOSE #1
+END SUB
+
+SUB Credits (clength%, cclr%, cover%, cdelay!, cstart%)
+ cdown% = 24 - cstart%: cbegin% = 1
+ FOR i% = 1 TO clength% - 25
+	cdown% = cdown% - 1
+	IF cdown% < 1 THEN cdown% = 1
+	cupness% = 0
+	FOR a% = 0 TO (24 - cdown%)
+	 IF cover% = -1 THEN
+		covr% = LEN(scrolltxt$(cbegin% + a%)): covr% = (40 - covr%) / 2
+	 ELSE
+		covr% = cover%
+	 END IF
+	 IF covr% = 0 THEN covr% = 1
+	 COLOR cclr%: LOCATE cdown% + cupness%, covr%: PRINT scrolltxt$(cbegin% + a%)
+	 cupness% = cupness% + 1
+	NEXT a%
+	IF cdown% > 1 THEN
+	 cbegin% = 1
+	ELSE
+	 cbegin% = cbegin% + 1
+	END IF
+	CurrentTimer! = TIMER: WHILE TIMER < (CurrentTimer! + cdelay!): WEND
+ NEXT i%
+END SUB
+
+SUB DrawLevel
+posy% = 4
+FOR i% = 1 TO 7
+posx% = 22
+FOR h% = 1 TO 7
+ f$ = MID$(level$((up - 4) + i%), (over - 4) + h%, 1)
+ IF f$ = "." THEN PUT (posx%, posy%), grass, PSET
+ IF f$ = "#" THEN PUT (posx%, posy%), water.d, PSET
+ IF f$ = "H" THEN PUT (posx%, posy%), water, PSET
+ IF f$ = "-" THEN PUT (posx%, posy%), beach.1, PSET
+ IF f$ = "_" THEN PUT (posx%, posy%), beach.4, PSET
+ IF f$ = "/" THEN PUT (posx%, posy%), beach.7, PSET
+ IF f$ = "\" THEN PUT (posx%, posy%), beach.10, PSET
+ IF f$ = "w" THEN PUT (posx%, posy%), grass.2, PSET
+ IF f$ = "T" THEN PUT (posx%, posy%), tree, PSET
+ IF f$ = "O" THEN PUT (posx%, posy%), boulder, PSET
+ IF f$ = "3" THEN PUT (posx%, posy%), beach.2, PSET
+ IF f$ = "1" THEN PUT (posx%, posy%), beach.5, PSET
+ IF f$ = "l" THEN PUT (posx%, posy%), beach.8, PSET
+ IF f$ = "I" THEN PUT (posx%, posy%), beach.11, PSET
+ IF f$ = "v" THEN PUT (posx%, posy%), grass.1, PSET
+ IF f$ = "4" THEN PUT (posx%, posy%), beach.3, PSET
+ IF f$ = "2" THEN PUT (posx%, posy%), beach.6, PSET
+ IF f$ = "r" THEN PUT (posx%, posy%), beach.9, PSET
+ IF f$ = "y" THEN PUT (posx%, posy%), beach.12, PSET
+ IF f$ = "∞" THEN PUT (posx%, posy%), path.5, PSET
+ IF f$ = "A" THEN PUT (posx%, posy%), mount.g, PSET
+ IF f$ = "M" THEN PUT (posx%, posy%), mount.s, PSET
+ IF f$ = "h" THEN PUT (posx%, posy%), hill, PSET
+ IF f$ = "5" THEN PUT (posx%, posy%), mount.1, PSET
+ IF f$ = "6" THEN PUT (posx%, posy%), mount.2, PSET
+ IF f$ = "7" THEN PUT (posx%, posy%), mount.3, PSET
+ IF f$ = "8" THEN PUT (posx%, posy%), mount.4, PSET
+ IF f$ = "c" THEN PUT (posx%, posy%), bridge.21, PSET
+ IF f$ = "t" THEN PUT (posx%, posy%), bridge.22, PSET
+ IF f$ = "d" THEN PUT (posx%, posy%), bridge.23, PSET
+ IF f$ = "Q" THEN PUT (posx%, posy%), island.l, PSET
+ IF f$ = "x" THEN PUT (posx%, posy%), island.m, PSET
+ IF f$ = "q" THEN PUT (posx%, posy%), island.r, PSET
+ IF f$ = "," THEN PUT (posx%, posy%), desert, PSET
+ IF f$ = "s" THEN PUT (posx%, posy%), swamp, PSET
+ IF f$ = "f" THEN PUT (posx%, posy%), fence.u, PSET
+ IF f$ = "F" THEN PUT (posx%, posy%), fence.s, PSET
+ IF f$ = "Ì" THEN PUT (posx%, posy%), bridge.11, PSET
+ IF f$ = "0" THEN PUT (posx%, posy%), cave, PSET
+ IF f$ = "i" THEN PUT (posx%, posy%), crop, PSET
+ IF f$ = "C" THEN PUT (posx%, posy%), crop.2, PSET
+ IF f$ = "R" THEN PUT (posx%, posy%), crop.3, PSET
+ IF f$ = "Ó" THEN PUT (posx%, posy%), bridge.12, PSET
+ IF f$ = "D" THEN PUT (posx%, posy%), stairs.d, PSET
+ IF f$ = "u" THEN PUT (posx%, posy%), stairs.u, PSET
+ IF f$ = "P" THEN PUT (posx%, posy%), crop.1, PSET
+ IF f$ = "S" THEN PUT (posx%, posy%), desert.s, PSET
+ IF f$ = "g" THEN PUT (posx%, posy%), desert.c, PSET
+ IF f$ = "Ô" THEN PUT (posx%, posy%), bridge.13, PSET
+ IF f$ = "≤" THEN PUT (posx%, posy%), cave.w, PSET
+ IF f$ = "" THEN PUT (posx%, posy%), secret.dc, PSET
+ IF f$ = "€" THEN PUT (posx%, posy%), wall, PSET
+ IF f$ = "Û" THEN PUT (posx%, posy%), secret.do, PSET
+ IF f$ = "Ò" THEN PUT (posx%, posy%), door.c, PSET
+ IF f$ = "Ú" THEN PUT (posx%, posy%), door.o, PSET
+ IF f$ = "" THEN PUT (posx%, posy%), steel.dl, PSET
+ IF f$ = "Ù" THEN PUT (posx%, posy%), prison.o, PSET
+ IF f$ = "'" THEN PUT (posx%, posy%), floor, PSET
+ IF f$ = "˜" THEN PUT (posx%, posy%), door.cl, PSET
+ IF f$ = "ˆ" THEN PUT (posx%, posy%), prison, PSET
+ IF f$ = "ı" THEN PUT (posx%, posy%), prison.dc, PSET
+ IF f$ = ":" THEN PUT (posx%, posy%), cave.f, PSET
+ IF f$ = "É" THEN PUT (posx%, posy%), dirt.w, PSET
+ IF f$ = "Ç" THEN PUT (posx%, posy%), lava, PSET
+ IF f$ = "(" THEN PUT (posx%, posy%), fountain, PSET
+ IF f$ = "Ä" THEN PUT (posx%, posy%), water.oo, PSET
+ IF f$ = "Å" THEN PUT (posx%, posy%), prison.dl, PSET
+ IF f$ = "¯" THEN PUT (posx%, posy%), cave.f2, PSET
+ IF f$ = ";" THEN PUT (posx%, posy%), cave.f1, PSET
+ IF f$ = "" THEN PUT (posx%, posy%), water.o, PSET
+ IF f$ = "~" THEN PUT (posx%, posy%), floor.w, PSET
+ IF f$ = "{" THEN PUT (posx%, posy%), stag, PSET
+ IF f$ = "|" THEN PUT (posx%, posy%), steel.du, PSET
+ IF f$ = "}" THEN PUT (posx%, posy%), steel.do, PSET
+ IF f$ = "@" THEN PUT (posx%, posy%), floor.c, PSET
+ IF f$ = "*" THEN PUT (posx%, posy%), sign, PSET
+ IF f$ = " " THEN PUT (posx%, posy%), table, PSET
+ IF f$ = "œ" THEN PUT (posx%, posy%), bed, PSET
+ IF f$ = "Ï" THEN PUT (posx%, posy%), dresser, PSET
+ IF f$ = "ø" THEN PUT (posx%, posy%), king, PSET
+ IF f$ = "±" THEN PUT (posx%, posy%), clerk, PSET
+ IF f$ = "≠" THEN PUT (posx%, posy%), robin, PSET
+ posx% = posx% + 25
+NEXT h%
+posy% = posy% + 20
+NEXT i%
+posy% = 4
+FOR i% = 1 TO 7
+posx% = 22
+FOR h% = 1 TO 7
+IF MID$(item.lvl$((up - 4) + i%), (over - 4) + h%, 1) <> " " THEN
+ f$ = MID$(item.lvl$((up - 4) + i%), (over - 4) + h%, 1)
+ IF f$ = "À" THEN   ShowStuff(posx%, posy%, 2, 23)
+ IF f$ = "Ã" THEN   ShowStuff(posx%, posy%, 2, 0)
+ IF f$ = "Õ" THEN   ShowStuff(posx%, posy%, 2, 1)
+ IF f$ = "–" THEN   ShowStuff(posx%, posy%, 2, 2)
+ IF f$ = "”" THEN   ShowStuff(posx%, posy%, 2, 3)
+ IF f$ = "÷" THEN   ShowStuff(posx%, posy%, 2, 4)
+ IF f$ = "ÿ" THEN   ShowStuff(posx%, posy%, 2, 5)
+ IF f$ = "˘" THEN   ShowStuff(posx%, posy%, 2, 7)
+ IF f$ = "‹" THEN   ShowStuff(posx%, posy%, 2, 8)
+ IF f$ = "›" THEN   ShowStuff(posx%, posy%, 2, 9)
+ IF f$ = "‡" THEN   ShowStuff(posx%, posy%, 2, 1)
+ IF f$ = "·" THEN   ShowStuff(posx%, posy%, 2, 10)
+ IF f$ = "„" THEN   ShowStuff(posx%, posy%, 2, 12)
+ IF f$ = "‰" THEN   ShowStuff(posx%, posy%, 2, 13)
+ IF f$ = "Â" THEN   ShowStuff(posx%, posy%, 2, 14)
+ IF f$ = "Ê" THEN   ShowStuff(posx%, posy%, 2, 15)
+ IF f$ = "Á" THEN   ShowStuff(posx%, posy%, 2, 16)
+ IF f$ = "Ë" THEN   ShowStuff(posx%, posy%, 2, 17)
+ IF f$ = "" THEN   ShowStuff(posx%, posy%, 2, 18)
+ IF f$ = "È" THEN   ShowStuff(posx%, posy%, 2, 19)
+ IF f$ = "Í" THEN   ShowStuff(posx%, posy%, 2, 20)
+ IF f$ = "Î" THEN   ShowStuff(posx%, posy%, 2, 21)
+ IF f$ = "Ñ" THEN   ShowItem(posx%, posy%, 2, 1)
+ IF f$ = "Ö" THEN   ShowItem(posx%, posy%, 2, 2)
+ IF f$ = "Ü" THEN   ShowItem(posx%, posy%, 2, 3)
+ IF f$ = "á" THEN   ShowItem(posx%, posy%, 2, 4)
+ IF f$ = "à" THEN   ShowItem(posx%, posy%, 2, 5)
+ IF f$ = "â" THEN   ShowItem(posx%, posy%, 2, 6)
+ IF f$ = "ä" THEN   ShowItem(posx%, posy%, 2, 7)
+ IF f$ = "ã" THEN   ShowItem(posx%, posy%, 2, 8)
+ IF f$ = "å" THEN   ShowItem(posx%, posy%, 2, 9)
+ IF f$ = "ç" THEN   ShowItem(posx%, posy%, 2, 10)
+ IF f$ = "é" THEN   ShowItem(posx%, posy%, 2, 11)
+ IF f$ = "è" THEN   ShowItem(posx%, posy%, 2, 12)
+ IF f$ = "ê" THEN   ShowItem(posx%, posy%, 2, 13)
+ IF f$ = "ë" THEN   ShowItem(posx%, posy%, 2, 14)
+ IF f$ = "í" THEN   ShowItem(posx%, posy%, 2, 15)
+ IF f$ = "ì" THEN   ShowItem(posx%, posy%, 2, 16)
+ IF f$ = "î" THEN   ShowItem(posx%, posy%, 2, 17)
+ IF f$ = "ï" THEN   ShowItem(posx%, posy%, 2, 18)
+ IF f$ = "ñ" THEN   ShowItem(posx%, posy%, 2, 19)
+ IF f$ = "ó" THEN   ShowItem(posx%, posy%, 2, 20)
+ IF f$ = "ò" THEN   ShowItem(posx%, posy%, 2, 21)
+ IF f$ = "ô" THEN   ShowItem(posx%, posy%, 2, 22)
+ IF f$ = "ö" THEN   ShowItem(posx%, posy%, 2, 23)
+ IF f$ = "õ" THEN   ShowItem(posx%, posy%, 2, 24)
+ IF f$ = "ú" THEN   ShowItem(posx%, posy%, 2, 25)
+ IF f$ = "ù" THEN   ShowItem(posx%, posy%, 2, 26)
+ IF f$ = "û" THEN   ShowItem(posx%, posy%, 2, 27)
+ IF f$ = "ü" THEN   ShowItem(posx%, posy%, 2, 28)
+ IF f$ = "†" THEN   ShowItem(posx%, posy%, 2, 29)
+ IF f$t 11 = "°" THEN   ShowItem(posx%, posy%, 2, 30)
+ IF f$ = "¢" THEN   ShowItem(posx%, posy%, 2, 31)
+ IF f$ = "£" THEN   ShowItem(posx%, posy%, 2, 32)
+ IF f$ = "§" THEN   ShowItem(posx%, posy%, 2, 33)
+ IF f$ = "•" THEN   ShowItem(posx%, posy%, 2, 34)
+ IF f$ = "¶" THEN   ShowItem(posx%, posy%, 2, 35)
+ IF f$ = "ß" THEN   ShowItem(posx%, posy%, 2, 36)
+ IF f$ = "®" THEN   ShowItem(posx%, posy%, 2, 37)
+ IF f$ = "˙" THEN   ShowItem(posx%, posy%, 2, 38)
+ IF f$ = "˚" THEN   ShowItem(posx%, posy%, 2, 39)
+ IF f$ = "´" THEN   ShowItem(posx%, posy%, 2, 40)
+ IF f$ = "¨" THEN   ShowItem(posx%, posy%, 2, 41)
+ IF f$ = "¥" THEN   ShowItem(posx%, posy%, 2, 42)
+ IF f$ = "µ" THEN   ShowItem(posx%, posy%, 2, 43)
+ IF f$ = "∂" THEN   ShowItem(posx%, posy%, 2, 44)
+ IF f$ = "1∑" THEN   ShowItem(posx%, posy%, 2, 45)
+ IF f$ = "∏" THEN   ShowItem(posx%, posy%, 2, 46)
+ IF f$ = "π" THEN   ShowItem(posx%, posy%, 2, 47)
+ IF f$ = "∫" THEN   ShowItem(posx%, posy%, 2, 48)
+ IF f$ = "ª" THEN   ShowItem(posx%, posy%, 2, 49)
+ IF f$ = "º" THEN   ShowItem(posx%, posy%, 2, 50)
+ IF f$ = "Ω" THEN   ShowItem(posx%, posy%, 2, 51)
+ IF f$ = "æ" THEN   ShowItem(posx%, posy%, 2, 52)
+ IF f$ = "˝" THEN   ShowItem(posx%, posy%, 2, 53)
+ IF f$ = "ƒ" THEN   ShowItem(posx%, posy%, 2, 54)
+ IF f$ = "≈" THEN   ShowItem(posx%, posy%, 2, 55)
+ IF f$ = "∆" THEN   ShowItem(posx%, posy%, 2, 56)
+ IF f$ = "ﬁ" THEN   ShowStuff(posx%, posy%, 2, 22)
+END IF
+posx% = posx% + 25
+NEXT h%
+posy% = posy% + 20
+NEXT i%
+IF boatcheck% <> 1 THEN   ShowGuy((4 * 25) - 3, (4 * 20) - 16, 2, dir%)
+key$ = INKEY$
+END SUB
+
+SUB DropObject
+LINE (4, 147)-(214, 195), 0, BF
+t% = 0
+WriteItemsToDrop:
+ LINE (22, 4)-(196, 143), 0, BF
+ DRAW "BM 24,6 C4 S4":   Font(0, "drop what (0 cancels)?"): i = 1
+ FOR n% = 1 TO 5: FOR w% = 1 TO 3
+	  GetJForItems(inv$(n% + t%), w%): DRAW "BM 24," + STR$((i * 7) + 6) + " C4"
+	  Font(0, CHR$(i + 96) + ": " + j$): i = i + 1
+ NEXT w%: NEXT n%
+ DRAW "BM 24," + STR$((i * 7) + 6) + " C4"
+ IF t% = 0 OR t% = 5 THEN
+	DRAW "BM 24," + STR$((16 * 7) + 6) + " C4":   Font(0, "p: next list...")
+ END IF
+ IF t% = 10 OR t% = 5 THEN
+	DRAW "BM 24," + STR$((17 * 7) + 6) + " C4":   Font(0, "q: previous list...")
+ END IF
+ DO
+	keyboard$ = INKEY$
+	SELECT CASE keyboard$
+	 CASE "a": dropover% = 1: dropup% = 1: GOSUB PickedDrop
+	 CASE "b": dropover% = 2: dropup% = 1: GOSUB PickedDrop
+	 CASE "c": dropover% = 3: dropup% = 1: GOSUB PickedDrop
+	 CASE "d": dropover% = 1: dropup% = 2: GOSUB PickedDrop
+	 CASE "e": dropover% = 2: dropup% = 2: GOSUB PickedDrop
+	 CASE "f": dropover% = 3: dropup% = 2: GOSUB PickedDrop
+	 CASE "g": dropover% = 1: dropup% = 3: GOSUB PickedDrop
+	 CASE "h": dropover% = 2: dropup% = 3: GOSUB PickedDrop
+	 CASE "i": dropover% = 3: dropup% = 3: GOSUB PickedDrop
+	 CASE "j": dropover% = 1: dropup% = 4: GOSUB PickedDrop
+	 CASE "k": dropover% = 2: droped 900(0)pup% = 4: GOSUB PickedDrop
+	 CASE "l": dropover% = 3: dropup% = 4: GOSUB PickedDrop
+	 CASE "m": dropover% = 1: dropup% = 5: GOSUB PickedDrop
+	 CASE "n": dropover% = 2: dropup% = 5: GOSUB PickedDrop
+	 CASE "o": dropover% = 3: dropup% = 5: GOSUB PickedDrop
+	 CASE "p"
+		IF t% = 0 OR t% = 5 THEN t% = t% + 5: GOSUB WriteItemsToDrop
+	 CASE "q"
+		IF t% = 5 OR t% = 10 THEN t% = t% - 5: GOSUB WriteItemsToDrop
+	 CASE "0": GOSUB EndDropObject
+	END SELECT
+ LOOP
+PickedDrop:
+ IF MID$(inv$(dropup% + t%), dropover%, 1) = " " THEN GOSUB NothingToDrop
+ IF MID$(item.lvl$(up), over, 1) <> " " THEN GOSUB CantDropHere
+ MID$(item.lvl$(up), over, 1) = MID$(inv$(dropup% + t%), dropover%, 1)
+   GetJForItems(inv$(dropup% + t%), dropover%)
+ DRAW "BM 6,148 C4 S4":   Font(0, "you dropped a " + j$ + ".")
+ MID$(inv$(dropup% + t%), dropover%, 1) = " "
+   ShowInventory: GOSUB EndDropObject
+NothingToDrop:
+ DRAW "BM 6,148 C4 S4":   Font(0, "nothing there to drop."): GOSUB EndDropObject
+CantDropHere:
+ DRAW "BM 6,148 C4 S4":   Font(0, "can't drop that here.")
+EndDropObject:
+ skipmenu = 1:   DrawLevel
+END SUB
+
+SUB Equip
+LINE (4, 147)-(214, 195), 0, BF
+t% = 0
+WriteEquipment:
+ LINE (22, 4)-(196, 143), 0, BF
+ DRAW "BM 24,6 C4 S4":   Font(0, "equip what (0 cancels)?"): i = 1
+ FOR n% = 1 TO 5: FOR w% = 1 TO 3
+	  GetJForItems(inv$(n% + t%), w%)
+	 IF j$ = "wood door key" THEN j$ = " "
+	 IF j$ = "steel door key" THEN j$ = " "
+	DRAW "BM 24," + STR$((i * 7) + 6) + " C4":   Font(0, CHR$(i + 96) + ": " + j$)
+	i = i + 1
+ NEXT w%: NEXT n%
+ IF t% = 0 OR t% = 5 THEN
+	DRAW "BM 24," + STR$((16 * 7) + 6) + " C4":   Font(0, "p: next list...")
+ END IF
+ IF t% = 10 OR t% = 5 THEN
+	DRAW "BM 24," + STR$((17 * 7) + 6) + " C4":   Font(0, "q: previous list...")
+ END IF
+ DO
+	keyboard$ = INKEY$
+	SELECT CASE keyboard$
+	 CASE "a": equipover = 1: equipup = 1: GOSUB PickedupEquip
+	 CASE "b": equipover = 2: equipup = 1: GOSUB PickedEquip
+	 CASE "c": equipover = 3: equipup = 1: GOSUB PickedEquip
+	 CASE "d": equipover = 1: equipup = 2: GOSUB PickedEquip
+	 CASE "e": equipover = 2: equipup = 2: GOSUB PickeugkdEquip
+	 CASE "f": equipover = 3: equipup = 2: GOSUB PickedEquip
+	 CASE "g": equipover = 1: equipup = 3: GOSUB PickedEquip
+	 CASE "h": equipover = 2: equipup = 3: GOSUB PickedEquip
+	 CASE "i": equipover = 3: equipup = 3: GOSUB PickedEquip
+	 CASE "j": equipover = 1: equipup = 4: GOSUB PickedEquip
+	 CASE "k": equipover = 2: equipup = 4: GOSUB PickedEquip
+	 CASE "l": equipover = 3: equipup = 4: GOSUB PickedEquip
+	 CASE "m": equipover = 1: equipup = 5: GOSUB PickedEquip
+	 CASE "n": equipover = 2: equipup = 5: GOSUB PickedEquip
+	 CASE "o": equipover = 3: equipup = 5: GOSUB PickedEquip
+	 CASE "p"
+		IF t% = 0 OR t% = 5 THEN t% = t% + 5: GOSUB WriteEquipment
+	 CASE "q"
+		IF t% = 5 OR t% = 10 THEN t% = t% - 5: GOSUB WriteEquipment
+	 CASE "0": GOSUB EndEquip
+	END SELECT
+ LOOP
+PickedEquip:
+ IF MID$(inv$(equipup + t%), equipover, 1) = " " THEN GOSUB NothingToEquip
+ l% = equipup: w% = equipover
+   SwitchItems:   SideGraphics:   ShowInventory: GOSUB EndEquip
+NothingToEquip:
+ DRAW "BM 6,148 C4 S4":   Font(0, "nothing there to equip."): p% = 0
+ GOSUB EndEquip
+EndEquip:
+ IF p% = 50 THEN GOSUB NothingToEquip
+ skipmenu = 1:   DrawLevel
+END SUB
+
+SUB Fight (enemy.name$, eland$)
+ LINE (4, 147)-(214, 195), 0, BF
+ DRAW "BM 6,148 C4 S4"
+   Font(0, "you ran into a " + enemy.name$ + ".")
+ IF enemy.name$ = "psycho frog" THEN edraw$ = "frog.kon": ehard% = 1
+ IF enemy.name$ = "rattle snake" THEN edraw$ = "snake.kon": ehard% = 1
+ IF enemy.name$ = "giant turtle" THEN edraw$ = "turtle.kon": ehard% = 2
+ IF enemy.name$ = "killer seagull" THEN edraw$ = "seagul.kon": ehard% = 1
+ IF enemy.name$ = "killer deer" THEN edraw$ = "dear.kon": ehard% = 3
+ IF enemy.name$ = "lion" THEN edraw$ = "lion.kon": ehard% = 4
+ IF enemy.name$ = "grizzly bear" THEN edraw$ = "bear.kon": ehard% = 6
+ IF enemy.name$ = "scorpion" THEN edraw$ = "scorpion.kon": ehard% = 1
+ IF enemy.name$ = "giant ant" THEN edraw$ = "ant.kon": ehard% = 1
+ IF enemy.name$ = "giant rat" THEN edraw$ = "rat.kon": ehard% = 1
+ IF enemy.name$ = "giant lizard" THEN edraw$ = "lizard.kon": ehard% = 3
+ IF enemy.name$ = "slime" THEN edraw$ = "slime.kon": ehard% = 3
+ IF enemy.name$ = "sea serpent" THEN edraw$ = "serpent.kon": ehard% = 7
+ IF enemy.name$ = "squid" THEN edraw$ = "squid.kon": ehard% = 4
+ IF enemy.name$ = "shark" THEN edraw$ = "shark.kon": ehard% = 4
+ IF enemy.name$ = "giant octopus" THEN edraw$ = "octopus.kon": ehard% = 6
+ IF enemy.name$ = "gremlin" THEN edraw$ = "gremlin.kon": ehard% = 2
+ IF enemy.name$ = "mongbat" THEN edraw$ = "mongbat.kon": ehard% = 5
+ IF enemy.name$ = "giant worm" THEN edraw$ = "worm.kon": ehard% = 3
+ IF enemy.name$ = "skeleton" THEN edraw$ = "skeleton.kon": ehard% = 8
+ IF enemy.name$ = "daemon" THEN edraw$ = "daemon.kon": ehard% = 9
+ IF enemy.name$ = "ghost" THEN edraw$ = "ghost.kon": ehard% = 7
+ IF enemy.name$ = "troll" THEN edraw$ = "troll.kon": ehard% = 9
+ IF enemy.name$ = "dragon" THEN edraw$ = "dragon.kon": ehard% = 9
+ IF enemy.name$ = "cyclops" THEN edraw$ = "cyclops.kon": ehard% = 8
+ IF enemy.name$ = "evil knight" THEN edraw$ = "knight.kon": ehard% = 10
+ IF enemy.name$ = "evil wizard" THEN edraw$ = "wizard.kon": ehard% = 12
+ IF enemy.name$ = "noel the witch" THEN edraw$ = "noel.kon": ehard% = 15
+ enemy.life% = ehard% * 20: egold% = ehard% * 5: eexper% = ehard% * 7
+ LINE (22, 4)-(196, 143), 0, BF
+ DEF SEG = VARSEG(getenemy(1))
+ BLOAD edraw$, VARPTR(getenemy(1))
+ DEF SEG
+ PUT (31, 10), getenemy
+ GET (31, 10)-(55, 29), enemy.1: GET (57, 10)-(81, 29), enemy.2
+SetupForFightMenu:
+LINE (22, 4)-(196, 143), 0, BF
+FOR i% = 0 TO 6
+ IF eland$ = "g" THEN PUT ((i% * 25) + 22, 104), grass
+ IF eland$ = "w" THEN PUT ((i% * 25) + 22, 104), water
+ IF eland$ = "d" THEN PUT ((i% * 25) + 22, 104), desert
+ IF eland$ = "s" THEN PUT ((i% * 25) + 22, 104), swamp
+ IF eland$ = "c" THEN PUT ((i% * 25) + 22, 104), cave.f
+ IF eland$ = "p" THEN PUT ((i% * 25) + 22, 104), dirt.w
+ IF eland$ = "l" THEN PUT ((i% * 25) + 22, 104), lava
+NEXT i%
+  ShowGuy(22, 85, 2, 7): PUT (171, 84), enemy.1
+MainFightOptions:
+ DRAW "BM 85,30 C4 S4":   Font(0, "fight menu")
+ DRAW "BM 85,37 C4 S4":   Font(0, "----------")
+ DRAW "BM 85,44 C4 S4":   Font(0, "1: blitz")
+ DRAW "BM 85,51 C4 S4":   Font(0, "2: attack")
+ DRAW "BM 85,58 C4 S4":   Font(0, "3: item")
+ DRAW "BM 85,65 C4 S4":   Font(0, "4: escape")
+DO
+ key$ = INKEY$
+ SELECT CASE key$
+	CASE "1": GOSUB Blitz
+	CASE "2": GOSUB AttackOnce
+	CASE "3":   UseObject: GOSUB SetupForFightMenu
+	CASE "4": GOSUB TryToRun
+ END SELECT
+LOOP
+TryToRun:
+ makeitornot = INT(RND * 5) + 1
+ IF makeitornot > 1 THEN
+	LINE (4, 147)-(214, 195), 0, BF
+	DRAW "BM 6,148 C4 S4":   Font(0, "you managed to get away."): GOSUB EndAllFightStuff
+ END IF
+ IF makeitornot = 1 THEN
+	LINE (4, 147)-(214, 195), 0, BF
+	DRAW "BM 6,148 C4 S4":   Font(0, "you did't get away."): GOSUB HisTurn
+ END IF
+AttackOnce:
+ FOR i% = 11 TO 2 STEP -1
+	LINE (22, 84)-(196, 103), 0, BF
+	  ShowGuy(104 - (i% * 7), 85, 2, 8): PUT (171, 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+	LINE (22, 84)-(196, 103), 0, BF
+	  ShowGuy(104 - (i% * 7), 85, 2, 7): PUT (171, 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+ NEXT i%
+ etakeaway = attack - (INT(RND * (ehard% * 2))): LINE (4, 147)-(214, 195), 0, BF
+ IF etakeaway <= 0 THEN
+	DRAW "BM 6,148 C4 S4":   Font(0, "you did no damage,"): etakeaway = 0
+ ELSE
+	DRAW "BM 6,148 C4 S4":   Font(0, "you bashed for" + STR$(etakeaway) + " damage,")
+ END IF
+ enemy.life = enemy.life - etakeaway
+ IF hp <= 0 THEN GOSUB FightEnded
+ FOR i% = 2 TO 11
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(104 - (i% * 7), 85, 2, 7): PUT (171, 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(104 - (i% * 7), 85, 2, 8): PUT (171, 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+ NEXT i%
+HisTurn:
+ FOR i% = 11 TO 2 STEP -1
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(22, 85, 2, 7): PUT (104 + (i% * 6), 84), enemy.2
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(22, 85, 2, 7): PUT (104 + (i% * 6), 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+ NEXT i%
+ utakeaway = ehard% + INT(((RND * (ehard% * 7)) + (ehard% * 2)) - (defense * .1))
+ LINE (4, 147)-(214, 195), 0, BF
+ IF utakeaway <= 0 THEN
+	DRAW "BM 6,148 C4 S4":   Font(0, "you got no damage."): utakeaway = 0
+ ELSE
+	DRAW "BM 6,148 C4 S4":   Font(0, "you got" + STR$(utakeaway) + " damage.")
+ END IF
+ hp = hp - utakeaway:   WriteStats
+ IF hp <= 0 THEN GOSUB FightEnded
+ FOR i% = 2 TO 11
+	LINE (22, 84)-(196, 103), 0, BF
+	  ShowGuy(22, 85, 2, 7): PUT (104 + (i% * 6), 84), enemy.2
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+	LINE (22, 84)-(196, 103), 0, BF
+	  ShowGuy(22, 85, 2, 7): PUT (104 + (i% * 6), 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .25): WEND
+ NEXT i%
+ GOSUB MainFightOptions
+Blitz:
+ LINE (85, 30)-(190, 70), 0, BF: DRAW "BM 49,44 C4 S4":   Font(0, "press 0 to break away")
+ FOR i% = 11 TO 2 STEP -1
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(104 - (i% * 7), 85, 2, 8): PUT (104 + (i% * 6), 84), enemy.2
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .3): WEND
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(104 - (i% * 7), 85, 2, 7): PUT (104 + (i% * 6), 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .3): WEND
+ NEXT i%
+DO
+ key$ = INKEY$
+ IF key$ = "0" THEN GOSUB CancelBlitz
+ LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(90, 85, 2, 8): PUT (116, 84), enemy.2
+ CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .3): WEND
+ LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(90, 85, 2, 7): PUT (116, 84), enemy.1
+ CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .3): WEND
+ etakeaway = attack - (INT(RND * (ehard% * 2)))
+ utakeaway = ehard% + INT(((RND * (ehard% * 7)) + (ehard% * 2)) - (defense * .1))
+ LINE (4, 147)-(214, 195), 0, BF
+ IF etakeaway <= 0 THEN
+	DRAW "BM 6,148 C4 S4":   Font(0, "you did no damage,"): etakeaway = 0
+ ELSE
+	DRAW "BM 6,148 C4 S4":   Font(0, "you bashed for" + STR$(etakeaway) + " damage,")
+ END IF
+ IF utakeaway <= 0 THEN
+	DRAW "BM 6,155 C4 S4":   Font(0, "and got no damage,"): utakeaway = 0
+ ELSE
+	DRAW "BM 6,155 C4 S4":   Font(0, "but got" + STR$(utakeaway) + " damage.")
+ END IF
+ hp = hp - utakeaway: enemy.life = enemy.life - etakeaway:   WriteStats
+ CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + 1): WEND
+LOOP UNTIL hp <= 0 OR enemy.life <= 0
+GOSUB FightEnded
+CancelBlitz:
+ DRAW "BM 49,44 C4 S4":   Font(0, "                     ")
+ FOR i% = 2 TO 11
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(104 - (i% * 7), 85, 2, 8): PUT (104 + (i% * 6), 84), enemy.2
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .3): WEND
+	LINE (22, 84)-(196, 103), 0, BF:   ShowGuy(104 - (i% * 7), 85, 2, 7): PUT (104 + (i% * 6), 84), enemy.1
+	CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + .3): WEND
+ NEXT i%
+GOSUB MainFightOptions
+FightEnded:
+ IF hp <= 0 THEN   YouDied
+ money = money + egold%: exper = exper + eexper%: LINE (4, 147)-(214, 195), 0, BF
+ DRAW "BM 6,148 C4 S4":   Font(0, "you beat the " + enemy.name$ + ".")
+ DRAW "BM 6,155 C4 S4": made  Font(0, "you got " + STR$(egold%) + " gold.")
+ DRAW "BM 6,162 C4 S4":   Font(0, "you got " + STR$(eexper%) + " experience.")
+ IF exper >= lefttonext THEN
+	lvl = lvl + 1: attack = attack + (INT(RND * 5) + 1)
+	defense = defense + (INT(RND * 5) + 1): hpmax = hpmax + (INT(RND * 5) + 6)
+	hp = hpmax: LINE (4, 147)-(214, 195), 0, BF
+	DRAW "BM 6,148 C4 S4":   Font(0, "you gained a level.")
+	DRAW "BM 6,162 C4 S4":   Font(0, "your defense raised.")
+	DRAW "BM 6,155 C4 S4":   Font(0, "your attack raised.")
+	lefttonext = lefttonext * 2
+ END IF
+EndAllFightStuff:
+   WriteStats:   DrawLevel
+END SUB
+
+SUB FightKnight
+enemy.name$ = "evil knight": eland$ = "g":   Fight(enemy.name$, eland$)
+MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "v"
+END SUB
+
+SUB FightNoel
+enemy.name$ = "noel the witch": eland$ = "c"
+  Fight(enemy.name$, eland$): over = 17: up = 15: dir = 3
+stage = stage - 2:   ChangeLevels(stage + 2)
+  DrawLevel
+LINE (4, 147)-(214, 195), 0, BF
+DRAW "BM 5,148 C4 S4":   Font(0, "king steve: thank you so much")
+DRAW "BM 5,155 C4 S4":   Font(0, "     for destroying noel and ")
+DRAW "BM 5,162 C4 S4":   Font(0, "     getting the magic stone!")
+DRAW "BM 5,169 C4 S4":   Font(0, "     you are truly the coolest")
+DRAW "BM 5,176 C4 S4":   Font(0, "     dude i know!")
+DRAW "BM 103,190 C10 S4":   Font(0, "press")
+DRAW "BM 139,190 C10 S4":   Font(0, "a")
+DRAW "BM 152,190 C10 S4":   Font(0, "key")
+SLEEP: CLS :   Credits(75, 1, -1, .2, 0)
+CLS : LOCATE 12, 16: PRINT "THE END!"
+LOCATE 13, 12: PRINT "Watch for KTW2!!": SYSTEM
+END SUB
+
+SUB FightSetup
+ IF MID$(level$(up), over, 1) = "'" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "@" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "~" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "∞" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "c" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "t" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "d" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "Ì" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "Ó" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "Ô" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "u" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "D" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "Û" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "Ú" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "0" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "}" THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "Ù" THEN GOSUB NotRightForFighting
+ IF stage = 2 AND up > 22 AND up < 42 AND over > 5 AND over < 33 THEN GOSUB NotRightForFighting
+ IF MID$(level$(up), over, 1) = "Ç" THEN
+	eland$ = "l": shouldwefight = INT(RND * 2) + 1
+	IF shouldwefight = 1 THEN enemy.name$ = "mongbat"
+	IF shouldwefight = 2 THEN enemy.name$ = "daemon"
+	GOSUB FightNow
+ END IF
+ IF stage = 4 THEN
+	eland$ = "c": shouldwefight = INT(RND * 6) + 1
+	IF MID$(level$(up), over, 1) = "É" THEN eland$ = "p"
+	IF shouldwefight = 1 THEN enemy.name$ = "cyclops"
+	IF shouldwefight = 2 THEN enemy.name$ = "dragon"
+	IF shouldwefight = 3 THEN enemy.name$ = "troll"
+	IF shouldwefight = 4 THEN enemy.name$ = "ghost"
+	IF shouldwefight = 5 THEN enemy.name$ = "skeleton"
+	IF shouldwefight = 6 THEN enemy.name$ = "daemon"
+	GOSUB FightNow
+ END IF
+ IF stage = 3 THEN
+	eland$ = "c"
+	IF MID$(level$(up), over, 1) = "É" THEN eland$ = "p"
+	shouldwefight = INT(RND * 6) + 1
+	IF shouldwefight = 1 THEN enemy.name$ = "giant rat"
+	IF shouldwefight = 2 THEN enemy.name$ = "giant lizard"
+	IF shouldwefight = 3 THEN enemy.name$ = "slime"
+	IF shouldwefight = 4 THEN enemy.name$ = "gremlin"
+	IF shouldwefight = 5 THEN enemy.name$ = "mongbat"
+	IF shouldwefight = 6 THEN enemy.name$ = "giant worm"
+	GOSUB FightNow
+ END IF
+ IF MID$(level$(up), over, 1) = "H" OR MID$(level$(up), over, 1) = "#" THEN
+	eland$ = "w"
+	IF lvl <= 2 THEN amountRandom = 3
+	IF lvl <= 5 AND lvl > 2 THEN amountRandom = 5
+	IF lvl > 5 THEN amountRandom = 7
+	shouldwefight = INT(RND * amountRandom) + 1
+	IF shouldwefight = 1 THEN enemy.name$ = "psycho frog"
+	IF shouldwefight = 2 THEN enemy.name$ = "killer seagull"
+	IF shouldwefight = 3 THEN enemy.name$ = "giant turtle"
+	IF shouldwefight = 4 THEN enemy.name$ = "squid"
+	IF shouldwefight = 5 THEN enemy.name$ = "shark"
+	IF shouldwefight = 6 THEN enemy.name$ = "giant octopus"
+	IF shouldwefight = 7 THEN enemy.name$ = "sea serpent"
+	GOSUB FightNow
+ END IF
+ IF MID$(level$(up), over, 1) = "," OR MID$(level$(up), over, 1) = "S" THEN
+	eland$ = "d"
+	IF lvl <= 2 THEN amountRandom = 3
+	IF lvl <= 4 AND lvl > 2 THEN amountRandom = 4
+	IF lvl > 4 THEN amountRandom = 6
+	shouldwefight = INT(RND * amountRandom) + 1
+	IF shouldwefight = 1 THEN enemy.name$ = "rattle snake"
+	IF shouldwefight = 5 THEN enemy.name$ = "lion"
+	IF shouldwefight = 3 THEN enemy.name$ = "scorpion"
+	IF shouldwefight = 2 THEN enemy.name$ = "giant ant"
+	IF shouldwefight = 4 THEN enemy.name$ = "giant worm"
+	IF shouldwefight = 6 THEN enemy.name$ = "skeleton"
+	GOSUB FightNow
+ END IF
+ IF MID$(level$(up), over, 1) = "s" THEN
+	eland$ = "s"
+	IF lvl < 3 THEN amountRandom = 1
+	IF lvl > 2 THEN amountRandom = 2
+	shouldwefight = INT(RND * amountRandom) + 1
+	IF shouldwefight = 1 THEN enemy.name$ = "slime"
+	IF shouldwefight = 2 THEN enemy.name$ = "ghost"
+	GOSUB FightNow
+ END IF
+ IF over > 70 THEN
+	eland$ = "g"
+	IF lvl < 3 THEN amountRandom = 3
+	IF lvl > 2 AND lvl < 5 THEN amountRandom = 5
+	IF lvl > 4 THEN amountRandom = 8
+	shouldwefight = INT(RND * amountRandom) + 1
+	IF shouldwefight = 1 THEN enemy.name$ = "rattle snake"
+	IF shouldwefight = 2 THEN enemy.name$ = "killer seagull"
+	IF shouldwefight = 4 THEN enemy.name$ = "killer deer"
+	IF shouldwefight = 5 THEN enemy.name$ = "giant lizard"
+	IF shouldwefight = 3 THEN enemy.name$ = "lion"
+	IF shouldwefight = 6 THEN enemy.name$ = "troll"
+	IF shouldwefight = 7 THEN enemy.name$ = "cyclops"
+	IF shouldwefight = 8 THEN enemy.name$ = "grizzly bear"
+	GOSUB FightNow
+ END IF
+ eland$ = "g"
+ IF lvl < 3 THEN amountRandom = 1
+ IF lvl > 2 AND lvl < 5 THEN amountRandom = 3
+ IF lvl > 4 THEN amountRandom = 5
+ shouldwefight = INT(RND * amountRandom) + 1
+ IF shouldwefight = 1 THEN enemy.name$ = "rattle snake"
+ IF shouldwefight = 2 THEN enemy.name$ = "killer seagull"
+ IF shouldwefight = 4 THEN enemy.name$ = "killer deer"
+ IF shouldwefight = 5 THEN enemy.name$ = "giant lizard"
+ IF shouldwefight = 3 THEN enemy.name$ = "giant ant"
+FightNow:
+   Fight(enemy.name$, eland$)
+NotRightForFighting:muggy
+END SUB
+
+SUB FightWizard
+enemy.name$ = "evil knight": eland$ = "c":   Fight(enemy.name$, eland$)
+MID$(item.lvl$(up + somethingup), over + somethingover, 1) = ";"
+END SUB
+
+SUB Font (fontdelay!, words$)
+FontLength% = LEN(words$)
+FOR i% = 1 TO FontLength%
+ IF MID$(words$, i%, 1) = "a" THEN DRAW "BR2G2D2ER2FU2H2BR4"
+ IF MID$(words$, i%, 1) = "b" THEN DRAW "D4R3EHL3U2R3FBEBR"
+ IF MID$(words$, i%, 1) = "c" THEN DRAW "BDD2FR2EBUBUHL2BR5"
+ IF MID$(words$, i%, 1) = "d" THEN DRAW "D4R3EU2HL3BR6"
+ IF MID$(words$, i%, 1) = "e" THEN DRAW "D4R4BHBUL3U2R4BR2"
+ IF MID$(words$, i%, 1) = "f" THEN DRAW "D4U2R3BUBEL4BR6"
+ IF MID$(words$, i%, 1) = "g" THEN DRAW "BDD2FR3U2L2BE2NL3BR2"
+ IF MID$(words$, i%, 1) = "h" THEN DRAW "D4U2R4D2U4BR2"
+ IF MID$(words$, i%, 1) = "i" THEN DRAW "BRBD4R2HU3LR2BR3"
+ IF MID$(words$, i%, 1) = "j" THEN DRAW "BD3DR2U4L2R4BR2"
+ IF MID$(words$, i%, 1) = "k" THEN DRAW "D4BR3H2E2BR3"
+ IF MID$(words$, i%, 1) = "l" THEN DRAW "D4R4BU4BR2"
+ IF MID$(words$, i%, 1) = "m" THEN DRAW "BD4U4F2E2ND4BR2"
+ IF MID$(words$, i%, 1) = "n" THEN DRAW "ND4F4U4BR2"
+ IF MID$(words$, i%, 1) = "o" THEN DRAW "BDD2FR2EU2HL2BR5"
+ IF MID$(words$, i%, 1) = "p" THEN DRAW "D4U2R3EHL3BR6"
+ IF MID$(words$, i%, 1) = "q" THEN DRAW "BDDFR2DRBU2U1HL2BR5"
+ IF MID$(words$, i%, 1) = "r" THEN DRAW "D4U2R3FDBU3HL3BR6"
+ IF MID$(words$, i%, 1) = "s" THEN DRAW "BD4R3EHL2HER3BR2"
+ IF MID$(words$, i%, 1) = "t" THEN DRAW "R2ND4R2BR2"
+ IF MID$(words$, i%, 1) = "u" THEN DRAW "D3FR2EU3BR2"
+ IF MID$(words$, i%, 1) = "v" THEN DRAW "D2F2E2U2BR2"
+ IF MID$(words$, i%, 1) = "w" THEN DRAW "D4E2F2U4BR2"
+ IF MID$(words$, i%, 1) = "x" THEN DRAW "F4BL4E4BR2"
+ IF MID$(words$, i%, 1) = "y" THEN DRAW "F2ND2E2BR2"
+ IF MID$(words$, i%, 1) = "z" THEN DRAW "R4G4R4BU4BR2"
+ IF MID$(words$, i%, 1) = "0" THEN DRAW "BD1D2FR2EU2LNG2UL2BR5"
+ IF MID$(words$, i%, 1) = "1" THEN DRAW "BFED4NL2R2BU4BR2"
+ IF MID$(words$, i%, 1) = "2" THEN DRAW "BDER2FGLG2R4BU4BR2"
+ IF MID$(words$, i%, 1) = "3" THEN DRAW "BDER2FGLRFGL2HBR6BU3"
+ IF MID$(words$, i%, 1) = "4" THEN DRAW "D2R3NRND2U2BR3"
+ IF MID$(words$, i%, 1) = "5" THEN DRAW "NR4D2R3FGNL3BE3BU"
+ IF MID$(words$, i%, 1) = "6" THEN DRAW "BR3L2GD2FR2EHNL3BE2BR"
+ IF MID$(words$, i%, 1) = "7" THEN DRAW "R4G2D2BE4"
+ IF MID$(words$, i%, 1) = "8" THEN DRAW "BRNR2GFNR2GFR2EHEHBR3"
+ IF MID$(words$, i%, 1) = "9" THEN DRAW "BRR2FD2GNL2BU2L2HEBR5"
+ IF MID$(words$, i%, 1) = "." THEN DRAW "BF2BD2RC0UC4BE3"
+ IF MID$(words$, i%, 1) = "?" THEN DRAW "BDER2FGLBD2RC0UC4BE3"
+ IF MID$(words$, i%, 1) = "!" THEN DRAW "BR2D2BD2RC0UC4BE3"
+ IF MID$(words$, i%, 1) = CHR$(34) THEN DRAW "BRDBR2UBR3"
+ IF MID$(words$, i%, 1) = ":" THEN DRAW "BR2BDD2BUC0R2C4BE2"
+ IF MID$(words$, i%, 1) = "'" THEN DRAW "BFEBR4"
+ IF MID$(words$, i%, 1) = "," THEN DRAW "BD4BREBE3BR"
+ IF MID$(words$, i%, 1) = "-" THEN DRAW "BD2BRR2BRBU2BR2"
+ IF MID$(words$, i%, 1) = "=" THEN DRAW "BF3L2BU2R2BEBR2"
+ IF MID$(words$, i%, 1) = "+" THEN DRAW "BD2BRED2EBE2BR"
+ IF MID$(words$, i%, 1) = ";" THEN DRAW "BR2BDD2GBU2C0R5C4BU2"
+ IF MID$(words$, i%, 1) = "(" THEN DRAW "BRGD2FBE4BR"
+ IF MID$(words$, i%, 1) = ")" THEN DRAW "BF4BLEU2HBR3"
+ IF MID$(words$, i%, 1) = "<" THEN DRAW "BR2G2F2BE4"
+ IF MID$(words$, i%, 1) = ">" THEN DRAW "BR2F2G2BE4"
+ IF MID$(words$, i%, 1) = "/" THEN DRAW "BD4E4BR2"
+ IF MID$(words$, i%, 1) = " " THEN DRAW "C0ND4RND4RND4RND4RND4BR2C4"
+ CurrentTimer! = TIMER: WHILE TIMER < (CurrentTimer! + fontdelay!): WEND
+NEXT i%
+END SUB
+
+SUB GameHelp
+CLS : PALETTE:   ScreenLoad("helppic.pal", "helppic.kon"): key$ = INKEY$
+SLEEP: CLS : PALETTE
+PALETTE 247, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 246, 65536 * INT(51) + 256 * INT(0) + INT(0)
+PALETTE 245, 65536 * INT(61) + 256 * INT(0) + INT(0): PALETTE 244, 65536 * INT(31) + 256 * INT(0) + INT(0)
+PALETTE 243, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 242, 65536 * INT(51) + 256 * INT(0) + INT(0)
+PALETTE 241, 65536 * INT(0) + 256 * INT(0) + INT(31): PALETTE 240, 65536 * INT(0) + 256 * INT(0) + INT(41)
+PALETTE 239, 65536 * INT(0) + 256 * INT(0) + INT(51)
+DEF SEG = &HA000: BLOAD "side.kon", 0
+  SideGraphics:   ShowInventory:   WriteStats:   DrawLevel
+END SUB
+
+SUB GetJForItems (stringtolookin$, lookover%)
+ f$ = MID$(stringtolookin$, lookover%, 1)
+ IF f$ = "ﬁ" THEN j$ = "healing leaf"
+ IF f$ = "Õ" THEN j$ = "wood door key"
+ IF f$ = "–" THEN j$ = "steel door key"
+ IF f$ = "÷" THEN j$ = "pick"
+ IF f$ = "ÿ" THEN j$ = "unlit torch"
+ IF f$ = "˘" THEN j$ = "hoe"
+ IF f$ = "Á" THEN j$ = "pair of flippers"
+ IF f$ = "Ë" THEN j$ = "snorkel + mask"
+ IF f$ = "" THEN j$ = "wetsuit top"
+ IF f$ = "È" THEN j$ = "wetsuit bottom"
+ IF f$ = "Í" THEN j$ = "magic stone"
+ IF f$ = "Î" THEN j$ = "fire shoes"
+ IF f$ = "Ñ" THEN j$ = "wooden sheild"
+ IF f$ = "Ö" THEN j$ = "bronze sheild"
+ IF f$ = "Ü" THEN j$ = "steel sheild"
+ IF f$ = "á" THEN j$ = "iron sheild"
+ IF f$ = "à" THEN j$ = "titanium sheild"
+ IF f$ = "â" THEN j$ = "spiked sheild"
+ IF f$ = "ä" THEN j$ = "waved sheild"
+ IF f$ = "ã" THEN j$ = "holy sheild"
+ IF f$ = "å" THEN j$ = "cosmic sheild"
+ IF f$ = "ç" THEN j$ = "crystal sheild"
+ IF f$ = "é" THEN j$ = "lether helmet"
+ IF f$ = "è" THEN j$ = "steel helmet"
+ IF f$ = "ê" THEN j$ = "masked helmet"
+ IF f$ = "ë" THEN j$ = "spiked helmet"
+ IF f$ = "í" THEN j$ = "winged helmet"
+ IF f$ = "ì" THEN j$ = "heavly spiked helmet"
+ IF f$ = "î" THEN j$ = "crystal helmet"
+ IF f$ = "ï" THEN j$ = "shirt"
+ IF f$ = "ñ" THEN j$ = "leather armor"
+ IF f$ = "ó" THEN j$ = "bronze chain mail"
+ IF f$ = "ò" THEN j$ = "steel chain mail"
+ IF f$ = "ô" THEN j$ = "iron plate"
+ IF f$ = "ö" THEN j$ = "magic cloak"
+ IF f$ = "õ" THEN j$ = "spiked armor"
+ IF f$ = "ú" THEN j$ = "crystal armor"
+ IF f$ = "ù" THEN j$ = "leather boots"
+ IF f$ = "û" THEN j$ = "swamp boots"
+ IF f$ = "ü" THEN j$ = "steel boots"
+ IF f$ = "†" THEN j$ = "crystal boots"
+ IF f$ = "°" THEN j$ = "pants"
+ IF f$ = "¢" THEN j$ = "crystal pants"
+ IF f$ = "£" THEN j$ = "arm protectors"
+ IF f$ = "§" THEN j$ = "crystal arm protectors"
+ IF f$ = "•" THEN j$ = "leather gloves"
+ IF f$ = "¶" THEN j$ = "crystal gloves"
+ IF f$ = "ß" THEN j$ = "attack ring"
+ IF f$ = "®" THEN j$ = "super attack ring"
+ IF f$ = "˙" THEN j$ = "dagger"
+ IF f$ = "˚" THEN j$ = "spear"
+ IF f$ = "´" THEN j$ = "club"
+ IF f$ = "¨" THEN j$ = "morning star"
+ IF f$ = "¥" THEN j$ = "axe"
+ IF f$ = "µ" THEN j$ = "whip"
+ IF f$ = "∂" THEN j$ = "flail"
+ IF f$ = "∑" THEN j$ = "sword"
+ IF f$ = "∏" THEN j$ = "great axe"
+ IF f$ = "π" THEN j$ = "spiked club"
+ IF f$ = "∫" THEN j$ = "spiked spear"
+ IF f$ = "ª" THEN j$ = "katana"
+ IF f$ = "º" THEN j$ = "mangaler"
+ IF f$ = "Ω" THEN j$ = "long sword"
+ IF f$ = "æ" THEN j$ = "fire sword"
+ IF f$ = "˝" THEN j$ = "crystal sword"
+ IF f$ = "ƒ" THEN j$ = "necklace"
+ IF f$ = "≈" THEN j$ = "sheilding necklace"
+ IF f$ = "∆" THEN j$ = "protector necklace"
+ IF f$ = " " THEN j$ = " "
+END SUB
+
+SUB GetObject
+ LINE (4, 147)-(214, 195), 0, BF
+ IF MID$(item.lvl$(up), over, 1) = " " THEN GOSUB NothingThere
+ IF MID$(item.lvl$(up), over, 1) = "À" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "Ã" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "œ" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "”" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "‹" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "›" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "·" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "‡" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "„" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "‰" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "Â" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "Ê" THEN GOSUB CantGetIt
+ IF MID$(item.lvl$(up), over, 1) = "Ï" THEN GOSUB CantGetIt
+ FOR i% = 1 TO 15: FOR s% = 1 TO 3
+	IF MID$(inv$(i%), s%, 1) = " " THEN GOSUB FoundASpot
+ NEXT s%: NEXT i%
+ DRAW "BM 6,148 C4 S4":   Font(0, "you can't carry any more!"): skipmenu = 1: GOSUB EndGetObject
+FoundASpot:
+ MID$(inv$(i%), s%, 1) = MID$(item.lvl$(up), over, 1):   GetJForItems(item.lvl$(up), over)
+ DRAW "BM 6,148 C4 S4":   Font(0, "you picked up a " + j$ + ".")
+ MID$(item.lvl$(up), over, 1) = " ":   ShowInventory: skipmenu = 1: GOSUB EndGetObject
+NothingThere:
+ DRAW "BM 6,148 C4 S4":   Font(0, "nothing there to get."): skipmenu = 1: GOSUB EndGetObject
+CantGetIt:
+ DRAW "BM 6,148 C4 S4":   Font(0, "you can't get that."): skipmenu = 1
+EndGetObject:
+   DrawLevel
+END SUB
+
+SUB Intro
+ LINE (4, 147)-(214, 195), 0, BF
+ DRAW "BM 5,148 C4 S4":   Font(0, "king steve: konrad, i'm glad you")
+ DRAW "BM 5,155 C4 S4":   Font(0, "     could come! i have a problem.")
+ DRAW "BM 5,162 C4 S4":   Font(0, "     the evil witch noel came here")
+ DRAW "BM 5,169 C4 S4":   Font(0, "     and destroyed my scepter. and")
+ DRAW "BM 5,176 C4 S4":   Font(0, "     without the scepter i'm no")
+ DRAW "BM 5,183 C4 S4":   Font(0, "     longer king. i don't want to")
+ DRAW "BM 103,190 C10 S4":   Font(0, "press")
+ DRAW "BM 139,190 C10 S4":   Font(0, "a")
+ DRAW "BM 152,190 C10 S4":   Font(0, "key")
+ SLEEP: LINE (4, 147)-(214, 195), 0, BF
+ DRAW "BM 5,148 C4 S4":   Font(0, "     be dethroned. the only way i")
+ DRAW "BM 5,155 C4 S4":   Font(0, "     can think of to get it back")
+ DRAW "BM 5,162 C4 S4":   Font(0, "     is to wish for it in the wish-")
+ DRAW "BM 5,169 C4 S4":   Font(0, "     ing fountain out front. but i")
+ DRAW "BM 5,176 C4 S4":   Font(0, "     need the magic stone hidden")
+ DRAW "BM 5,183 C4 S4":   Font(0, "     somewhere in the underworld")
+ DRAW "BM 103,190 C10 S4":   Font(0, "press")
+ DRAW "BM 139,190 C10 S4":   Font(0, "a")
+ DRAW "BM 152,190 C10 S4":   Font(0, "key")
+ SLEEP: LINE (4, 147)-(214, 195), 0, BF
+ DRAW "BM 5,148 C4 S4":   Font(0, "     to throw into the fountain")
+ DRAW "BM 5,155 C4 S4":   Font(0, "     for my wish to come true.")
+ DRAW "BM 5,162 C4 S4":   Font(0, "     please help me.")
+ DRAW "BM 5,169 C4 S4":   Font(0, "konrad: sure, anything to help you,")
+ DRAW "BM 5,176 C4 S4":   Font(0, "     i'll get on it right away!!!")
+ DRAW "BM 5,183 C4 S4":   Font(0, "king steve: a couple things before")
+ DRAW "BM 103,190 C10 S4":   Font(0, "press")
+ DRAW "BM 139,190 C10 S4":   Font(0, "a")
+ DRAW "BM 152,190 C10 S4":   Font(0, "key")
+ SLEEP: LINE (4, 147)-(214, 195), 0, BF
+ DRAW "BM 5,148 C4 S4":   Font(0, "     away!!!!!")
+ DRAW "BM 5,155 C4 S4":   Font(0, "     you go. use space bar to use")
+ DRAW "BM 5,162 C4 S4":   Font(0, "     things, and hit h for the rest")
+ DRAW "BM 5,169 C4 S4":   Font(0, "     of the commands. and come talk")
+ DRAW "BM 5,176 C4 S4":   Font(0, "     to me anytime and i'll heal")
+ DRAW "BM 5,183 C4 S4":   Font(0, "     you. bye, and good luck!!!!!!")
+ DRAW "BM 103,190 C10 S4":   Font(0, "press")
+ DRAW "BM 139,190 C10 S4":   Font(0, "a")
+ DRAW "BM 152,190 C10 S4":   Font(0, "key")
+ SLEEP: LINE (4, 147)-(214, 195), 0, BF
+END SUB
+
+SUB Menu
+DO
+ keyboard$ = INKEY$
+ SELECT CASE keyboard$
+	CASE "1"
+	 CLS : PALETTE: DEF SEG = &HA000: BLOAD "side.kon", 0: DEF SEG
+	   SetupNewGame:   DrawLevel:   Intro: GOSUB PassMenu
+	CASE "2"
+	 CLS : PALETTE:   Continue: GOSUB PassMenu
+	CASE "3"
+	 CLS : PALETTE:   ScreenLoad("helppic.pal", "helppic.kon")
+	 key$ = INKEY$: SLEEP: CLS : PALETTE
+	   ScreenLoad("menu.pal", "menu.kon")
+	CASE "4"
+	 CLS : PALETTE:   Credits(75, 1, -1, .2, 0): CLS
+	   ScreenLoad("menu.pal", "menu.kon")
+	CASE "5": SYSTEM
+ END SELECT
+ KEY 15, CHR$(4 + 128 + 32 + 64) + CHR$(70)
+ ON KEY(15) GOSUB NoBreak: KEY(15) ON
+ KEY 16, CHR$(4 + 128) + CHR$(70): ON KEY(16) GOSUB NoBreak: KEY(16) ON
+ KEY 17, CHR$(4 + 128 + 32) + CHR$(70): ON KEY(17) GOSUB NoBreak
+ KEY(17) ON: KEY 18, CHR$(4 + 128 + 64) + CHR$(70): ON KEY(18) GOSUB NoBreak
+ KEY(18) ON: KEY 19, CHR$(4) + CHR$(70): ON KEY(21) GOSUB NoBreak
+ KEY(21) ON: KEY 22, CHR$(4 + 64) + CHR$(70)
+ ON KEY(22) GOSUB NoBreak: KEY(22) ON: KEY 23, CHR$(4 + 32) + CHR$(46)
+ ON KEY(23) GOSUB NoBreak: KEY(23) ON: KEY 24, CHR$(4 + 64) + CHR$(46)
+ ON KEY(24) GOSUB NoBreak: KEY(24) ON
+ KEY 25, CHR$(4 + 32 + 64) + CHR$(46)
+ ON KEY(25) GOSUB NoBreak: KEY(25) ON
+LOOP
+PassMenu:
+ CLS : PALETTE
+END SUB
+
+SUB QuitGame
+LINE (4, 147)-(214, 195), 0, BF: DRAW "BM 6,148 C4 S4":   Font(0, "quit(y or n)????")
+DO: key$ = INKEY$: IF key$ = "y" THEN SYSTEM
+LOOP UNTIL key$ = "n"
+END SUB
+
+SUB RotateColors
+ currentpal = currentpal - 1
+ IF currentpal = 0 THEN currentpal = 3
+ IF currentpal = 1 THEN
+	PALETTE 247, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 246, 65536 * INT(51) + 256 * INT(0) + INT(0)
+	PALETTE 245, 65536 * INT(61) + 256 * INT(0) + INT(0): PALETTE 244, 65536 * INT(31) + 256 * INT(0) + INT(0)
+	PALETTE 243, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 242, 65536 * INT(51) + 256 * INT(0) + INT(0)
+	PALETTE 241, 65536 * INT(0) + 256 * INT(0) + INT(31): PALETTE 240, 65536 * INT(0) + 256 * INT(0) + INT(41)
+	PALETTE 239, 65536 * INT(0) + 256 * INT(0) + INT(51)
+ END IF
+ IF currentpal = 2 THEN
+	PALETTE 246, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 245, 65536 * INT(51) + 256 * INT(0) + INT(0)
+	PALETTE 247, 65536 * INT(61) + 256 * INT(0) + INT(0): PALETTE 243, 65536 * INT(31) + 256 * INT(0) + INT(0)
+	PALETTE 242, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 244, 65536 * INT(51) + 256 * INT(0) + INT(0)
+	PALETTE 240, 65536 * INT(0) + 256 * INT(0) + INT(31): PALETTE 239, 65536 * INT(0) + 256 * INT(0) + INT(41)
+	PALETTE 241, 65536 * INT(0) + 256 * INT(0) + INT(51)
+ END IF
+ IF currentpal = 3 THEN
+	PALETTE 245, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 247, 65536 * INT(51) + 256 * INT(0) + INT(0)
+	PALETTE 246, 65536 * INT(61) + 256 * INT(0) + INT(0): PALETTE 242, 65536 * INT(31) + 256 * INT(0) + INT(0)
+	PALETTE 244, 65536 * INT(41) + 256 * INT(0) + INT(0): PALETTE 243, 65536 * INT(51) + 256 * INT(0) + INT(0)
+	PALETTE 239, 65536 * INT(0) + 256 * INT(0) + INT(31): PALETTE 241, 65536 * INT(0) + 256 * INT(0) + INT(41)
+	PALETTE 240, 65536 * INT(0) + 256 * INT(0) + INT(51)
+ END IF
+END SUB
+
+SUB SaveGame
+OPEN "temp2.s" FOR OUTPUT AS #3
+ IF stage = 1 THEN
+	FOR i = 1 TO 25: WRITE #3, item.lvl(i): NEXT i: FOR i = 1 TO 25: WRITE #3, level(i): NEXT i
+ ELSE
+	FOR i = 1 TO 100: WRITE #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #3, level(i): NEXT i
+ END IF
+CLOSE #3
+OPEN confile$ FOR INPUT AS #1
+OPEN "temp.s" FOR OUTPUT AS #2
+ INPUT #1, a, a, a, a, a: INPUT #1, a, a, a: INPUT #1, a, a, a, a
+ INPUT #1, j$, a: FOR i = 1 TO 15: INPUT #1, j$: NEXT i
+ FOR i = 1 TO 25: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 25: INPUT #1, level(i): NEXT i
+ WRITE #2, lvl, hp, hpmax, attack, defense: WRITE #2, money, exper, lefttonext
+ WRITE #2, up, over, dir, stage: WRITE #2, body.items, item.down
+ FOR i = 1 TO 15: WRITE #2, inv(i): NEXT i
+ IF newstage% = 1 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 25: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 25: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 25: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 25: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF newstage% = 2 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 100: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF newstage% = 3 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 100: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF newstage% = 4 THEN
+	OPEN "temp2.s" FOR INPUT AS #3
+	 FOR i = 1 TO 100: INPUT #3, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #3, level(i): NEXT i
+	CLOSE #3
+ END IF
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+CLOSE #2
+CLOSE #1
+KILL "temp2.s"
+KILL confile$
+OPEN "temp.s" FOR INPUT AS #1
+OPEN confile$ FOR OUTPUT AS #2
+ INPUT #1, a, a, a, a, a: INPUT #1, a, a, a: INPUT #1, a, a, a, a
+ INPUT #1, j$, a: FOR i = 1 TO 15: INPUT #1, j$: NEXT i
+ FOR i = 1 TO 25: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 25: INPUT #1, level(i): NEXT i
+ WRITE #2, lvl, hp, hpmax, attack, defense: WRITE #2, money, exper, lefttonext
+ WRITE #2, up, over, dir, stage: WRITE #2, body.items, item.down
+ FOR i = 1 TO 15: WRITE #2, inv(i): NEXT i: FOR i = 1 TO 25: WRITE #2, item.lvl(i): NEXT i
+ FOR i = 1 TO 25: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+CLOSE #2
+CLOSE #1
+KILL "temp.s"
+OPEN confile$ FOR INPUT AS #1
+ INPUT #1, a, a, a, a, a: INPUT #1, a, a, a
+ INPUT #1, a, a, a, a: INPUT #1, j$, a
+ FOR i = 1 TO 15: INPUT #1, j$: NEXT i
+ FOR i = 1 TO 25: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 25: INPUT #1, level(i): NEXT i
+ IF stage = 1 THEN GOSUB DoneChangingLvls2
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF stage = 2 THEN GOSUB DoneChangingLvls2
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ IF stage = 3 THEN GOSUB DoneChangingLvls2
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+DoneChangingLvls2:
+CLOSE #1
+LINE (4, 147)-(214, 195), 0, BF: a = LEN(confile$): j$ = LEFT$(confile$, a - 4)
+DRAW "BM 6,148 C4 S4":   Font(0, "your gamed was saved as " + j$)
+END SUB
+
+SUB ScreenLoad (a$, filename$)
+DEFINT A-Z
+DIM Byte AS STRING * 1
+OPEN a$ FOR BINARY AS #1
+ FOR Att% = 0 TO 255: OUT &H3C8, Att%: FOR RedGreenAndBlue% = 1 TO 3
+	GET #1, , Byte: Valew% = ASC(Byte): OUT &H3C9, Valew%
+ NEXT RedGreenAndBlue%: NEXT Att%
+CLOSE #1
+DEF SEG = &HA000: BLOAD filename$, 0
+END SUB
+
+DEFSNG A-Z
+SUB SetupGame
+FOR i% = 1 TO 255: PALETTE i%, 0: NEXT i%
+DEF SEG = &HA000: BLOAD "landscap.kon", 0
+GET (1, 1)-(25, 20), bridge.21: GET (27, 1)-(51, 20), bridge.22
+GET (53, 1)-(77, 20), bridge.23: GET (79, 1)-(103, 20), island.l
+GET (105, 1)-(129, 20), island.m: GET (131, 1)-(155, 20), island.r
+GET (157, 1)-(181, 20), water.d: GET (183, 1)-(207, 20), water
+GET (209, 1)-(233, 20), beach.7: GET (235, 1)-(259, 20), beach.10
+GET (261, 1)-(285, 20), beach.11: GET (287, 1)-(311, 20), bridge.11
+GET (1, 22)-(25, 41), grass: GET (27, 22)-(51, 41), grass.2
+GET (53, 22)-(77, 41), grass.1: GET (79, 22)-(103, 41), tree
+GET (105, 22)-(129, 41), boulder: GET (131, 22)-(155, 41), mount.g
+GET (157, 22)-(181, 41), mount.s: GET (183, 22)-(207, 41), desert
+GET (209, 22)-(233, 41), beach.9: GET (235, 22)-(259, 41), beach.12
+GET (261, 22)-(285, 41), beach.1: GET (287, 22)-(311, 41), bridge.12
+GET (1, 43)-(25, 62), mount.1: GET (27, 43)-(51, 62), mount.2
+GET (53, 43)-(77, 62), secret.dc: GET (79, 43)-(103, 62), stairs.u
+GET (105, 43)-(129, 62), stairs.d: GET (183, 43)-(207, 62), path.5
+GET (157, 43)-(181, 62), king': GET (131, 43)-(155, 62), path.1
+GET (209, 43)-(233, 62), wall: GET (235, 43)-(259, 62), beach.8
+GET (261, 43)-(285, 62), beach.4: GET (287, 43)-(311, 62), bridge.13
+GET (1, 64)-(25, 83), mount.3: GET (27, 64)-(51, 83), mount.4
+GET (53, 64)-(77, 83), secret.do: GET (79, 64)-(103, 83), door.c
+GET (105, 64)-(129, 83), door.o': GET (131, 64)-(155, 83), path.3
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(22, a%, b%) = POINT(a% + 182, b% + 63): NEXT b%: NEXT a%
+GET (209, 64)-(233, 83), hill: GET (235, 64)-(259, 83), swamp
+GET (261, 64)-(285, 83), cave: GET (287, 64)-(311, 83), cave.w
+GET (1, 85)-(25, 104), beach.5: GET (27, 85)-(51, 104), beach.6
+GET (53, 85)-(77, 104), beach.2: GET (79, 85)-(103, 104), beach.3
+GET (105, 85)-(129, 104), fence.u: GET (131, 85)-(155, 104), fence.s
+GET (157, 85)-(181, 104), crop: GET (183, 85)-(207, 104), crop.2
+GET (209, 85)-(233, 104), crop.3: GET (235, 85)-(259, 104), crop.1
+GET (261, 85)-(285, 104), desert.s: GET (287, 85)-(311, 104), desert.c
+CLS : DEF SEG = &HA000: BLOAD "city.kon", 0
+GET (1, 1)-(25, 20), prison: GET (27, 1)-(51, 20), door.cl
+GET (53, 1)-(77, 20), steel.du: GET (79, 1)-(103, 20), lava
+GET (105, 1)-(129, 20), prison.dc: GET (131, 1)-(155, 20), cave.f1
+GET (157, 1)-(181, 20), cave.f: GET (183, 1)-(207, 20), stag
+GET (209, 1)-(233, 20), fountain: GET (235, 1)-(259, 20), sign
+GET (261, 1)-(285, 20), floor.w
+GET (1, 22)-(25, 41), prison.dl: GET (27, 22)-(51, 41), steel.dl
+GET (53, 22)-(77, 41), steel.do: GET (79, 22)-(103, 41), floor
+GET (105, 22)-(129, 41), prison.o: GET (131, 22)-(155, 41), cave.f2
+GET (157, 22)-(181, 41), dirt.w: GET (183, 22)-(207, 41), water.o
+GET (209, 22)-(233, 41), water.oo: GET (235, 22)-(259, 41), floor.c
+CLS : DEF SEG = &HA000: BLOAD "items.kon", 0
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(1, a%, b%) = POINT(a%, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(2, a%, b%) = POINT(a% + 26, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(3, a%, b%) = POINT(a% + 52, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(4, a%, b%) = POINT(a% + 78, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(5, a%, b%) = POINT(a% + 104, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(6, a%, b%) = POINT(a% + 130, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(7, a%, b%) = POINT(a% + 156, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(8, a%, b%) = POINT(a% + 182, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(9, a%, b%) = POINT(a% + 208, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(10, a%, b%) = POINT(a% + 234, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(11, a%, b%) = POINT(a% + 260, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(12, a%, b%) = POINT(a% + 286, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(13, a%, b%) = POINT(a%, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(14, a%, b%) = POINT(a% + 26, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(15, a%, b%) = POINT(a% + 52, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(16, a%, b%) = POINT(a% + 78, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(17, a%, b%) = POINT(a% + 104, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(18, a%, b%) = POINT(a% + 130, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(19, a%, b%) = POINT(a% + 156, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(20, a%, b%) = POINT(a% + 182, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(21, a%, b%) = POINT(a% + 208, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(22, a%, b%) = POINT(a% + 234, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(23, a%, b%) = POINT(a% + 260, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(24, a%, b%) = POINT(a% + 286, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(25, a%, b%) = POINT(a%, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(26, a%, b%) = POINT(a% + 26, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(27, a%, b%) = POINT(a% + 52, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(28, a%, b%) = POINT(a% + 78, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(29, a%, b%) = POINT(a% + 104, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(30, a%, b%) = POINT(a% + 130, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(31, a%, b%) = POINT(a% + 156, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(32, a%, b%) = POINT(a% + 182, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(33, a%, b%) = POINT(a% + 208, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(34, a%, b%) = POINT(a% + 234, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(35, a%, b%) = POINT(a% + 260, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(36, a%, b%) = POINT(a% + 286, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(37, a%, b%) = POINT(a%, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(38, a%, b%) = POINT(a% + 26, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(39, a%, b%) = POINT(a% + 52, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(40, a%, b%) = POINT(a% + 78, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(41, a%, b%) = POINT(a% + 104, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(42, a%, b%) = POINT(a% + 130, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(43, a%, b%) = POINT(a% + 156, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(44, a%, b%) = POINT(a% + 182, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(45, a%, b%) = POINT(a% + 208, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(46, a%, b%) = POINT(a% + 234, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(47, a%, b%) = POINT(a% + 260, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(48, a%, b%) = POINT(a% + 286, b% + 63): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(49, a%, b%) = POINT(a%, b% + 84): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(50, a%, b%) = POINT(a% + 26, b% + 84): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(51, a%, b%) = POINT(a% + 52, b% + 84): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(52, a%, b%) = POINT(a% + 78, b% + 84): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(53, a%, b%) = POINT(a% + 104, b% + 84): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(54, a%, b%) = POINT(a% + 234, b% + 84): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(55, a%, b%) = POINT(a% + 260, b% + 84): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: items(56, a%, b%) = POINT(a% + 286, b% + 84): NEXT b%: NEXT a%
+CLS : DEF SEG = &HA000: BLOAD "stuff.kon", 0
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(0, a%, b%) = POINT(a% + 182, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(1, a%, b%) = POINT(a% + 78, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(2, a%, b%) = POINT(a% + 104, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(3, a%, b%) = POINT(a% + 208, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(4, a%, b%) = POINT(a% + 208, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(5, a%, b%) = POINT(a% + 260, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(6, a%, b%) = POINT(a% + 286, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(7, a%, b%) = POINT(a% + 52, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(8, a%, b%) = POINT(a% + 130, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(9, a%, b%) = POINT(a% + 156, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(10, a%, b%) = POINT(a% + 78, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(11, a%, b%) = POINT(a% + 104, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(12, a%, b%) = POINT(a% + 78, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(13, a%, b%) = POINT(a% + 104, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(14, a%, b%) = POINT(a% + 130, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(15, a%, b%) = POINT(a% + 156, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(16, a%, b%) = POINT(a% + 260, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(17, a%, b%) = POINT(a% + 286, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(18, a%, b%) = POINT(a%, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(19, a%, b%) = POINT(a% + 26, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(20, a%, b%) = POINT(a% + 52, b% + 42): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(21, a%, b%) = POINT(a% + 234, b% + 21): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: stuffs(23, a%, b%) = POINT(a% + 234, b% + 42): NEXT b%: NEXT a%
+GET (261, 43)-(285, 62), dresser: GET (287, 43)-(311, 62), bed
+GET (1, 64)-(25, 83), table: GET (79, 64)-(103, 83), fill.side
+CLS : DEF SEG = &HA000: BLOAD "charac.kon", 0
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(1, a%, b%) = POINT(a%, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(2, a%, b%) = POINT(a% + 26, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(3, a%, b%) = POINT(a% + 52, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(4, a%, b%) = POINT(a% + 78, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(5, a%, b%) = POINT(a% + 104, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(6, a%, b%) = POINT(a% + 130, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(7, a%, b%) = POINT(a% + 156, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(8, a%, b%) = POINT(a% + 182, b%): NEXT b%: NEXT a%
+FOR a% = 1 TO 25: FOR b% = 1 TO 20: guy(9, a%, b%) = POINT(a% + 208, b%): NEXT b%: NEXT a%
+GET (235, 1)-(259, 20), clerk: GET (235, 22)-(259, 41), robin
+CLS : PALETTE
+RESTORE CreditData
+FOR i = 1 TO 24: READ scrolltxt$(i): NEXT i
+currentpal% = 2: spaceclear = 0: skipmenu = 0: boatcheck% = 0
+END SUB
+
+SUB SetupNewGame
+COLOR 15
+LOCATE 2, 4: PRINT "What do you  ": LOCATE 3, 4: PRINT "your game(max of"
+LOCATE 4, 4: PRINT "8 characters)???": confile$ = ""
+DO
+ COLOR 7: LOCATE 5, 4: INPUT confile$
+ IF confile$ <> "" THEN EXIT DO
+LOOP
+LINE (22, 4)-(196, 143), 0, BF
+confile$ = LEFT$(confile$, 8): confile$ = RTRIM$(confile$)
+confile$ = LCASE$(confile$): confile$ = confile$ + ".sav"
+OPEN "newgame.dat" FOR INPUT AS #1
+OPEN confile$ FOR OUTPUT AS #2
+ INPUT #1, lvl, hp, hpmax, attack, defense: INPUT #1, money, exper, lefttonext
+ INPUT #1, up, over, dir, stage: INPUT #1, body.items, item.down
+ WRITE #2, lvl, hp, hpmax, attack, defense: WRITE #2, money, exper, lefttonext
+ WRITE #2, up, over, dir, stage: WRITE #2, body.items, item.down
+ FOR i = 1 TO 15: INPUT #1, inv(i): NEXT i: FOR i = 1 TO 15: WRITE #2, inv(i): NEXT i
+ FOR i = 1 TO 25: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 25: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 25: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 25: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level(i): NEXT i
+ FOR i = 1 TO 100: WRITE #2, item.lvl(i): NEXT i: FOR i = 1 TO 100: WRITE #2, level(i): NEXT i
+CLOSE #2
+CLOSE #1
+OPEN "newgame.dat" FOR INPUT AS #1
+ INPUT #1, lvl, hp, hpmax, attack, defense: INPUT #1, money, exper, lefttonext
+ INPUT #1, up, over, dir, stage: INPUT #1, body.items, item.down
+ FOR i = 1 TO 15: INPUT #1, inv(i): NEXT i: FOR i = 1 TO 25: INPUT #1, item.lvl$(i): NEXT i
+ FOR i = 1 TO 25: INPUT #1, level$(i): NEXT i
+ FOR i = 1 TO 100: INPUT #1, item.lvl$(i): NEXT i: FOR i = 1 TO 100: INPUT #1, level$(i): NEXT i
+CLOSE #1
+END SUB
+
+SUB ShowGuy (xshow%, yshow%, kindofput%, itemtoshow%)
+amountlossx% = xshow% - 1: amountlossy% = yshow% - 1
+IF kindofput = 1 THEN
+ FOR x% = 1 TO 25: FOR y% = 1 TO 20
+	PSET (x% + amountlossx%, y% + amountlossy%), guy%(itemtoshow%, x%, y%)
+ NEXT y%: NEXT x%
+ELSE
+ FOR x% = 1 TO 25: FOR y% = 1 TO 20
+	IF guy%(itemtoshow%, x%, y%) <> 0 THEN
+	 PSET (x% + amountlossx%, y% + amountlossy%), guy%(itemtoshow%, x%, y%)
+	END IF
+ NEXT y%: NEXT x%
+END IF
+END SUB
+
+SUB ShowInventory
+ a% = 1
+ FOR i% = 220 TO 278 STEP 29
+	IF MID$(inv$(item.down), a%, 1) = "Ñ" THEN   ShowItem(i%, 175, 1, 1)
+	IF MID$(inv$(item.down), a%, 1) = "Ö" THEN   ShowItem(i%, 175, 1, 2)
+	IF MID$(inv$(item.down), a%, 1) = "Ü" THEN   ShowItem(i%, 175, 1, 3)
+	IF MID$(inv$(item.down), a%, 1) = "á" THEN   ShowItem(i%, 175, 1, 4)
+	IF MID$(inv$(item.down), a%, 1) = "à" THEN   ShowItem(i%, 175, 1, 5)
+	IF MID$(inv$(item.down), a%, 1) = "â" THEN   ShowItem(i%, 175, 1, 6)
+	IF MID$(inv$(item.down), a%, 1) = "ä" THEN   ShowItem(i%, 175, 1, 7)
+	IF MID$(inv$(item.down), a%, 1) = "ã" THEN   ShowItem(i%, 175, 1, 8)
+	IF MID$(inv$(item.down), a%, 1) = "å" THEN   ShowItem(i%, 175, 1, 9)
+	IF MID$(inv$(item.down), a%, 1) = "ç" THEN   ShowItem(i%, 175, 1, 10)
+	IF MID$(inv$(item.down), a%, 1) = "é" THEN   ShowItem(i%, 175, 1, 11)
+	IF MID$(inv$(item.down), a%, 1) = "è" THEN   ShowItem(i%, 175, 1, 12)
+	IF MID$(inv$(item.down), a%, 1) = "ê" THEN   ShowItem(i%, 175, 1, 13)
+	IF MID$(inv$(item.down), a%, 1) = "ë" THEN   ShowItem(i%, 175, 1, 14)
+	IF MID$(inv$(item.down), a%, 1) = "í" THEN   ShowItem(i%, 175, 1, 15)
+	IF MID$(inv$(item.down), a%, 1) = "ì" THEN   ShowItem(i%, 175, 1, 16)
+	IF MID$(inv$(item.down), a%, 1) = "î" THEN   ShowItem(i%, 175, 1, 17)
+	IF MID$(inv$(item.down), a%, 1) = "ï" THEN   ShowItem(i%, 175, 1, 18)
+	IF MID$(inv$(item.down), a%, 1) = "ñ" THEN   ShowItem(i%, 175, 1, 19)
+	IF MID$(inv$(item.down), a%, 1) = "ó" THEN   ShowItem(i%, 175, 1, 20)
+	IF MID$(inv$(item.down), a%, 1) = "ò" THEN   ShowItem(i%, 175, 1, 21)
+	IF MID$(inv$(item.down), a%, 1) = "ô" THEN   ShowItem(i%, 175, 1, 22)
+	IF MID$(inv$(item.down), a%, 1) = "ö" THEN   ShowItem(i%, 175, 1, 23)
+	IF MID$(inv$(item.down), a%, 1) = "õ" THEN   ShowItem(i%, 175, 1, 24)
+	IF MID$(inv$(item.down), a%, 1) = "ú" THEN   ShowItem(i%, 175, 1, 25)
+	IF MID$(inv$(item.down), a%, 1) = "ù" THEN   ShowItem(i%, 175, 1, 26)
+	IF MID$(inv$(item.down), a%, 1) = "û" THEN   ShowItem(i%, 175, 1, 27)
+	IF MID$(inv$(item.down), a%, 1) = "ü" THEN   ShowItem(i%, 175, 1, 28)
+	IF MID$(inv$(item.down), a%, 1) = "†" THEN   ShowItem(i%, 175, 1, 29)
+	IF MID$(inv$(item.down), a%, 1) = "°" THEN   ShowItem(i%, 175, 1, 30)
+	IF MID$(inv$(item.down), a%, 1) = "¢" THEN   ShowItem(i%, 175, 1, 31)
+	IF MID$(inv$(item.down), a%, 1) = "£" THEN   ShowItem(i%, 175, 1, 32)
+	IF MID$(inv$(item.down), a%, 1) = "§" THEN   ShowItem(i%, 175, 1, 33)
+	IF MID$(inv$(item.down), a%, 1) = "•" THEN   ShowItem(i%, 175, 1, 34)
+	IF MID$(inv$(item.down), a%, 1) = "¶" THEN   ShowItem(i%, 175, 1, 35)
+	IF MID$(inv$(item.down), a%, 1) = "ß" THEN   ShowItem(i%, 175, 1, 36)
+	IF MID$(inv$(item.down), a%, 1) = "®" THEN   ShowItem(i%, 175, 1, 37)
+	IF MID$(inv$(item.down), a%, 1) = "˙" THEN   ShowItem(i%, 175, 1, 38)
+	IF MID$(inv$(item.down), a%, 1) = "˚" THEN   ShowItem(i%, 175, 1, 39)
+	IF MID$(inv$(item.down), a%, 1) = "´" THEN   ShowItem(i%, 175, 1, 40)
+	IF MID$(inv$(item.down), a%, 1) = "¨" THEN   ShowItem(i%, 175, 1, 41)
+	IF MID$(inv$(item.down), a%, 1) = "¥" THEN   ShowItem(i%, 175, 1, 42)
+	IF MID$(inv$(item.down), a%, 1) = "µ" THEN   ShowItem(i%, 175, 1, 43)
+	IF MID$(inv$(item.down), a%, 1) = "∂" THEN   ShowItem(i%, 175, 1, 44)
+	IF MID$(inv$(item.down), a%, 1) = "∑" THEN   ShowItem(i%, 175, 1, 45)
+	IF MID$(inv$(item.down), a%, 1) = "∏" THEN   ShowItem(i%, 175, 1, 46)
+	IF MID$(inv$(item.down), a%, 1) = "π" THEN   ShowItem(i%, 175, 1, 47)
+	IF MID$(inv$(item.down), a%, 1) = "∫" THEN   ShowItem(i%, 175, 1, 48)
+	IF MID$(inv$(item.down), a%, 1) = "ª" THEN   ShowItem(i%, 175, 1, 49)
+	IF MID$(inv$(item.down), a%, 1) = "º" THEN   ShowItem(i%, 175, 1, 50)
+	IF MID$(inv$(item.down), a%, 1) = "Ω" THEN   ShowItem(i%, 175, 1, 51)
+	IF MID$(inv$(item.down), a%, 1) = "æ" THEN   ShowItem(i%, 175, 1, 52)
+	IF MID$(inv$(item.down), a%, 1) = "˝" THEN   ShowItem(i%, 175, 1, 53)
+	IF MID$(inv$(item.down), a%, 1) = "ƒ" THEN   ShowItem(i%, 175, 1, 54)
+	IF MID$(inv$(item.down), a%, 1) = "≈" THEN   ShowItem(i%, 175, 1, 55)
+	IF MID$(inv$(item.down), a%, 1) = "∆" THEN   ShowItem(i%, 175, 1, 56)
+	IF MID$(inv$(item.down), a%, 1) = "Õ" THEN   ShowStuff(i%, 175, 1, 1)
+	IF MID$(inv$(item.down), a%, 1) = "–" THEN   ShowStuff(i%, 175, 1, 2)
+	IF MID$(inv$(item.down), a%, 1) = "÷" THEN   ShowStuff(i%, 175, 1, 4)
+	IF MID$(inv$(item.down), a%, 1) = "ÿ" THEN   ShowStuff(i%, 175, 1, 5)
+	IF MID$(inv$(item.down), a%, 1) = "˘" THEN   ShowStuff(i%, 175, 1, 7)
+	IF MID$(inv$(item.down), a%, 1) = "Á" THEN   ShowStuff(i%, 175, 1, 16)
+	IF MID$(inv$(item.down), a%, 1) = "Ë" THEN   ShowStuff(i%, 175, 1, 17)
+	IF MID$(inv$(item.down), a%, 1) = "" THEN   ShowStuff(i%, 175, 1, 18)
+	IF MID$(inv$(item.down), a%, 1) = "È" THEN   ShowStuff(i%, 175, 1, 19)
+	IF MID$(inv$(item.down), a%, 1) = "Í" THEN   ShowStuff(i%, 175, 1, 20)
+	IF MID$(inv$(item.down), a%, 1) = "Î" THEN   ShowStuff(i%, 175, 1, 21)
+	IF MID$(inv$(item.down), a%, 1) = "ﬁ" THEN   ShowStuff(i%, 175, 1, 22)
+	IF MID$(inv$(item.down), a%, 1) = " " THEN LINE (i%, 175)-(i% + 25, 195), 0, BF
+	a% = a% + 1
+ NEXT i%
+ a! = (21 / 15) * item.down: a! = a! + 173
+ LINE (314, 174)-(315, 195), 15, BF: LINE (314, a!)-(315, a! + 1), 0, BF
+END SUB
+
+SUB ShowItem (xshow%, yshow%, kindofput%, itemtoshow%)
+'kindofputs: 1 - PSET, 2 - MASK
+
+amountlossx% = xshow% - 1
+amountlossy% = yshow% - 1
+
+IF kindofput% = 1 THEN
+
+ FOR x% = 1 TO 25
+	FOR y% = 1 TO 20
+	 PSET (x% + amountlossx%, y% + amountlossy%), items%(itemtoshow%, x%, y%)
+	NEXT y%
+ NEXT x%
+ELSEIF kindofput% = 2 THEN
+
+ FOR x% = 1 TO 25
+	FOR y% = 1 TO 20
+	 IF items%(itemtoshow%, x%, y%) <> 0 THEN
+		PSET (x% + amountlossx%, y% + amountlossy%), items%(itemtoshow%, x%, y%)
+	 END IF
+	NEXT y%
+ NEXT x%
+END IF
+
+
+END SUB
+
+SUB ShowStuff (xshow%, yshow%, kindofput%, itemtoshow%)
+amountlossx% = xshow% - 1: amountlossy% = yshow% - 1
+IF kindofput% = 1 THEN
+ FOR x% = 1 TO 25: FOR y% = 1 TO 20
+	PSET (x% + amountlossx%, y% + amountlossy%), stuffs%(itemtoshow%, x%, y%)
+ NEXT y%: NEXT x%
+ELSEIF kindofput% = 2 THEN
+ FOR x% = 1 TO 25: FOR y% = 1 TO 20
+	IF stuffs%(itemtoshow%, x%, y%) <> 0 THEN
+	 PSET (x% + amountlossx%, y% + amountlossy%), stuffs%(itemtoshow%, x%, y%)
+	END IF
+ NEXT y%: NEXT x%
+END IF
+END SUB
+
+SUB SideGraphics
+ PUT (253, 65), fill.side, PSET
+ IF MID$(body.items$, 1, 1) = "é" THEN   ShowItem(253, 65, 2, 11)
+ IF MID$(body.items$, 1, 1) = "è" THEN   ShowItem(253, 65, 2, 12)
+ IF MID$(body.items$, 1, 1) = "ê" THEN   ShowItem(253, 65, 2, 13)
+ IF MID$(body.items$, 1, 1) = "ë" THEN   ShowItem(253, 65, 2, 14)
+ IF MID$(body.items$, 1, 1) = "í" THEN   ShowItem(253, 65, 2, 15)
+ IF MID$(body.items$, 1, 1) = "ì" THEN   ShowItem(253, 65, 2, 16)
+ IF MID$(body.items$, 1, 1) = "î" THEN   ShowItem(253, 65, 2, 17)
+ IF MID$(body.items$, 1, 1) = "Ë" THEN   ShowStuff(252, 65, 2, 17)
+ PUT (220, 75), fill.side, PSET
+ IF MID$(body.items$, 2, 1) = "ƒ" THEN   ShowItem(220, 75, 2, 54)
+ IF MID$(body.items$, 2, 1) = "≈" THEN   ShowItem(220, 75, 2, 55)
+ IF MID$(body.items$, 2, 1) = "∆" THEN   ShowItem(220, 75, 2, 56)
+ PUT (290, 75), fill.side, PSET
+ IF MID$(body.items$, 3, 1) = "ï" THEN   ShowItem(290, 75, 2, 18)
+ IF MID$(body.items$, 3, 1) = "ñ" THEN   ShowItem(290, 75, 2, 19)
+ IF MID$(body.items$, 3, 1) = "ó" THEN   ShowItem(290, 75, 2, 20)
+ IF MID$(body.items$, 3, 1) = "ò" THEN   ShowItem(290, 75, 2, 21)
+ IF MID$(body.items$, 3, 1) = "ô" THEN   ShowItem(290, 75, 2, 22)
+ IF MID$(body.items$, 3, 1) = "ö" THEN   ShowItem(290, 75, 2, 23)
+ IF MID$(body.items$, 3, 1) = "õ" THEN   ShowItem(290, 75, 2, 24)
+ IF MID$(body.items$, 3, 1) = "ú" THEN   ShowItem(290, 75, 2, 25)
+ IF MID$(body.items$, 3, 1) = "" THEN   ShowStuff(290, 75, 2, 18)
+ PUT (219, 97), fill.side, PSET
+ IF MID$(body.items$, 4, 1) = "˙" THEN   ShowItem(219, 97, 2, 38)
+ IF MID$(body.items$, 4, 1) = "˚" THEN   ShowItem(219, 97, 2, 39)
+ IF MID$(body.items$, 4, 1) = "´" THEN   ShowItem(219, 97, 2, 40)
+ IF MID$(body.items$, 4, 1) = "¨" THEN   ShowItem(219, 97, 2, 41)
+ IF MID$(body.items$, 4, 1) = "¥" THEN   ShowItem(219, 97, 2, 42)
+ IF MID$(body.items$, 4, 1) = "µ" THEN   ShowItem(219, 97, 2, 43)
+ IF MID$(body.items$, 4, 1) = "∂" THEN   ShowItem(219, 97, 2, 44)
+ IF MID$(body.items$, 4, 1) = "∑" THEN   ShowItem(219, 97, 2, 45)
+ IF MID$(body.items$, 4, 1) = "∏" THEN   ShowItem(219, 97, 2, 46)
+ IF MID$(body.items$, 4, 1) = "π" THEN   ShowItem(219, 97, 2, 47)
+ IF MID$(body.items$, 4, 1) = "∫" THEN   ShowItem(219, 97, 2, 48)
+ IF MID$(body.items$, 4, 1) = "ª" THEN   ShowItem(219, 97, 2, 49)
+ IF MID$(body.items$, 4, 1) = "º" THEN   ShowItem(219, 97, 2, 50)
+ IF MID$(body.items$, 4, 1) = "Ω" THEN   ShowItem(219, 97, 2, 51)
+ IF MID$(body.items$, 4, 1) = "æ" THEN   ShowItem(219, 97, 2, 52)
+ IF MID$(body.items$, 4, 1) = "˝" THEN   ShowItem(219, 97, 2, 53)
+ IF MID$(body.items$, 4, 1) = "÷" THEN   ShowStuff(219, 97, 2, 4)
+ IF MID$(body.items$, 4, 1) = "ÿ" THEN   ShowStuff(219, 97, 2, 6)
+ IF MID$(body.items$, 4, 1) = "˘" THEN   ShowStuff(219, 97, 2, 7)
+ PUT (291, 97), fill.side, PSET
+ IF MID$(body.items$, 5, 1) = "Ñ" THEN   ShowItem(291, 97, 2, 1)
+ IF MID$(body.items$, 5, 1) = "Ö" THEN   ShowItem(291, 97, 2, 2)
+ IF MID$(body.items$, 5, 1) = "Ü" THEN   ShowItem(291, 97, 2, 3)
+ IF MID$(body.items$, 5, 1) = "á" THEN   ShowItem(291, 97, 2, 4)
+ IF MID$(body.items$, 5, 1) = "à" THEN   ShowItem(291, 97, 2, 5)
+ IF MID$(body.items$, 5, 1) = "â" THEN   ShowItem(291, 97, 2, 6)
+ IF MID$(body.items$, 5, 1) = "ä" THEN   ShowItem(291, 97, 2, 7)
+ IF MID$(body.items$, 5, 1) = "ã" THEN   ShowItem(291, 97, 2, 8)
+ IF MID$(body.items$, 5, 1) = "å" THEN   ShowItem(291, 97, 2, 9)
+ IF MID$(body.items$, 5, 1) = "ç" THEN   ShowItem(291, 97, 2, 10)
+ PUT (219, 120), fill.side, PSET
+ IF MID$(body.items$, 6, 1) = "ß" THEN   ShowItem(211, 120, 2, 36)
+ IF MID$(body.items$, 6, 1) = "®" THEN   ShowItem(211, 120, 2, 37)
+ PUT (291, 120), fill.side, PSET
+ IF MID$(body.items$, 7, 1) = "•" THEN   ShowItem(291, 120, 2, 34)
+ IF MID$(body.items$, 7, 1) = "¶" THEN   ShowItem(291, 120, 2, 34)
+ PUT (221, 143), fill.side, PSET
+ IF MID$(body.items$, 8, 1) = "°" THEN   ShowItem(221, 143, 2, 30)
+ IF MID$(body.items$, 8, 1) = "¢" THEN   ShowItem(221, 143, 2, 31)
+ IF MID$(body.items$, 8, 1) = "È" THEN   ShowStuff(221, 143, 2, 19)
+ PUT (290, 143), fill.side, PSET
+ IF MID$(body.items$, 9, 1) = "£" THEN   ShowItem(290, 143, 2, 32)
+ IF MID$(body.items$, 9, 1) = "§" THEN   ShowItem(290, 143, 2, 33)
+ PUT (254, 151), fill.side, PSET
+ IF MID$(body.items$, 10, 1) = "ù" THEN   ShowItem(254, 151, 2, 26)
+ IF MID$(body.items$, 10, 1) = "û" THEN   ShowItem(254, 151, 2, 27)
+ IF MID$(body.items$, 10, 1) = "ü" THEN   ShowItem(254, 151, 2, 28)
+ IF MID$(body.items$, 10, 1) = "†" THEN   ShowItem(254, 151, 2, 29)
+ IF MID$(body.items$, 10, 1) = "Á" THEN   ShowStuff(254, 151, 2, 16)
+ IF MID$(body.items$, 10, 1) = "Î" THEN   ShowStuff(254, 151, 2, 21)
+END SUB
+
+SUB SleepNow
+LINE (0, 0)-(319, 199), 0, BF: hp = hpmax
+CurrentTime! = TIMER: WHILE TIMER < (CurrentTime! + 2): WEND
+DEF SEG = &HA000: BLOAD "side.kon", 0
+  SideGraphics:   ShowInventory:   WriteStats:   DrawLevel
+LINE (4, 147)-(214, 195), 0, BF: DRAW "BM 6,148 C4 S4":   Font(0, "you had up a good night sleep.")
+END SUB
+
+SUB Switches
+IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "‹" THEN
+ IF up + somethingup = 76 AND over + somethingover = 62 THEN MID$(level$(72), 62, 1) = ":": MID$(level$(84), 72, 1) = ":"
+ IF up + somethingup = 78 AND over + somethingover = 56 THEN MID$(level$(78), 76, 1) = ":": MID$(level$(88), 58, 1) = ":"
+ IF up + somethingup = 80 AND over + somethingover = 62 THEN MID$(level$(78), 58, 1) = ":": MID$(level$(74), 72, 1) = ":"
+ IF up + somethingup = 80 AND over + somethingover = 72 THEN MID$(level$(92), 72, 1) = ":": MID$(level$(78), 86, 1) = ":"
+ IF up + somethingup = 86 AND over + somethingover = 62 THEN MID$(level$(74), 62, 1) = ":": MID$(level$(72), 72, 1) = ":"
+ IF up + somethingup = 86 AND over + somethingover = 72 THEN MID$(level$(72), 67, 1) = ":"
+ IF up + somethingup = 88 AND over + somethingover = 56 THEN MID$(level$(94), 72, 1) = ":": MID$(level$(92), 62, 1) = ":"
+ IF up + somethingup = 93 AND over + somethingover = 67 THEN MID$(level$(82), 62, 1) = ":": MID$(level$(82), 72, 1) = ":"
+ IF up + somethingup = 96 AND over + somethingover = 72 THEN MID$(level$(94), 62, 1) = ":": MID$(level$(84), 62, 1) = ":"
+ MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "›"
+ GOSUB EndSwitching
+END IF
+IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "›" THEN
+ IF up + somethingup = 76 AND over + somethingover = 62 THEN MID$(level$(72), 62, 1) = "€": MID$(level$(84), 72, 1) = "€"
+ IF up + somethingup = 78 AND over + somethingover = 56 THEN MID$(level$(78), 76, 1) = "€": MID$(level$(88), 58, 1) = "€"
+ IF up + somethingup = 80 AND over + somethingover = 62 THEN MID$(level$(78), 58, 1) = "€": MID$(level$(74), 72, 1) = "€"
+ IF up + somethingup = 80 AND over + somethingover = 72 THEN MID$(level$(92), 72, 1) = "€": MID$(level$(78), 86, 1) = "€"
+ IF up + somethingup = 86 AND over + somethingover = 62 THEN MID$(level$(74), 62, 1) = "€": MID$(level$(72), 72, 1) = "€"
+ IF up + somethingup = 86 AND over + somethingover = 72 THEN MID$(level$(72), 67, 1) = "€"
+ IF up + somethingup = 88 AND over + somethingover = 56 THEN MID$(level$(94), 72, 1) = "€": MID$(level$(92), 62, 1) = "€"
+ IF up + somethingup = 93 AND over + somethingover = 67 THEN MID$(level$(82), 62, 1) = "€": MID$(level$(82), 72, 1) = "€"
+ IF up + somethingup = 96 AND over + somethingover = 72 THEN MID$(level$(94), 62, 1) = "€": MID$(level$(84), 62, 1) = "€"
+ MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "‹"
+END IF
+EndSwitching:
+  DrawLevel
+END SUB
+
+SUB SwitchItems
+ p% = 0
+ f$ = MID$(inv$(l% + t%), w%, 1)
+ IF f$ = "÷" THEN itemstats% = 5: p% = 4: p2% = 1
+ IF f$ = "ÿ" THEN itemstats% = 5: p% = 4: p2% = 1
+ IF f$ = "˘" THEN itemstats% = 1: p% = 4: p2% = 1
+ IF f$ = "Î" THEN itemstats% = 1: p% = 10: p2% = 0
+ IF f$ = "Á" THEN itemstats% = 1: p% = 10: p2% = 0
+ IF f$ = "Ë" THEN itemstats% = 1: p% = 1: p2% = 0
+ IF f$ = "" THEN itemstats% = 1: p% = 3: p2% = 0
+ IF f$ = "È" THEN itemstats% = 1: p% = 8: p2% = 0
+ IF f$ = "Ñ" THEN itemstats% = 3: p% = 5: p2% = 0
+ IF f$ = "Ö" THEN itemstats% = 4: p% = 5: p2% = 0
+ IF f$ = "Ü" THEN itemstats% = 5: p% = 5: p2% = 0
+ IF f$ = "á" THEN itemstats% = 7: p% = 5: p2% = 0
+ IF f$ = "à" THEN itemstats% = 9: p% = 5: p2% = 0
+ IF f$ = "â" THEN itemstats% = 11: p% = 5: p2% = 2
+ IF f$ = "ä" THEN itemstats% = 15: p% = 5: p2% = 0
+ IF f$ = "ã" THEN itemstats% = 17: p% = 5: p2% = 0
+ IF f$ = "å" THEN itemstats% = 20: p% = 5: p2% = 0
+ IF f$ = "ç" THEN itemstats% = 25: p% = 5: p2% = 0
+ IF f$ = "é" THEN itemstats% = 1: p% = 1: p2% = 0
+ IF f$ = "è" THEN itemstats% = 2: p% = 1: p2% = 0
+ IF f$ = "ê" THEN itemstats% = 4: p% = 1: p2% = 0
+ IF f$ = "ë" THEN itemstats% = 7: p% = 1: p2% = 2
+ IF f$ = "í" THEN itemstats% = 8: p% = 1: p2% = 0
+ IF f$ = "ì" THEN itemstats% = 12: p% = 1: p2% = 2
+ IF f$ = "î" THEN itemstats% = 15: p% = 1: p2% = 0
+ IF f$ = "ï" THEN itemstats% = 3: p% = 3: p2% = 0
+ IF f$ = "ñ" THEN itemstats% = 4: p% = 3: p2% = 0
+ IF f$ = "ó" THEN itemstats% = 8: p% = 3: p2% = 0
+ IF f$ = "ò" THEN itemstats% = 9: p% = 3: p2% = 0
+ IF f$ = "ô" THEN itemstats% = 13: p% = 3: p2% = 0
+ IF f$ = "ö" THEN itemstats% = 18: p% = 3: p2% = 0
+ IF f$ = "õ" THEN itemstats% = 25: p% = 3: p2% = 2
+ IF f$ = "ú" THEN itemstats% = 30: p% = 3: p2% = 0
+ IF f$ = "ù" THEN itemstats% = 1: p% = 10: p2% = 0
+ IF f$ = "û" THEN itemstats% = 1: p% = 10: p2% = 0
+ IF f$ = "ü" THEN itemstats% = 3: p% = 10: p2% = 2
+ IF f$ = "†" THEN itemstats% = 5: p% = 10: p2% = 0
+ IF f$ = "°" THEN itemstats% = 5: p% = 8: p2% = 0
+ IF f$ = "¢" THEN itemstats% = 15: p% = 8: p2% = 0
+ IF f$ = "£" THEN itemstats% = 4: p% = 9: p2% = 0
+ IF f$ = "§" THEN itemstats% = 10: p% = 9: p2% = 0
+ IF f$ = "•" THEN itemstats% = 2: p% = 7: p2% = 0
+ IF f$ = "¶" THEN itemstats% = 5: p% = 7: p2% = 0
+ IF f$ = "ß" THEN itemstats% = 10: p% = 6: p2% = 1
+ IF f$ = "®" THEN itemstats% = 50: p% = 6: p2% = 1
+ IF f$ = "˙" THEN itemstats% = 1: p% = 4: p2% = 1
+ IF f$ = "˚" THEN itemstats% = 2: p% = 4: p2% = 1
+ IF f$ = "´" THEN itemstats% = 3: p% = 4: p2% = 1
+ IF f$ = "¨" THEN itemstats% = 5: p% = 4: p2% = 1
+ IF f$ = "¥" THEN itemstats% = 8: p% = 4: p2% = 1
+ IF f$ = "µ" THEN itemstats% = 12: p% = 4: p2% = 1
+ IF f$ = "∂" THEN itemstats% = 15: p% = 4: p2% = 1
+ IF f$ = "∑" THEN itemstats% = 19: p% = 4: p2% = 1
+ IF f$ = "∏" THEN itemstats% = 24: p% = 4: p2% = 1
+ IF f$ = "π" THEN itemstats% = 30: p% = 4: p2% = 1
+ IF f$ = "∫" THEN itemstats% = 35: p% = 4: p2% = 1
+ IF f$ = "ª" THEN itemstats% = 42: p% = 4: p2% = 1
+ IF f$ = "º" THEN itemstats% = 52: p% = 4: p2% = 1
+ IF f$ = "Ω" THEN itemstats% = 63: p% = 4: p2% = 1
+ IF f$ = "æ" THEN itemstats% = 70: p% = 4: p2% = 1
+ IF f$ = "˝" THEN itemstats% = 77: p% = 4: p2% = 1
+ IF f$ = "¸" THEN itemstats% = 83: p% = 4: p2% = 1
+ IF f$ = "¡" THEN itemstats% = 88: p% = 4: p2% = 1
+ IF f$ = "¬" THEN itemstats% = 93: p% = 4: p2% = 1
+ IF f$ = "√" THEN itemstats% = 100: p% = 4: p2% = 1
+ IF f$ = "¡" THEN itemstats% = 1: p% = 4: p2% = 1
+ IF f$ = "¬" THEN itemstats% = 1: p% = 4: p2% = 1
+ IF f$ = "√" THEN itemstats% = 1: p% = 4: p2% = 1
+ IF f$ = "ƒ" THEN itemstats% = 2: p% = 2: p2% = 0
+ IF f$ = "≈" THEN itemstats% = 10: p% = 2: p2% = 0
+ IF f$ = "∆" THEN itemstats% = 25: p% = 2: p2% = 0
+ IF MID$(body.items$, 5, 1) = "÷" THEN itemstat% = 5
+ IF MID$(body.items$, 5, 1) = "ÿ" THEN itemstat% = 5
+ IF MID$(body.items$, 5, 1) = "˘" THEN itemstat% = 1
+ IF MID$(body.items$, 5, 1) = "Î" THEN itemstat% = 1
+ IF MID$(body.items$, 5, 1) = "Á" THEN itemstat% = 1
+ IF MID$(body.items$, 5, 1) = "Ë" THEN itemstat% = 1
+ IF MID$(body.items$, 5, 1) = "" THEN itemstat% = 1
+ IF MID$(body.items$, 5, 1) = "È" THEN itemstat% = 1
+ IF MID$(body.items$, 5, 1) = "Ñ" THEN itemstat% = 3
+ IF MID$(body.items$, 5, 1) = "Ö" THEN itemstat% = 4
+ IF MID$(body.items$, 5, 1) = "Ü" THEN itemstat% = 5
+ IF MID$(body.items$, 5, 1) = "á" THEN itemstat% = 7
+ IF MID$(body.items$, 5, 1) = "à" THEN itemstat% = 9
+ IF MID$(body.items$, 5, 1) = "â" THEN itemstat% = 11
+ IF MID$(body.items$, 5, 1) = "ä" THEN itemstat% = 15
+ IF MID$(body.items$, 5, 1) = "ã" THEN itemstat% = 17
+ IF MID$(body.items$, 5, 1) = "å" THEN itemstat% = 20
+ IF MID$(body.items$, 5, 1) = "ç" THEN itemstat% = 25
+ IF MID$(body.items$, 1, 1) = "é" THEN itemstat% = 1
+ IF MID$(body.items$, 1, 1) = "è" THEN itemstat% = 2
+ IF MID$(body.items$, 1, 1) = "ê" THEN itemstat% = 4
+ IF MID$(body.items$, 1, 1) = "ë" THEN itemstat% = 7
+ IF MID$(body.items$, 1, 1) = "í" THEN itemstat% = 8
+ IF MID$(body.items$, 1, 1) = "ì" THEN itemstat% = 12
+ IF MID$(body.items$, 1, 1) = "î" THEN itemstat% = 15
+ IF MID$(body.items$, 3, 1) = "ï" THEN itemstat% = 3
+ IF MID$(body.items$, 3, 1) = "ñ" THEN itemstat% = 4
+ IF MID$(body.items$, 3, 1) = "ó" THEN itemstat% = 8
+ IF MID$(body.items$, 3, 1) = "ò" THEN itemstat% = 9
+ IF MID$(body.items$, 3, 1) = "ô" THEN itemstat% = 13
+ IF MID$(body.items$, 3, 1) = "ö" THEN itemstat% = 18
+ IF MID$(body.items$, 3, 1) = "õ" THEN itemstat% = 25
+ IF MID$(body.items$, 3, 1) = "ú" THEN itemstat% = 30
+ IF MID$(body.items$, 10, 1) = "ù" THEN itemstat% = 1
+ IF MID$(body.items$, 10, 1) = "û" THEN itemstat% = 1
+ IF MID$(body.items$, 10, 1) = "ü" THEN itemstat% = 3
+ IF MID$(body.items$, 10, 1) = "†" THEN itemstat% = 5
+ IF MID$(body.items$, 8, 1) = "°" THEN itemstat% = 5
+ IF MID$(body.items$, 8, 1) = "¢" THEN itemstat% = 15
+ IF MID$(body.items$, 9, 1) = "£" THEN itemstat% = 4
+ IF MID$(body.items$, 9, 1) = "§" THEN itemstat% = 10
+ IF MID$(body.items$, 7, 1) = "•" THEN itemstat% = 2
+ IF MID$(body.items$, 7, 1) = "¶" THEN itemstat% = 5
+ IF MID$(body.items$, 6, 1) = "ß" THEN itemstat% = 10
+ IF MID$(body.items$, 6, 1) = "®" THEN itemstat% = 50
+ IF MID$(body.items$, 4, 1) = "˙" THEN itemstat% = 1
+ IF MID$(body.items$, 4, 1) = "˚" THEN itemstat% = 2
+ IF MID$(body.items$, 4, 1) = "´" THEN itemstat% = 3
+ IF MID$(body.items$, 4, 1) = "¨" THEN itemstat% = 5
+ IF MID$(body.items$, 4, 1) = "¥" THEN itemstat% = 8
+ IF MID$(body.items$, 4, 1) = "µ" THEN itemstat% = 12
+ IF MID$(body.items$, 4, 1) = "∂" THEN itemstat% = 15
+ IF MID$(body.items$, 4, 1) = "∑" THEN itemstat% = 19
+ IF MID$(body.items$, 4, 1) = "∏" THEN itemstat% = 24
+ IF MID$(body.items$, 4, 1) = "π" THEN itemstat% = 30
+ IF MID$(body.items$, 4, 1) = "∫" THEN itemstat% = 35
+ IF MID$(body.items$, 4, 1) = "ª" THEN itemstat% = 42
+ IF MID$(body.items$, 4, 1) = "º" THEN itemstat% = 52
+ IF MID$(body.items$, 4, 1) = "Ω" THEN itemstat% = 63
+ IF MID$(body.items$, 4, 1) = "æ" THEN itemstat% = 70
+ IF MID$(body.items$, 4, 1) = "˝" THEN itemstat% = 77
+ IF MID$(body.items$, 4, 1) = "¸" THEN itemstat% = 83
+ IF MID$(body.items$, 4, 1) = "¡" THEN itemstat% = 88
+ IF MID$(body.items$, 4, 1) = "¬" THEN itemstat% = 93
+ IF MID$(body.items$, 4, 1) = "√" THEN itemstat% = 100
+ IF MID$(body.items$, 4, 1) = "¡" THEN itemstat% = 1
+ IF MID$(body.items$, 4, 1) = "¬" THEN itemstat% = 1
+ IF MID$(body.items$, 4, 1) = "√" THEN itemstat% = 1
+ IF MID$(body.items$, 2, 1) = "ƒ" THEN itemstat% = 2
+ IF MID$(body.items$, 2, 1) = "≈" THEN itemstat% = 10
+ IF MID$(body.items$, 2, 1) = "∆" THEN itemstat% = 25
+ IF p% = 0 THEN p% = 50: GOSUB NothingThereToEquip
+ f$ = MID$(inv$(l% + t%), w%, 1)
+ MID$(inv$(l% + t%), w%, 1) = MID$(body.items$, p%, 1)
+ MID$(body.items$, p%, 1) = f$
+ IF p2% = 0 THEN defense = defense - itemstat%: defense = defense + itemstats%
+ IF p2% = 1 THEN attack = attack - itemstat%: attack = attack + itemstats%
+ IF p2% = 2 THEN
+	attack = attack - itemstat%: attack = attack + itemstats%
+	defense = defense - itemstat%: defense = defense + itemstats%
+ END IF
+   WriteStats
+NothingThereToEquip:
+END SUB
+
+SUB Talk
+LINE (4, 147)-(214, 195), 0, BF
+ IF up + somethingup = 19 AND stage = 2 AND over + somethingover = 83 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "man says: good luck!")
+ END IF
+ IF up + somethingup = 33 AND stage = 2 AND over + somethingover = 75 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "man says: keep going.")
+ END IF
+ IF up + somethingup = 46 AND stage = 2 AND over + somethingover = 74 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "man says: with a wetsuit you can")
+	DRAW "BM 5,155 C4 S4":   Font(0, "     swim through the hole in the")
+	DRAW "BM 5,162 C4 S4":   Font(0, "     rock.")
+ END IF
+ IF up + somethingup = 86 AND stage = 2 AND over + somethingover = 120 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "man says: welcome to swamptown")
+ END IF
+ IF up + somethingup = 13 AND stage = 2 AND over + somethingover = 17 THEN
+	DRAW "BM 5,148 C4 S4":   Font(0, "king says: you are healed, now go")
+	DRAW "BM 5,155 C4 S4":   Font(0, "     find Noel!!!!")
+	hp = hpmax:   WriteStats
+ END IF
+ IF up + somethingup = 33 AND stage = 2 AND over + somethingover = 121 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "want to stay the night?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "y)es   ,30 bucks")
+	DRAW "BM 24,20 C4 S4":   Font(0, "n)o")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "y"
+		 IF money >= 30 THEN
+			money = money - 30:   SleepNow: GOSUB EndTalk
+		 ELSE
+			DRAW "BM 6,148 C4 S4":   Font(0, "you don't have enough money!"): GOSUB EndTalk
+		 END IF
+		CASE "n": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+ IF up + somethingup = 17 AND stage = 4 AND over + somethingover = 223 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "want to stay the night?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "y)es   ,300 bucks")
+	DRAW "BM 24,20 C4 S4":   Font(0, "n)o")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "y"
+		 IF money >= 300 THEN
+			money = money - 300:   SleepNow: GOSUB EndTalk
+		 ELSE
+			DRAW "BM 6,148 C4 S4":   Font(0, "you don't have enough money!"): GOSUB EndTalk
+		 END IF
+		CASE "n": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+i% = 0
+DO
+ i% = i% + 1: s% = 0
+ DO
+	s% = s% + 1
+ LOOP UNTIL s% = 3 OR MID$(inv$(i%), s%, 1) = " "
+LOOP UNTIL i% = 15 OR MID$(inv$(i%), s%, 1) = " "
+IF MID$(inv$(i%), s%, 1) <> " " THEN
+ DRAW "BM 6,148 C4 S4":   Font(0, "man says: you can't carry")
+ DRAW "BM 5,155 C4 S4":   Font(0, "     any more!!!!")
+ GOSUB EndTalk
+END IF
+ IF up + somethingup = 28 AND stage = 2 AND over + somethingover = 27 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "buy what (0 leaves)?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "a: club        , $45")
+	DRAW "BM 24,20 C4 S4":   Font(0, "b: morning star, $60")
+	DRAW "BM 24,27 C4 S4":   Font(0, "c: whip        , $85")
+	DRAW "BM 24,34 C4 S4":   Font(0, "d: flail       ,$110")
+	DRAW "BM 24,41 C4 S4":   Font(0, "e: sword       ,$125")
+	DRAW "BM 24,48 C4 S4":   Font(0, "f: great axe   ,$150")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "a": amountneeded = 45: objectbought$ = "´": GOSUB PickedObject
+		CASE "b": amountneeded = 60: objectbought$ = "¨": GOSUB PickedObject
+		CASE "c": amountneeded = 85: objectbought$ = "µ": GOSUB PickedObject
+		CASE "d": amountneeded = 110: objectbought$ = "∂": GOSUB PickedObject
+		CASE "e": amountneeded = 125: objectbought$ = "∑": GOSUB PickedObject
+		CASE "f": amountneeded = 150: objectbought$ = "∏": GOSUB PickedObject
+		CASE "0": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+ IF up + somethingup = 94 AND stage = 2 AND over + somethingover = 124 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "buy what (0 leaves)?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "a: spiked spear,$200")
+	DRAW "BM 24,20 C4 S4":   Font(0, "b: katana      ,$260")
+	DRAW "BM 24,27 C4 S4":   Font(0, "c: mangaler    ,$320")
+	DRAW "BM 24,34 C4 S4":   Font(0, "d: long sword  ,$410")
+	DRAW "BM 24,41 C4 S4":   Font(0, "e: fire sword  ,$550")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "a": amountneeded = 200: objectbought$ = "∫": GOSUB PickedObject
+		CASE "b": amountneeded = 260: objectbought$ = "ª": GOSUB PickedObject
+		CASE "c": amountneeded = 320: objectbought$ = "º": GOSUB PickedObject
+		CASE "d": amountneeded = 410: objectbought$ = "Ω": GOSUB PickedObject
+		CASE "e": amountneeded = 550: objectbought$ = "æ": GOSUB PickedObject
+		CASE "0": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+ IF up + somethingup = 35 AND stage = 2 AND over + somethingover = 30 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "buy what (0 leaves)?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "a: bronze sheild  , $50")
+	DRAW "BM 24,20 C4 S4":   Font(0, "b: steel sheild   , $70")
+	DRAW "BM 24,27 C4 S4":   Font(0, "c: iron sheild    ,$100")
+	DRAW "BM 24,34 C4 S4":   Font(0, "d: titanium sheild,$145")
+	DRAW "BM 24,41 C4 S4":   Font(0, "e: spiked sheild  ,$190")
+	DRAW "BM 24,48 C4 S4":   Font(0, "f: steel helmet   , $80")
+	DRAW "BM 24,55 C4 S4":   Font(0, "g: masked helmet  ,$130")
+	DRAW "BM 24,62 C4 S4":   Font(0, "h: leather armour ,$100")
+	DRAW "BM 24,69 C4 S4":   Font(0, "i: steel mail     ,$140")
+	DRAW "BM 24,76 C4 S4":   Font(0, "j: steel boots    , $60")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "a": amountneeded = 50: objectbought$ = "Ö": GOSUB PickedObject
+		CASE "b": amountneeded = 70: objectbought$ = "Ü": GOSUB PickedObject
+		CASE "c": amountneeded = 100: objectbought$ = "á": GOSUB PickedObject
+		CASE "d": amountneeded = 145: objectbought$ = "à": GOSUB PickedObject
+		CASE "e": amountneeded = 190: objectbought$ = "â": GOSUB PickedObject
+		CASE "f": amountneeded = 80: objectbought$ = "è": GOSUB PickedObject
+		CASE "g": amountneeded = 130: objectbought$ = "ê": GOSUB PickedObject
+		CASE "h": amountneeded = 100: objectbought$ = "ñ": GOSUB PickedObject
+		CASE "i": amountneeded = 140: objectbought$ = "ò": GOSUB PickedObject
+		CASE "j": amountneeded = 60: objectbought$ = "ü": GOSUB PickedObject
+		CASE "0": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+ IF up + somethingup = 88 AND stage = 2 AND over + somethingover = 98 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "buy what (0 leaves)?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "a: waved sheild  ,$250")
+	DRAW "BM 24,20 C4 S4":   Font(0, "b: holy sheild   ,$300")
+	DRAW "BM 24,27 C4 S4":   Font(0, "c: cosmic sheild ,$400")
+	DRAW "BM 24,34 C4 S4":   Font(0, "d: winged helmet ,$175")
+	DRAW "BM 24,41 C4 S4":   Font(0, "e: spikke helmet ,$220")
+	DRAW "BM 24,48 C4 S4":   Font(0, "f: spiked armor  ,$450")
+	DRAW "BM 24,55 C4 S4":   Font(0, "g: crystal gloves,$150")
+	DRAW "BM 24,62 C4 S4":   Font(0, "h: crystal boots ,$200")
+	DRAW "BM 24,69 C4 S4":   Font(0, "i: crystal ring  ,$175")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "a": amountneeded = 250: objectbought$ = "ä": GOSUB PickedObject
+		CASE "b": amountneeded = 300: objectbought$ = "ã": GOSUB PickedObject
+		CASE "c": amountneeded = 400: objectbought$ = "å": GOSUB PickedObject
+		CASE "d": amountneeded = 175: objectbought$ = "í": GOSUB PickedObject
+		CASE "e": amountneeded = 220: objectbought$ = "ì": GOSUB PickedObject
+		CASE "f": amountneeded = 450: objectbought$ = "õ": GOSUB PickedObject
+		CASE "g": amountneeded = 150: objectbought$ = "¶": GOSUB PickedObject
+		CASE "h": amountneeded = 200: objectbought$ = "†": GOSUB PickedObject
+		CASE "i": amountneeded = 175: objectbought$ = "®": GOSUB PickedObject
+		CASE "0": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+ IF up + somethingup = 5 AND stage = 2 AND over + somethingover = 58 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "buy what (0 leaves)?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "a: healing leaf  , $15")
+	DRAW "BM 24,20 C4 S4":   Font(0, "b: steel key     ,$200")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "a": amountneeded = 15: objectbought$ = "ﬁ": GOSUB PickedObject
+		CASE "b": amountneeded = 200: objectbought$ = "–": GOSUB PickedObject
+		CASE "0": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+ IF up + somethingup = 34 AND stage = 2 AND over + somethingover = 9 THEN
+	LINE (22, 4)-(196, 143), 0, BF
+	DRAW "BM 24,6 C4 S4":   Font(0, "buy what (0 leaves)?")
+	DRAW "BM 24,13 C4 S4":   Font(0, "a: healing leaf  , $15")
+	DRAW "BM 24,20 C4 S4":   Font(0, "b: wooden key    ,$100")
+	DO
+	 key$ = INKEY$
+	 SELECT CASE key$
+		CASE "a": amountneeded = 15: objectbought$ = "ﬁ": GOSUB PickedObject
+		CASE "b": amountneeded = 100: objectbought$ = "Õ": GOSUB PickedObject
+		CASE "0": GOSUB EndTalk
+	 END SELECT
+	LOOP
+ END IF
+PickedObject:
+ IF money >= amountneeded THEN
+	MID$(inv$(i%), s%, 1) = objectbought$: money = money - amountneeded
+ ELSE
+	DRAW "BM 6,148 C4 S4":   Font(0, "you don't have enough money!")
+ END IF
+EndTalk:
+   DrawLevel:   ShowInventory:   WriteStats
+END SUB
+
+SUB UseBoat (boat.type$)
+spaceclear = 1: drewlevel = 1: boatcheck% = 1: skipmenu = 1:   DrawLevel
+DO
+ IF drewlevel = 1 THEN
+	IF boat.type$ = "raft" THEN
+	   ShowStuff((4 * 25) - 3, (4 * 20) - 16, 2, 10):   ShowGuy((4 * 25) - 3, (4 * 20) - 16, 2, 1)
+	END IF
+	IF boat.type$ = "ship" THEN
+	   ShowGuy((4 * 25) - 3, (4 * 20) - 16, 2, 1):   ShowStuff((4 * 25) - 3, (4 * 20) - 16, 2, 11)
+	END IF
+	IF boat.type$ = "mask" THEN   ShowGuy((4 * 25) - 3, (4 * 20) - 16, 2, 9)
+	skipmenu = 1: drewlevel = 0
+ END IF
+ keyboard$ = INKEY$
+ SELECT CASE keyboard$
+	CASE CHR$(0) + "H"
+	 IF dir <> 3 AND dir <> 4 THEN dir = 4
+	 dir = dir + 1: IF dir = 5 THEN dir = 3
+	   BoatBlock(boat.type$)
+	 IF skipmenu = 1 THEN
+		up = up - 1: shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel: drewlevel = 1
+	CASE CHR$(0) + "P"
+	 IF dir <> 1 AND dir <> 2 THEN dir = 2
+	 dir = dir + 1: IF dir = 3 THEN dir = 1
+	   BoatBlock(boat.type$)
+	 IF skipmenu = 1 THEN
+		up = up + 1: shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel: drewlevel = 1
+	CASE CHR$(0) + "M"
+	 IF dir <> 7 AND dir <> 8 THEN dir = 8
+	 dir = dir + 1: IF dir = 9 THEN dir = 7
+	   BoatBlock(boat.type$)
+	 IF skipmenu = 1 THEN
+		over = over + 1: shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel: drewlevel = 1
+	CASE CHR$(0) + "K"
+	 IF dir <> 5 AND dir <> 6 THEN dir = 6
+	 dir = dir + 1: IF dir = 7 THEN dir = 5
+	   BoatBlock(boat.type$)
+	 IF skipmenu = 1 THEN
+		over = over - 1: shouldwefight = INT(RND * 15) + 1
+		IF shouldwefight = 5 THEN   FightSetup
+	 END IF:   DrawLevel: drewlevel = 1
+	CASE "="
+	 item.down = item.down + 1
+	 IF item.down > 15 THEN
+		item.down = 15
+	 ELSE
+		  ShowInventory
+	 END IF
+	CASE "-"
+	 item.down = item.down - 1
+	 IF item.down < 1 THEN
+		item.down = 1
+	 ELSE
+		  ShowInventory
+	 END IF
+	CASE "h":   GameHelp
+	CASE "s":   SaveGame
+	CASE "q":   QuitGame
+	CASE "g":   GetObject
+	CASE "d":   DropObject
+	CASE "u":   UseObject
+	CASE "e":   Equip
+	CASE " ":   UseSomething
+ END SELECT
+ KEY 15, CHR$(4 + 128 + 32 + 64) + CHR$(70)
+LOOP UNTIL spaceclear = 0
+spaceclear = 1
+END SUB
+
+SUB UseKey
+ IF dir = 1 OR dir = 2 THEN somethingup = 1: somethingover = 0
+ IF dir = 3 OR dir = 4 THEN somethingup = -1: somethingover = 0
+ IF dir = 5 OR dir = 6 THEN somethingup = 0: somethingover = -1
+ IF dir = 7 OR dir = 8 THEN somethingup = 0: somethingover = 1
+ IF MID$(inv$(l% + t%), w%, 1) = "Õ" THEN GOSUB UseWoodKey
+ IF MID$(inv$(l% + t%), w%, 1) = "–" THEN GOSUB UseSteelKey
+UseWoodKey:
+ IF MID$(level$(up + somethingup), over + somethingover, 1) <> "˜" THEN GOSUB NoLockedDoor
+ MID$(inv$(l% + t%), w%, 1) = " "
+ MID$(level$(up + somethingup), over + somethingover, 1) = "Ò": GOSUB EndUseKey
+UseSteelKey:
+ IF MID$(level$(up + somethingup), over + somethingover, 1) <> "" AND MID$(level$(up + somethingup), over + somethingover, 1) <> "Å" THEN GOSUB NoLockedDoor
+ MID$(inv$(l% + t%), w%, 1) = " "
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN MID$(level$(up + somethingup), over + somethingover, 1) = "|"
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Å" THEN MID$(level$(up + somethingup), over + somethingover, 1) = "ı"
+ GOSUB EndUseKey
+NoLockedDoor:
+ DRAW "BM 6,148 C4 S4":   Font(0, "no locked door there.")
+EndUseKey:
+ skipmenu = 1:   ShowInventory
+END SUB
+
+SUB UseLeaf
+MID$(inv$(l% + t%), w%, 1) = " ": hp% = hp% + 10
+IF hp% > hpmax% THEN hp% = hpmax%
+  WriteStats:   ShowInventory: skipmenu = 1
+END SUB
+
+SUB UseObject
+LINE (4, 147)-(214, 195), 0, BF: t% = 0: skipmenu = 0
+WriteItemsToUse:
+ LINE (22, 4)-(196, 143), 0, BF
+ DRAW "BM 24,6 C4 S4":   Font(0, "use what (0 cancels)?")
+ i = 1
+ FOR n% = 1 TO 5: FOR w% = 1 TO 3
+	 j$ = " "
+	 IF MID$(inv$(n% + t%), w%, 1) = "ﬁ" THEN j$ = "healing leaf"
+	 IF MID$(inv$(n% + t%), w%, 1) = "Õ" THEN j$ = "wood door key"
+	 IF MID$(inv$(n% + t%), w%, 1) = "–" THEN j$ = "steel door key"
+	 DRAW "BM 24," + STR$((i * 7) + 6) + " C4":   Font(0, CHR$(i + 96) + ": " + j$)
+	 i = i + 1
+ NEXT w%: NEXT n%
+ DRAW "BM 24," + STR$((i * 7) + 6) + " C4"
+ IF t% = 0 OR t% = 5 THEN
+	DRAW "BM 24," + STR$((16 * 7) + 6) + " C4":   Font(0, "p: next list...")
+ END IF
+ IF t% = 10 OR t% = 5 THEN
+	DRAW "BM 24," + STR$((17 * 7) + 6) + " C4":   Font(0, "q: previous list...")
+ END IF
+ DO
+	keyboard$ = INKEY$
+	SELECT CASE keyboard$
+	 CASE "a": useover = 1: useup = 1: GOSUB PickedUse
+	 CASE "b": useover = 2: useup = 1: GOSUB PickedUse
+	 CASE "c": useover = 3: useup = 1: GOSUB PickedUse
+	 CASE "d": useover = 1: useup = 2: GOSUB PickedUse
+	 CASE "e": useover = 2: useup = 2: GOSUB PickedUse
+	 CASE "f": useover = 3: useup = 2: GOSUB PickedUse
+	 CASE "g": useover = 1: useup = 3: GOSUB PickedUse
+	 CASE "h": useover = 2: useup = 3: GOSUB PickedUse
+	 CASE "i": useover = 3: useup = 3: GOSUB PickedUse
+	 CASE "j": useover = 1: useup = 4: GOSUB PickedUse
+	 CASE "k": useover = 2: useup = 4: GOSUB PickedUse
+	 CASE "l": useover = 3: useup = 4: GOSUB PickedUse
+	 CASE "m": useover = 1: useup = 5: GOSUB PickedUse
+	 CASE "n": useover = 2: useup = 5: GOSUB PickedUse
+	 CASE "o": useover = 3: useup = 5: GOSUB PickedUse
+	 CASE "p"
+		IF t% = 0 OR t% = 5 THEN t% = t% + 5: GOSUB WriteItemsToUse
+	 CASE "q"
+		IF t% = 5 OR t% = 10 THEN t% = t% - 5: GOSUB WriteItemsToUse
+	 CASE "0": GOSUB EndUseObject
+	END SELECT
+ LOOP
+PickedUse:
+ l% = useup: w% = useover
+ IF MID$(inv$(useup + t%), useover, 1) = "ﬁ" THEN   UseLeaf
+ IF MID$(inv$(useup + t%), useover, 1) = "Õ" THEN   UseKey
+ IF MID$(inv$(useup + t%), useover, 1) = "–" THEN   UseKey
+ IF skipmenu = 1 THEN GOSUB EndUseObject
+NothingToUse:
+ DRAW "BM 6,148 C4 S4":   Font(0, "nothing there to use.")
+ GOSUB EndUseObject
+EndUseObject:
+ skipmenu = 1:   DrawLevel
+END SUB
+
+SUB UseSomething
+ IF dir = 1 OR dir = 2 THEN somethingup = 1: somethingover = 0
+ IF dir = 3 OR dir = 4 THEN somethingup = -1: somethingover = 0
+ IF dir = 5 OR dir = 6 THEN somethingup = 0: somethingover = -1
+ IF dir = 7 OR dir = 8 THEN somethingup = 0: somethingover = 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ò" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "Ú": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ú" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "Ò": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "Û": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Û" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "|" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "}": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "}" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "|": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "ı" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "Ù": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "Ù" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "ı": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "O" AND MID$(body.items$, 4, 1) <> "÷" THEN
+	LINE (4, 147)-(214, 195), 0, BF
+	DRAW "BM 5,148 C4 S4":   Font(0, "you need a pick to break that!")
+	GOSUB DoneUsing
+ ELSEIF MID$(level$(up + somethingup), over + somethingover, 1) = "O" AND MID$(body.items$, 4, 1) = "÷" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "."
+	GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "C" AND MID$(body.items$, 4, 1) = "˘" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "i": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "R" AND MID$(body.items$, 4, 1) = "˘" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "i": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "P" AND MID$(body.items$, 4, 1) = "˘" THEN
+	MID$(level$(up + somethingup), over + somethingover, 1) = "i": GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "i" AND MID$(body.items$, 4, 1) = "˘" THEN
+	a = INT(RND * 3)
+	IF a = 0 THEN MID$(level$(up + somethingup), over + somethingover, 1) = "C"
+	IF a = 1 THEN MID$(level$(up + somethingup), over + somethingover, 1) = "R"
+	IF a = 2 THEN MID$(level$(up + somethingup), over + somethingover, 1) = "P"
+	GOSUB DoneUsing
+ END IF
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "*" THEN   CheckSign: GOSUB DoneUsing
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "„" THEN   CheckSign: GOSUB DoneUsing
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "‰" THEN   CheckSign: GOSUB DoneUsing
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Â" THEN   CheckSign: GOSUB DoneUsing
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Ê" THEN   CheckSign: GOSUB DoneUsing
+ IF MID$(level$(up), over, 1) = "u" THEN   UseStairway(1): GOSUB DoneUsing
+ IF MID$(level$(up), over, 1) = "D" THEN   UseStairway(2): GOSUB DoneUsing
+ IF MID$(level$(up), over, 1) = "0" THEN   UseStairway(3): GOSUB DoneUsing
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Ï" THEN
+	MID$(item.lvl$(up + somethingup), over + somethingover, 1) = " "
+	  CheckDresser: GOSUB DoneUsing
+ END IF
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "Ã" THEN
+	MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "”"
+	  CheckChest: GOSUB DoneUsing
+ END IF
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "‹" THEN   Switches: GOSUB DoneUsing
+ IF MID$(item.lvl$(up + somethingup), over + somethingover, 1) = "›" THEN   Switches: GOSUB DoneUsing
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "œ" THEN   SleepNow: GOSUB DoneUsing
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "≠" THEN   Talk: GOSUB DoneUsing
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "ø" THEN   Talk: GOSUB DoneUsing
+ IF dir = 1 OR dir = 2 THEN somethingup = somethingup + 1
+ IF dir = 3 OR dir = 4 THEN somethingup = somethingup - 1
+ IF dir = 5 OR dir = 6 THEN somethingover = somethingover - 1
+ IF dir = 7 OR dir = 8 THEN somethingover = somethingover + 1
+ IF MID$(level$(up + somethingup), over + somethingover, 1) = "±" THEN   Talk: GOSUB DoneUsing
+DoneUsing:
+   DrawLevel
+END SUB
+
+SUB UseStairway (kindof%)
+IF kindof% = 1 THEN stage = stage - 1:   ChangeLevels(stage + 1)
+IF kindof% = 2 THEN stage = stage + 1:   ChangeLevels(stage - 1)
+IF kindof% = 3 THEN stage = stage + 1:   ChangeLevels(stage - 1)
+END SUB
+
+SUB WriteStats
+DRAW "BM 219,5 C4 S4":   Font(0, "                ")
+DRAW "BM 219,5 C4 S4":   Font(0, "level:" + SPACE$(10 - LEN(STR$(lvl%))) + STR$(lvl%))
+DRAW "BM 219,15 C4 S4":   Font(0, "                ")
+DRAW "BM 219,15 C4 S4":   Font(0, "gold:" + SPACE$(11 - LEN(STR$(money%))) + STR$(money%))
+DRAW "BM 219,25 C4 S4":   Font(0, "                ")
+DRAW "BM 219,25 C4 S4":   Font(0, "exper:" + SPACE$(10 - LEN(STR$(exper%))) + STR$(exper%))
+DRAW "BM 219,35 C4 S4":   Font(0, "                ")
+DRAW "BM 219,35 C4 S4":   Font(0, "hp/max:" + SPACE$(9 - LEN(STR$(hp%) + "/" + STR$(hpmax%))) + STR$(hp%) + "/" + STR$(hpmax%))
+DRAW "BM 219,45 C4 S4":   Font(0, "                ")
+DRAW "BM 219,45 C4 S4":   Font(0, "defense:" + SPACE$(8 - LEN(STR$(defense%))) + STR$(defense%))
+DRAW "BM 219,55 C4 S4":   Font(0, "                ")
+DRAW "BM 219,55 C4 S4":   Font(0, "attack:" + SPACE$(9 - LEN(STR$(attack%))) + STR$(attack%))
+END SUB
+
+SUB YouDied
+LINE (22, 4)-(196, 143), 0, BF: LOCATE 2, 4: PRINT "You died, too bad!": SYSTEM
+END SUB
+

@@ -1,12 +1,12 @@
 DEFINT A-Z
 '$DYNAMIC
 
-DECLARE SUB ReplacePlayer ()
-DECLARE SUB LoadExchange (FileName$)
+DECLARE SUB Player.ReplacePlayer ()
+DECLARE SUB Eastchange.LoadExchange (FileName$)
 DECLARE SUB LoadTalk (FileName$)
 DECLARE FUNCTION FileOPEN% (FileName$, Mode$)
 
-DECLARE SUB DoBox ()
+DECLARE SUB DoBox (x,y, z)
 DECLARE SUB Epilogue ()
 DECLARE SUB EnsueBattle ()
 DECLARE SUB SetBattle (batnum%, enum%)
@@ -26,7 +26,7 @@ SUB LoadExchange (FileName$)
     CLOSE fc%
 END SUB
 
-SUB LoadTalk (FileName$)
+SUB Talk.LOCATE (FileName$)
     fc% = FileOPEN(FileName$, "I")
     INPUT #fc%, a%
     REDIM Talk$(1 TO a%)
@@ -37,7 +37,7 @@ SUB LoadTalk (FileName$)
     CLOSE fc%
 END SUB
 
-SUB TalkKing
+SUB TalkKing()
     COLOR 15
     LINE (0, 0)-(319, 31), totalback, BF
     LINE (0, 31)-(319, 31), 12
@@ -71,7 +71,7 @@ SUB TalkKing
     LINE (0, 0)-(319, 31), totalback, BF
     LINE (0, 31)-(319, 31), 12
     LOCATE 1, 1
-    FOR abc = 0 TO 2
+    FOR i% = 0 TO 2
       PRINT Talk$(Exchange(2, 13) + abc)
     NEXT
     LOCATE 3, 40
@@ -122,9 +122,12 @@ SUB TalkVillager (vlgnum)
   PRINT Talk$(Exchange%(2, vlgnum) + abc - 1)
   NEXT
   LOCATE 3, 40
+Screen 7
+
   PRINT CHR$(254)
-PCOPY 2, 0 'Copys text to screen in mode 7
+PCOPY 2, 0
+ 'Copies text to screen in mode 7
 SLEEP
-dmb$ = INKEY$
+K$ = INKEY$
 END SUB
 

@@ -1,0 +1,10 @@
+FileRec
+  filename AS STRING *12
+  TotalBitmapsInFile
+for each graphic in filename, do
+Graphics mode
+loading method
+x
+y
+size
+
